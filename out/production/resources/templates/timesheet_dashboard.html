@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time Sheet Dashboard</title>
+</head>
+<body>
+
+<div>
+    <table id="timeSheetTable">
+        <tr>
+            <th>Manager</th>
+            <th>Contractor</th>
+            <th>Status</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+
+    // var timeSheetArray = "[[${exampleArrayReplaceMe}]]";
+
+    var timeSheetArray = ["test1","test2","test3"];
+
+    var table = document.getElementById("timeSheetTable");
+
+    for(var i=1;i<timeSheetArray.length+1;i++){
+        var row = table.insertRow(i);
+        row.insertCell(0);
+        row.insertCell(1);
+        row.insertCell(2);
+        table.rows[i].cells[0].innerHTML = timeSheetArray[i-1]
+        table.rows[i].cells[1].innerHTML = timeSheetArray[i-1]
+        table.rows[i].cells[2].innerHTML = timeSheetArray[i-1] //this will need changing and expansion later on
+    }
+
+</script>
+
+</body>
+</html>
