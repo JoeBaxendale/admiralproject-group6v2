@@ -17,8 +17,7 @@ insert into admiral_staff (admiral_staff_id, admiral_staff_email, password, firs
 insert into admiral_staff (admiral_staff_id, admiral_staff_email, password, first_name, last_name) values (14, 'maddison@hotmail.com', 'p123', 'Maddison', 'Wilson');
 insert into admiral_staff (admiral_staff_id, admiral_staff_email, password, first_name, last_name) values (15, 'riley@gmail.com', 'riley777', 'Riley', 'Brown');
 
-
-
+/*MANAGER DATA*/
 
 insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (1, 'dave@gmail.com', 'dave12', 'Dave', 'Harris', 1);
 insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (2, 'joe@gmail.com', 'joe51', 'Joe', 'Young', 1);
