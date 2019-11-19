@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `admiral_staff`
     `first_name`                    VARCHAR(45)  NOT NULL,
     `last_name`                     VARCHAR(45)  NOT NULL,
 
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`admiral_staff_id`)
 )
     ENGINE = InnoDB;
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `managers`
     `status`                        BIT  NOT NULL,
 
 
-    PRIMARY KEY (`managers_id`)
+    PRIMARY KEY (`manager_id`)
 )
     ENGINE = InnoDB;
 
