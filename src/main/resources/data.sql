@@ -18,12 +18,27 @@ insert into admiral_staff (admiral_staff_id, admiral_staff_email, password, firs
 insert into admiral_staff (admiral_staff_id, admiral_staff_email, password, first_name, last_name) values (15, 'riley@gmail.com', 'riley777', 'Riley', 'Brown');
 
 
-/* MANAGER DATA */
+
 
 insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (1, 'dave@gmail.com', 'dave12', 'Dave', 'Harris', 1);
-insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (2, 'joe@gmail.com', 'joe51', 'Joe', 'Young', 0);
+insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (2, 'joe@gmail.com', 'joe51', 'Joe', 'Young', 1);
 insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (3, 'dan@outlook.com', 'dan123', 'Dan', 'Brown', 1);
 insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (4, 'matthew@hotmail.co.uk', 'matthew423!', 'Matthew', 'Mort', 1);
-insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (5, 'james@yahoo.com', 'james#312', 'James', 'Smith', 0);
+insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (5, 'james@yahoo.com', 'james#312', 'James', 'Smith', 1);
 insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (6, 'kyle@gmail.co.uk', 'kyle1', 'Kyle', 'Adams', 0);
 
+
+/* CONTRACTOR DATA */
+
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (1, 'Peter@gmail.co.uk', 'kPeter1', 'Peter', 'Bridge', 1, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (2, 'Jason@gmail.co.uk', 'kPJason1', 'Jason', 'Bridger', 1, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (3, 'Zach@gmail.co.uk', 'kZach1', 'Zach', 'matters', 2, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (4, 'Sam@gmail.co.uk', 'kSam1#', 'Sam', 'brokes', 3, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (5, 'Euan@gmail.co.uk', 'Euan98', 'Euan', 'Evans', 4, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (6, 'Finn@gmail.co.uk', 'Finn8', 'Finn', 'Tomson', 4, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (7, 'Bill@gmail.co.uk', 'Bill3', 'Bill', 'Gates', 4, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (8, 'Mark@gmail.co.uk', 'Mark5', 'Mark', 'Zuck', 4, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (9, 'Mike@gmail.co.uk', 'Mike73', 'Mike', 'Jones', 4, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (10, 'Jane@gmail.co.uk', 'Jane72!', 'Jane', 'Smith', 5, 0);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (11, 'Sarah@gmail.co.uk', 'Shar333', 'Sarah', 'Smith', 5, 1);
+insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (12, 'Mike@gmail.co.uk', 'Mike62626', 'Mike', 'Zuch', 5, 1);
