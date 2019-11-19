@@ -1,0 +1,5 @@
+Group_6/.idea
+
+Group_6/.gradle
+
+Group_6/gradle
