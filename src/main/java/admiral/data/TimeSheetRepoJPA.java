@@ -1,4 +1,4 @@
 package admiral.data;
 
-public class TimeSheetRepoJPA {
+public interface TimeSheetRepoJPA {
 }
