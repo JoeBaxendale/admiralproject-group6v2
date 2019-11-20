@@ -16,11 +16,7 @@ CREATE TABLE IF NOT EXISTS `admiral_user`
     `password`                      VARCHAR(45)  NOT NULL,
     `status`                        BOOLEAN  NOT NULL,
 
-<<<<<<< HEAD
-    PRIMARY KEY (`admiral_staff_id`)
-=======
     PRIMARY KEY (`admiral_user_id`)
->>>>>>> development
 )
     ENGINE = InnoDB;
 
@@ -34,12 +30,7 @@ CREATE TABLE IF NOT EXISTS `admiral_role`
     `admiral_role_name`                 VARCHAR(45)  NOT NULL,
     `admiral_role_description`          VARCHAR(250)  NOT NULL,
 
-
-<<<<<<< HEAD
-    PRIMARY KEY (`manager_id`)
-=======
     PRIMARY KEY (`admiral_role_id`)
->>>>>>> development
 )
     ENGINE = InnoDB;
 
