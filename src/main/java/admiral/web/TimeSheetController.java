@@ -1,24 +1,30 @@
 package admiral.web;
 
+//----------------------------------------------------------------------------------------------------------------------
+// Imports
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
+//----------------------------------------------------------------------------------------------------------------------
+// Controller
 @Controller
 public class TimeSheetController {
 
-
+    //------------------------------------------------------------------------------------------------------------------
+    // Constructor
     public TimeSheetController() {
         // for finders
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Time sheet details page
     @RequestMapping(path = "/Timesheet", method = RequestMethod.GET)
     public String timeSheetDetails(Model model) {
 
-        return "t_time_sheet_details_page";
+        // Open timesheet details html
+        return "timesheet";
 
     }
 }
