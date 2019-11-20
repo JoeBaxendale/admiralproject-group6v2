@@ -24,7 +24,7 @@ public class TimeSheetController {
     public String timeSheetDetails(Model model) {
 
         // Open timesheet details html
-        return "t_time_sheet_details_page";
+        return "timesheet";
 
     }
 }
