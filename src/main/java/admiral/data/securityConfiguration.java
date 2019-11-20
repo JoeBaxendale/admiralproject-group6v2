@@ -36,6 +36,9 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
     }
 
+
+//    https://tutorials.webencyclop.com/spring-boot/03-create-user-login-registration/
+
     @Override
     protected void configure (HttpSecurity http) throws Exception{
 
