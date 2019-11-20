@@ -1,11 +1,11 @@
-package data;
+package admiral.data;
 
-import domain.TimeSheet;
+import admiral.domain.TimeSheet;
+import admiral.service.TimeSheetRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import service.TimeSheetRepo;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
 
     public List<TimeSheet> findTimeSheetsByStatus(String searchTerm){
         return jdbc.query(
-                "SELECT * FROM *timesheets* WHERE status = ?",
+                "SELECT * FROM timesheets WHERE status = ?",
                 new Object[]{searchTerm},
                 timeSheetMapper
         );

@@ -1,10 +1,10 @@
-package web;
+package admiral.web;
 
-import domain.TimeSheet;
+import admiral.domain.TimeSheet;
+import admiral.service.TimeSheetFinder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import service.TimeSheetFinder;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class TimeSheetDashboardController {
 
     }
 
-    @GetMapping("/timeSheetDashboard")
+    @RequestMapping("/timeSheetDashboard")
     public String showTimeSheetDashboard(Model model){
 
         List<TimeSheet> pendingTimeSheets = finder.findTimeSheetsByStatus("Pending");
