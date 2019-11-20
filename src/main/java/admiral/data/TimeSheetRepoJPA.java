@@ -1,4 +1,8 @@
 package admiral.data;
 
-public interface TimeSheetRepoJPA {
+import admiral.domain.TimeSheet;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TimeSheetRepoJPA extends JpaRepository<TimeSheet, Long> {
+
 }
