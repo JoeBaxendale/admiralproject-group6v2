@@ -38,7 +38,7 @@ insert into admiral_user_role (admiral_user_id, admiral_role_id) values (1, 3)
 -- insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (4, 'matthew@hotmail.co.uk', 'matthew423!', 'Matthew', 'Mort', 1);
 -- insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (5, 'james@yahoo.com', 'james#312', 'James', 'Smith', 1);
 -- insert into managers (manager_id, manager_email, password, first_name, last_name, status) values (6, 'kyle@gmail.co.uk', 'kyle1', 'Kyle', 'Adams', 0);
---
+-- --
 --
 -- /* CONTRACTOR DATA */
 --

@@ -10,7 +10,6 @@ import java.util.Date;
 public class TimeSheet {
 
     private int timesheetId;
-    private int admiralRoleId;
     private int numberOfDays;
     private int overtime;
     private Date startDate;

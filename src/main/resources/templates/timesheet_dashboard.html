@@ -18,9 +18,9 @@
 
 <script>
 
-     var timeSheetArray = "[[${pendingTimeSheets}]]";
+     var tempTimeSheetArray = "[[${pendingTimeSheets}]]";
 
-    // var timeSheetArray = ["test1","test2","test3"];
+    var timeSheetArray = tempTimeSheetArray.split(",");
 
     var table = document.getElementById("timeSheetTable");
 
