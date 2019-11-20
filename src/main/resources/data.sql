@@ -54,3 +54,12 @@ insert into admiral_user_role (admiral_user_id, admiral_role_id) values (1, 3)
 -- insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (10, 'Jane@gmail.co.uk', 'Jane72!', 'Jane', 'Smith', 5, 0);
 -- insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (11, 'Sarah@gmail.co.uk', 'Shar333', 'Sarah', 'Smith', 5, 1);
 -- insert into contractors (contractor_id, contractor_email, password, first_name, last_name, managers_id, status) values (12, 'Mike@gmail.co.uk', 'Mike62626', 'Mike', 'Zuch', 5, 1);
+
+
+--/* TIME SHEET DATA */
+
+insert into timesheet(timesheet_id, admiral_role_id, number_days, overtime, start_date, end_date, date_submitted, notes, status) values (1,1,5,3,2019-11-11,2019-11-15,2019-11-16,,'Pending');
+insert into timesheet(timesheet_id, admiral_role_id, number_days, overtime, start_date, end_date, date_submitted, notes, status) values (2,2,3,1,2019-11-1,2019-11-4,2019-11-7,'Wrong Overtime','Rejected');
+insert into timesheet(timesheet_id, admiral_role_id, number_days, overtime, start_date, end_date, date_submitted, notes, status) values (3,6,2,0,2019-11-13,2019-11-15,2019-11-18,,'Pending');
+insert into timesheet(timesheet_id, admiral_role_id, number_days, overtime, start_date, end_date, date_submitted, notes, status) values (4,2,4,0,2019-11-2,2019-11-6,2019-11-7,,'Approved');
+insert into timesheet(timesheet_id, admiral_role_id, number_days, overtime, start_date, end_date, date_submitted, notes, status) values (5,9,5,0,2019-11-11,2019-11-15,2019-11-17,,'Pending');
