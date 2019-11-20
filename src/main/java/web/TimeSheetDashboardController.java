@@ -15,7 +15,7 @@ public class TimeSheetDashboardController {
 
     }
 
-    @GetMapping()
+    @GetMapping("/timeSheetDashboard")
     public String showTimeSheetDashboard(Model model){
         return "timesheet_dashboard";
     }
