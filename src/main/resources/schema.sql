@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS `admiral_role`
     `admiral_role_name`                 VARCHAR(45)  NOT NULL,
     `admiral_role_description`          VARCHAR(250)  NOT NULL,
 
-
     PRIMARY KEY (`admiral_role_id`)
 )
     ENGINE = InnoDB;
