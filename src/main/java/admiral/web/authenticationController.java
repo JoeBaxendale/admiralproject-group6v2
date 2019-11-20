@@ -22,10 +22,10 @@ public class authenticationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/t_time_sheet_details", method = RequestMethod.GET)
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("t_time_sheet_details");
+        modelAndView.setViewName("home");
         return modelAndView;
     }
 }

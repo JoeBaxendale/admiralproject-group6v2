@@ -48,19 +48,22 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/home/**").hasAnyAuthority("Manager", "Admin", "Contractor")
                 .anyRequest().authenticated()
                 .and()
+//                form login
                 .csrf().disable().formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
-                .defaultSuccessUrl("home")
+                .defaultSuccessUrl("/home")
                 .usernameParameter("admiral_staff_email")
                 .passwordParameter("password")
                 .and()
+//                form logout
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").and()
                 .exceptionHandling()
                 .accessDeniedPage("/access-denied");
     }
+
 
     @Override
     public void configure(WebSecurity web) throws Exception{
