@@ -1,7 +1,11 @@
 package service;
 
+import domain.TimeSheet;
+
+import java.util.List;
+
 public interface TimeSheetFinder {
 
-    public List<> findTimeSheetsByStatus(String searchTerm);
+    public List<TimeSheet> findTimeSheetsByStatus(String searchTerm);
 
 }

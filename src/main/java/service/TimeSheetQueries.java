@@ -1,6 +1,9 @@
 package service;
 
+import domain.TimeSheet;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TimeSheetQueries implements TimeSheetFinder {
@@ -11,7 +14,7 @@ public class TimeSheetQueries implements TimeSheetFinder {
         timeSheetRepo = aRepo;
     }
 
-    public List<> findTimeSheetsByStatus(String searchTerm){
+    public List<TimeSheet> findTimeSheetsByStatus(String searchTerm){
         return timeSheetRepo.findTimeSheetsByStatus(searchTerm);
     }
 
