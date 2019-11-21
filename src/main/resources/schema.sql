@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `admiral_user`
     `last_name`                     VARCHAR(45)  NOT NULL,
     `admiral_user_email`            VARCHAR(45)  NOT NULL,
     `password`                      VARCHAR(45)  NOT NULL,
-    `status`                        BOOLEAN  NOT NULL,
+    `status`                        BIT      NOT NULL,
 
     PRIMARY KEY (`admiral_user_id`)
 )
@@ -40,9 +40,11 @@ CREATE TABLE IF NOT EXISTS `admiral_role`
 
 CREATE TABLE IF NOT EXISTS `admiral_user_role`
 (
+--     `admiral_user_role_id` 				INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `admiral_user_id`                   INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `admiral_role_id`                   INT UNSIGNED NOT NULL AUTO_INCREMENT,
 
+    PRIMARY KEY (`admiral_user_role_id`),
     FOREIGN KEY (`admiral_user_id`) REFERENCES admiral_user (`admiral_user_id`),
     FOREIGN KEY (`admiral_role_id`) REFERENCES admiral_role (`admiral_role_id`)
 
@@ -57,7 +59,6 @@ CREATE TABLE IF NOT EXISTS `admiral_user_role`
 CREATE TABLE IF NOT EXISTS `timesheet`
 (
     `timesheet_id`                   INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `admiral_role_id`                  INT  NOT NULL,
     `number_days`                    INT NOT NULL,
     `overtime`                       INT  NOT NULL,
     `start_date`                     DATE  NOT NULL,
@@ -67,9 +68,7 @@ CREATE TABLE IF NOT EXISTS `timesheet`
     `status`                         VARCHAR(25) NOT NULL,
 
 
-    PRIMARY KEY (`timesheet_id`),
-    FOREIGN KEY (`admiral_role_id`) REFERENCES admiral_role (`admiral_role_id`)
-
+    PRIMARY KEY (`timesheet_id`)
 )
     ENGINE = InnoDB;
 

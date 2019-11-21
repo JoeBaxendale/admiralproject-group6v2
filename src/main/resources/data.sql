@@ -1,17 +1,18 @@
 /* ADMIRAL USER DATA */
-insert into admiral_user (admiral_user_id, first_name, last_name, admiral_staff_email, password, status) values (1,'Victoria', 'Smith', 'victoria@hotmail.com', 'victoria123', 'true');
-insert into admiral_user (admiral_user_id, first_name, last_name, admiral_staff_email, password, status) values (2,'Karla', 'Mendivelso', 'nicolmes@hotmail.com', 'nicol123NICOL', 'true');
+insert into admiral_user (admiral_user_id, first_name, last_name, admiral_staff_email, password, status) values (1,'Victoria', 'Smith', 'victoria@hotmail.com', 'victoria123', 'VERIFIED');
+insert into admiral_user (admiral_user_id, first_name, last_name, admiral_staff_email, password, status) values (2,'Karla', 'Mendivelso', 'nicolmes@hotmail.com', 'nicol123NICOL', 'VERIFIED');
 
 
 /* ADMIRAL ROLE DATA */
-insert into admiral_role (admiral_role_id, admiral_role_name, admiral_role_description) values (1, 'Manager', 'This user has ultimate rights for everything')
-insert into admiral_role (admiral_role_id, admiral_role_name, admiral_role_description) values (2, 'Admin', 'This user has admin rights for administrative work')
-insert into admiral_role (admiral_role_id, admiral_role_name, admiral_role_description) values (3, 'Contractor', 'This user has access to site, after login')
+insert into admiral_role (admiral_role_id, admiral_role_name, admiral_role_description) values (1, 'Manager', 'This user has ultimate rights for everything');
+insert into admiral_role (admiral_role_id, admiral_role_name, admiral_role_description) values (2, 'Admin', 'This user has admin rights for administrative work');
+insert into admiral_role (admiral_role_id, admiral_role_name, admiral_role_description) values (3, 'Contractor', 'This user has access to site, after login');
 
 /* ADMIRAL USER_ROLE DATA */
-insert into admiral_user_role (admiral_user_id, admiral_role_id) values (1, 1)
-insert into admiral_user_role (admiral_user_id, admiral_role_id) values (1, 2)
-insert into admiral_user_role (admiral_user_id, admiral_role_id) values (1, 3)
+insert into admiral_user_role (admiral_user_id, admiral_role_id) values (1, 1);
+insert into admiral_user_role (admiral_user_id, admiral_role_id) values (1, 2);
+insert into admiral_user_role (admiral_user_id, admiral_role_id) values (1, 3);
+insert into admiral_user_role (admiral_user_id, admiral_role_id) values (2, 1);
 
 
 /* ADMIRAL STAFF DATA */
