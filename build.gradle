@@ -22,7 +22,6 @@ dependencies {
     
 //    security dependencies 
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder'
     
 //    sql dependencies
     runtimeOnly 'mysql:mysql-connector-java'
