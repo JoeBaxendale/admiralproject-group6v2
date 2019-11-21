@@ -13,9 +13,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
+//setting up spring security configuration using java config, to use
+//JDBC based authentication and authorization
+
 @Configuration
+//to override the default configuration of spring security the annotation below is needed
 @EnableWebSecurity
-public class securityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -23,25 +27,25 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+//    queries from application properties
     @Value("${spring.queries.users-query}")
     private String usersQuery;
 
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
 
+//    encoding the password
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
                 .dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
     }
 
-
-//    https://tutorials.webencyclop.com/spring-boot/03-create-user-login-registration/
-
     @Override
     protected void configure (HttpSecurity http) throws Exception{
 
         http.authorizeRequests()
+//                URLs matching for access rights
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/home/**").hasAnyAuthority("Manager", "Admin", "Contractor")
@@ -70,3 +74,6 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 }
+
+
+//Page used for the code above https://tutorials.webencyclop.com/spring-boot/03-create-user-login-registration/
