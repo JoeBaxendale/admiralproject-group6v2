@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Time Sheet Dashboard</title>
-</head>
+    </head>
 <body>
 
 <div>
@@ -20,26 +20,84 @@
 
      var tempTimeSheetArray = "[[${pendingTimeSheets}]]";
 
-    var timeSheetArray = tempTimeSheetArray.split(",");
+    var timeSheetArray = tempTimeSheetArray.split(",");     //split the string of time sheets into an array of timesheets
 
-    var timeSheetArray2 = timeSheetArray.toString().split(")");
-    console.log(timeSheetArray2);
+    var timeSheetArray2 = timeSheetArray.toString().split(")"); //split the string of time sheets into an array of timesheets
 
     var table = document.getElementById("timeSheetTable");
 
+    var count = 1;                              //using a counter to add 2 rows per entry in the time sheet array so the extra row can be used to show more data when dropped down
+
     for(var i=1;i<timeSheetArray2.length+1;i++){
         var temp = timeSheetArray2.toString();
-        var toInsert = temp.split(",");
+        var toInsert = temp.split(",");         //split the array of timesheets into its own array (array of arrays)
         var firstEntry = toInsert[0].substring((toInsert[0].indexOf("("))+1); //remove the [TimeSheet from the front of the data
-        var row = table.insertRow(i);
+
+        var row = table.insertRow(count);//add a a new row to the table
+        row.id = "row" + count;
         row.insertCell(0);
-        row.insertCell(1);
+        row.insertCell(1);  //insert the columns into said row
         row.insertCell(2);
-        table.rows[i].cells[0].innerHTML = firstEntry;
-        table.rows[i].cells[1].innerHTML = toInsert[1];
-        table.rows[i].cells[2].innerHTML = toInsert[7];
-        //this will need changing and expansion later on
+        table.rows[count].cells[0].innerHTML = firstEntry;      //add the data to each of the respective columns
+        table.rows[count].cells[1].innerHTML = toInsert[1];
+        table.rows[count].cells[2].innerHTML = toInsert[7];
+
+        var spareRow = table.insertRow(count+1);        //add another row to the table to be used later
+        spareRow.id = "dropDownRow"+count;
+
+
+        spareRow.insertCell(0);         //add some empty cells so we can add data to the end cell (stop the table stretching)********************
+        spareRow.insertCell(1);         //could maybe remove this if we can fix it with css? *******************
+
+
+        var dropDownCell = spareRow.insertCell(2);       //add a cell to the row and give both the row and the cell an ID
+        dropDownCell.id = "dropDownCell" + count;
+
+        count+=2;   //incrementing the counter by 2 as 2 rows have been added to the table
+
+        document.getElementById(row.id).onclick = function(){           //add an on click function
+
+            dropDownTable = document.createElement('table');    //the function creates a new table
+            dropDownTable.style.width = '200px';
+            dropDownTable.style.border = '1px solid black';     //adds some small css
+
+            ddHeader = dropDownTable.createTHead();         //add a header
+
+            ddRow = ddHeader.insertRow(0);             //adds a row to the header
+            ddRow.insertCell(0);
+            ddRow.insertCell(1);            //add cells to the new row
+            ddRow.insertCell(2);
+            ddRow.insertCell(3);
+            ddRow.insertCell(4);
+
+            dropDownTable.rows[0].cells[0].innerHTML = "Example Heading";
+            dropDownTable.rows[0].cells[1].innerHTML = "Example Heading";   //adds headings into these cells
+            dropDownTable.rows[0].cells[2].innerHTML = "Example Heading";
+            dropDownTable.rows[0].cells[3].innerHTML = "Example Heading";
+            dropDownTable.rows[0].cells[4].innerHTML = "Example Heading";
+
+            ddRow2 = dropDownTable.insertRow(1);           //adds another row to the table
+            ddRow2.insertCell(0);
+            ddRow2.insertCell(1);            //add cells to the new row
+            ddRow2.insertCell(2);
+            ddRow2.insertCell(3);
+            ddRow2.insertCell(4);
+
+            dropDownTable.rows[1].cells[0].innerHTML = "YEE";
+            dropDownTable.rows[1].cells[1].innerHTML = "YEE";   //adds data into the cells
+            dropDownTable.rows[1].cells[2].innerHTML = "YEE";
+            dropDownTable.rows[1].cells[3].innerHTML = "YEE";
+            dropDownTable.rows[1].cells[4].innerHTML = "YEE";
+
+            var clickPosition = this.id;
+            var id = clickPosition.substring(3);
+
+            document.getElementById("dropDownCell" + id).appendChild(dropDownTable);    //appends the new table into the cell we created earlier NEEDS TO CHANGE DEPENDING ON WHAT CELL IS CLICKED
+        }
     }
+
+
+
 
 </script>
 
