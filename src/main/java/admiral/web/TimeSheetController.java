@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.validation.Valid;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -25,15 +24,9 @@ public class TimeSheetController {
     //------------------------------------------------------------------------------------------------------------------
     // Time sheet details page
     @RequestMapping(path = "/Timesheet", method = RequestMethod.GET)
-    public String timeSheetDetails(@ModelAttribute("timesheetKey") @Valid TimeSheetForm donor, BindingResult bindingResult, Model model) {
+    public String timeSheetDetails(Model model) {
 
-        if (bindingResult.hasErrors()) {
-            System.out.println("----------------------------------> Fail");
-            return "timesheet";
-        }
-
-        // Open timesheet details html
-        System.out.println("----------------------------------> Success");
+        // Open timesheet form
         model.addAttribute("timesheetKey", new TimeSheetForm());
         return "timesheet";
 
@@ -41,11 +34,18 @@ public class TimeSheetController {
 
     //------------------------------------------------------------------------------------------------------------------
     // Time sheet details page
-    //@RequestMapping(path = "/Timesheet/Process", method = RequestMethod.GET)
-    //public String timeSheetProcess(Model model) {
+    @RequestMapping(path = "/TimesheetDetails", method = RequestMethod.POST)
+    public String timeSheetProcess(@ModelAttribute("timesheetKey") @Valid TimeSheetForm timeSheet,
+                                   BindingResult bindingResult,
+                                   Model model) {
 
-        // Open timesheet details html
-    //    return "timesheet";
+        //--------------------------------------------------------------------------------------------------------------
+        // Validate the form, else force resubmission
+        if (bindingResult.hasErrors()) {
+            return "timesheet";
+        }
 
-    //}
+        // Go to the confirmation page
+        return "timesheet_confirm";
+    }
 }
