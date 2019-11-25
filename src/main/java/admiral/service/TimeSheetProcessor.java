@@ -9,15 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class TimeSheetProcessor implements TimeSheetCreator {
 
-    private TimeSheetRepository timeSheetRepository;
+    private TimeSheetRepo timeSheetRepo;
 
-    public TimeSheetProcessor(TimeSheetRepository aRepo){
-        timeSheetRepository = aRepo;
+    public TimeSheetProcessor(TimeSheetRepo aRepo){
+        timeSheetRepo = aRepo;
     }
 
     public void makeTimeSheet(TimeSheetMade timeSheet) {
 
-        timeSheetRepository.saveTimeSheetEvent(timeSheet);
+        timeSheetRepo.saveTimeSheetEvent(timeSheet);
     }
 
 }

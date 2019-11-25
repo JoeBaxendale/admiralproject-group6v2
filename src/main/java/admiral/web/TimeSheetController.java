@@ -2,23 +2,31 @@ package admiral.web;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
+import admiral.service.TimeSheetCreator;
+import admiral.service.TimeSheetQueries;
+import admiral.service.events.TimeSheetMade;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
 import javax.validation.Valid;
+import java.util.Date;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Controller
 @Controller
 public class TimeSheetController {
 
+    private TimeSheetCreator timeSheetCreator;
+
     //------------------------------------------------------------------------------------------------------------------
     // Constructor
-    public TimeSheetController() {
-        // for finders
+    public TimeSheetController(TimeSheetCreator iCreator) {
+        timeSheetCreator = iCreator;
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -45,7 +53,21 @@ public class TimeSheetController {
             return "timesheet";
         }
 
+        TimeSheetMade timeSheetEvent = new TimeSheetMade(
+                Integer.parseInt(timeSheet.getNumber_of_days()),
+                Integer.parseInt(timeSheet.getOvertime()),
+                timeSheet.getStart_date(),
+                timeSheet.getEnd_date(),
+                timeSheet.getNotes()
+
+        );
+
+        timeSheetCreator.makeTimeSheet(timeSheetEvent);
+
         // Go to the confirmation page
         return "timesheet_confirm";
     }
+
+
+
 }

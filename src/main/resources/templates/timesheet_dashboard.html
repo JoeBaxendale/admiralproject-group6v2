@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time Sheet Dashboard</title>
+</head>
+<body>
+
+<div>
+    <table id="timeSheetTable">
+        <tr>
+            <th>Manager</th>
+            <th>Contractor</th>
+            <th>Status</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+
+     var tempTimeSheetArray = "[[${pendingTimeSheets}]]";
+
+    var timeSheetArray = tempTimeSheetArray.split(",");
+
+    var timeSheetArray2 = timeSheetArray.toString().split(")");
+    console.log(timeSheetArray2);
+
+    var table = document.getElementById("timeSheetTable");
+
+    for(var i=1;i<timeSheetArray2.length+1;i++){
+        var temp = timeSheetArray2.toString();
+        var toInsert = temp.split(",");
+        var firstEntry = toInsert[0].substring((toInsert[0].indexOf("("))+1); //remove the [TimeSheet from the front of the data
+        var row = table.insertRow(i);
+        row.insertCell(0);
+        row.insertCell(1);
+        row.insertCell(2);
+        table.rows[i].cells[0].innerHTML = firstEntry;
+        table.rows[i].cells[1].innerHTML = toInsert[1];
+        table.rows[i].cells[2].innerHTML = toInsert[7];
+        //this will need changing and expansion later on
+    }
+
+</script>
+
+</body>
+</html>
