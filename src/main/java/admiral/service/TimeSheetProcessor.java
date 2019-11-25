@@ -1,7 +1,6 @@
 package admiral.service;
 
 
-import admiral.domain.TimeSheet;
 import admiral.service.events.TimeSheetMade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -10,13 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class TimeSheetProcessor implements TimeSheetCreator {
 
-    private TimeSheetRepo timeSheetRepo;
+    private TimeSheetRepository timeSheetRepository;
 
-    public TimeSheetProcessor(TimeSheetRepo aRepo) { timeSheetRepo = aRepo; }
+    public TimeSheetProcessor(TimeSheetRepository aRepo){
+        timeSheetRepository = aRepo;
+    }
 
     public void makeTimeSheet(TimeSheetMade timeSheet) {
 
-        timeSheetRepo.saveTimeSheetEvent(timeSheet);
+        timeSheetRepository.saveTimeSheetEvent(timeSheet);
     }
 
 }
