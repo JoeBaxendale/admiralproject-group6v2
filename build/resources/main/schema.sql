@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `users`
     `role_id`                       INT NOT NULL,
     `active`                        BIT NOT NULL,
 
-    PRIMARY KEY (`user_id`)
+    PRIMARY KEY (`user_id`),
     FOREIGN KEY (`role_id`) REFERENCES roles (`role_id`)
 )
     ENGINE = InnoDB;
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `managers`
     `manager_id`             INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `user_id`                INT UNSIGNED NOT NULL,
 
-    PRIMARY KEY (`manager_id`)
+    PRIMARY KEY (`manager_id`),
     FOREIGN KEY (`user_id`) REFERENCES users (`user_id`)
 )
     ENGINE = InnoDB;
@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS `contractors`
     `manager_id`             INT UNSIGNED NOT NULL,
 
 
-    PRIMARY KEY (`contractor_id`)
-    FOREIGN KEY (`user_id`) REFERENCES users (`user_id`)
+    PRIMARY KEY (`contractor_id`),
+    FOREIGN KEY (`user_id`) REFERENCES users (`user_id`),
     FOREIGN KEY (`manager_id`) REFERENCES managers (`manager_id`)
 )
     ENGINE = InnoDB;

@@ -1,5 +1,7 @@
 package admiral.data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,8 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 
+//    static final Logger LOG = LoggerFactory.getLogger(SecurityConfigurationJDBC.class);
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -28,10 +32,10 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
 //    queries from application properties
-    @Value("${spring.queries.users-query}")
+    @Value("${spring.users-query}")
     private String usersQuery;
 
-    @Value("${spring.queries.roles-query}")
+    @Value("${spring.roles-query}")
     private String rolesQuery;
 
 //    encoding the password
