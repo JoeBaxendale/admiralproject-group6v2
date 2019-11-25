@@ -6,6 +6,7 @@ import admiral.service.TimeSheetRepo;
 import admiral.service.events.TimeSheetMade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -63,7 +64,27 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
     @Override
     public void saveTimeSheetEvent(TimeSheetMade timeSheetMade) {
 
-        System.out.print("DBG: --------------------------------------------------> ");
+        jdbc.update(
+                new PreparedStatementCreator() {
+                    @Override
+                    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 
+                        PreparedStatement ps = con.prepareStatement(
+                                "insert into timesheet values (numberOfDays, overtime, startDate, endDate," +
+                                        " dateSubmitted, notes, status) values (?, ?, ?, ?, ?, ?, ?)");
+
+                                ps.setInt(1, timeSheetMade.getNumber_of_days());
+                                ps.setInt(2, timeSheetMade.getOvertime());
+                                ps.setDate(3, timeSheetMade.getStart_date());
+                                ps.setDate(4, timeSheetMade.getEnd_date());
+                                ps.setDate(5, timeSheetMade.getEnd_date());
+                                ps.setString(6, timeSheetMade.getNotes());
+                                ps.setString(7, "Pending");
+                                return ps;
+                    }
+                }
+
+        );
+        System.out.println("DBG:----------------------------------------->>");
     }
 }
