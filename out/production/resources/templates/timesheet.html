@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!-- ############################################################################################################### -->
+<!--Using bootstrap-->
+<head>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
+    <link href="/css/template.css" rel="stylesheet">
+</head>
+
+<!-- ############################################################################################################### -->
+<!-- Time sheet form to enter details -->
+<body>
+<main class="container" role="main">
+
+    <!-- ########################################################################################################### -->
+    <!-- Tilebar for the webpage -->
+    <div class="titlebar">
+        <!-- Broken code to try and display the logo -->
+        <!-- <img src="admiral_logo.jpg"> -->
+        <H2 class="titlebar_logo">Admiral</H2>
+        <button class="titlebar_button"> Logout </button>
+    </div>
+
+    <!-- ########################################################################################################### -->
+    <!-- Form for time sheet details -->
+    <div class="template">
+
+        <!-- ####################################################################################################### -->
+        <!-- Page and user greeting -->
+        <div class="template">
+            <H3>Hello {Name} please fill in your time sheet</H3>
+        </div>
+
+        <!-- ####################################################################################################### -->
+        <!-- Main form object -->
+        <div id=timeSheetDetails>
+            <form action="#" method="post" th:action="@{/TimesheetDetails}" th:object="${timesheetKey}">
+
+                <!-- ############################################################################################### -->
+                <!-- Entry for the number of days field -->
+                <div class="form-group">
+                    <label th:for="number_of_days">Number of days</label>
+                    <input placeholder="0"
+                           value="0"
+                           class="form-control"
+                           th:field="*{number_of_days}"
+                           type="number"
+                           min="0"
+                           max="7"/>
+                    <div class="alert alert-danger"
+                         th:errors="*{number_of_days}"
+                         th:if="${#fields.hasErrors('number_of_days')}">
+                        Number of days Error
+                    </div>
+                </div>
+
+                <!-- ############################################################################################### -->
+                <!-- Entry for the overtime field -->
+                <div class="form-group">
+                    <label th:for="overtime">Overtime</label>
+                    <input placeholder="0"
+                           value="0"
+                           class="form-control"
+                           th:field="*{overtime}"
+                           type="number"
+                           min="0"
+                           max="7"/>
+                    <div class="alert alert-danger"
+                         th:errors="*{overtime}"
+                         th:if="${#fields.hasErrors('overtime')}">
+                        Overtime of days Error
+                    </div>
+                </div>
+
+                <!-- ############################################################################################### -->
+                <!-- Entry for the start date field -->
+                <div class="form-group">
+                    <label th:for="start_date">Start date</label>
+                    <input
+                           class="form-control"
+                           th:field="*{start_date}"
+                           type="date"/>
+                    <div class="alert alert-danger"
+                         th:errors="*{start_date}"
+                         th:if="${#fields.hasErrors('start_date')}">
+                        Start date of days Error
+                    </div>
+                </div>
+
+                <!-- ############################################################################################### -->
+                <!-- Entry for the end date field -->
+                <div class="form-group">
+                    <label id="endDate" th:for="end_date">End date</label>
+                    <input
+                            value="11-11-2001"
+                            class="form-control"
+                            th:field="*{end_date}"
+                            type="date"/>
+                    <div class="alert alert-danger"
+                         th:errors="*{end_date}"
+                         th:if="${#fields.hasErrors('end_date')}">
+                        End date of days Error
+                    </div>
+                </div>
+
+                <!-- ############################################################################################### -->
+                <!-- Entry for the notes field -->
+                <div class="form-group">
+                    <label th:for="notes">Time sheet notes</label>
+                    <input
+                            class="form-control"
+                            th:field="*{notes}"
+                            type="text"/>
+                    <div class="alert alert-danger"
+                         th:errors="*{notes}"
+                         th:if="${#fields.hasErrors('notes')}">
+                        Notes error
+                    </div>
+                </div>
+
+                <!-- ############################################################################################### -->
+                <!-- Submit button -->
+                <br><input class="button" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</main>
+
+<script>
+
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = day + "-" + month + "-" + day;
+    //document.getElementById("endDate").value = today;
+</script>
+
+</body>
+</html>
