@@ -41,11 +41,12 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
                 timesheetList.add(new TimeSheet(temp.getInt(1),
                         temp.getInt(2),
                         temp.getInt(3),
-                        temp.getDate(4),
+                        temp.getInt(4),
                         temp.getDate(5),
                         temp.getDate(6),
-                        temp.getString(7),
-                        temp.getString(8)));
+                        temp.getDate(7),
+                        temp.getString(8),
+                        temp.getString(9)));
 
             }
         } catch (SQLException e) {
