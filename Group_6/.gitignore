@@ -1,6 +1,8 @@
 # Steve's "exclude everything" lines
 .*/
 /build/
+*.iml
+*.iml~*
 
 
 # Created by .ignore support plugin (hsz.mobi)
