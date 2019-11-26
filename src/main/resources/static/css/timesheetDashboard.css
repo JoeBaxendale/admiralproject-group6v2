@@ -1,7 +1,20 @@
 #timeSheetTable{
-    width: 90%;
+    table-layout: fixed;
+    width: 100%;
 }
 
-#timeSheetTable, th, td{
-    width: 10%;
+#timeSheetTable, th{
+    width: 100%;
+}
+
+#dropDownTable{
+    table-layout: fixed;
+}
+
+#dropDownTable,th{
+    width: 100%;
+}
+
+#dropDownTable,td{
+    width:300%;
 }
