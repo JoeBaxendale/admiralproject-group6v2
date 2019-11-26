@@ -1,6 +1,7 @@
 # Steve's "exclude everything" lines
 .*/
 /build/
+/gradle/
 *.iml
 *.iml~*
 
