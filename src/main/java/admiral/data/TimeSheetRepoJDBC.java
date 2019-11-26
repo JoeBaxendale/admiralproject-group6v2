@@ -3,6 +3,7 @@ package admiral.data;
 import admiral.DatabaseConnection;
 import admiral.domain.TimeSheet;
 import admiral.service.TimeSheetRepo;
+import admiral.service.events.TimeSheetMade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -58,5 +59,9 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
 //                new Object[]{searchTerm},
 //                timeSheetMapper
 //        );
+    };
+
+    public void saveTimeSheetEvent(TimeSheetMade timeSheetMade){
+
     };
 }
