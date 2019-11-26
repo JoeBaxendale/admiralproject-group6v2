@@ -1,0 +1,7 @@
+#timeSheetTable{
+    width: 90%;
+}
+
+#timeSheetTable, th, td{
+    width: 10%;
+}
