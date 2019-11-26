@@ -6,6 +6,7 @@ import admiral.service.TimeSheetRepo;
 import admiral.service.events.TimeSheetMade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -40,12 +41,11 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
                 timesheetList.add(new TimeSheet(temp.getInt(1),
                         temp.getInt(2),
                         temp.getInt(3),
-                        temp.getInt(4),
+                        temp.getDate(4),
                         temp.getDate(5),
                         temp.getDate(6),
-                        temp.getDate(7),
-                        temp.getString(8),
-                        temp.getString(9)));
+                        temp.getString(7),
+                        temp.getString(8)));
 
             }
         } catch (SQLException e) {
@@ -61,7 +61,30 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
 //        );
     };
 
-    public void saveTimeSheetEvent(TimeSheetMade timeSheetMade){
+    @Override
+    public void saveTimeSheetEvent(TimeSheetMade timeSheetMade) {
 
-    };
+        jdbc.update(
+                new PreparedStatementCreator() {
+                    @Override
+                    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+
+                        PreparedStatement ps = con.prepareStatement(
+                                "insert into timesheet values (numberOfDays, overtime, startDate, endDate," +
+                                        " dateSubmitted, notes, status) values (?, ?, ?, ?, ?, ?, ?)");
+
+                                ps.setInt(1, timeSheetMade.getNumber_of_days());
+                                ps.setInt(2, timeSheetMade.getOvertime());
+                                ps.setDate(3, timeSheetMade.getStart_date());
+                                ps.setDate(4, timeSheetMade.getEnd_date());
+                                ps.setDate(5, timeSheetMade.getEnd_date());
+                                ps.setString(6, timeSheetMade.getNotes());
+                                ps.setString(7, "Pending");
+                                return ps;
+                    }
+                }
+
+        );
+        System.out.println("DBG:----------------------------------------->>");
+    }
 }
