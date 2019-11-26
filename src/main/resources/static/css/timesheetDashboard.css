@@ -9,6 +9,7 @@
 
 #dropDownTable{
     table-layout: fixed;
+    overflow:hidden;
 }
 
 #dropDownTable,th{
