@@ -1,0 +1,21 @@
+#timeSheetTable{
+    table-layout: fixed;
+    width: 100%;
+}
+
+#timeSheetTable, th{
+    width: 100%;
+}
+
+#dropDownTable{
+    table-layout: fixed;
+    overflow:hidden;
+}
+
+#dropDownTable,th{
+    width: 100%;
+}
+
+#dropDownTable,td{
+    width:300%;
+}

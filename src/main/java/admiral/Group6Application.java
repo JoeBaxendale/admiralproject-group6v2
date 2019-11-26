@@ -1,13 +1,12 @@
 package admiral;
 
+//----------------------------------------------------------------------------------------------------------------------
+// Imports
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.xml.crypto.Data;
-import java.sql.Connection;
-
-
-
+//----------------------------------------------------------------------------------------------------------------------
+// Main launch function
 @SpringBootApplication
 public class Group6Application {
 

@@ -92,9 +92,8 @@
                 <!-- ############################################################################################### -->
                 <!-- Entry for the end date field -->
                 <div class="form-group">
-                    <label id="endDate" th:for="end_date">End date</label>
+                    <label th:for="end_date">End date</label>
                     <input
-                            value="11-11-2001"
                             class="form-control"
                             th:field="*{end_date}"
                             type="date"/>
@@ -127,21 +126,6 @@
         </div>
     </div>
 </main>
-
-<script>
-
-    var date = new Date();
-
-    var day = date.getDate();
-    var month = date.getMonth();
-    var year = date.getFullYear();
-
-    if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
-
-    var today = day + "-" + month + "-" + day;
-    //document.getElementById("endDate").value = today;
-</script>
 
 </body>
 </html>
