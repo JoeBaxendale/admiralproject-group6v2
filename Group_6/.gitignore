@@ -1,3 +1,8 @@
+# Steve's "exclude everything" lines
+.*/
+/build/
+
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Gradle template
 .gradle
