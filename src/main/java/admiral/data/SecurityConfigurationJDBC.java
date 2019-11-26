@@ -1,5 +1,6 @@
 package admiral.data;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -24,12 +26,13 @@ import javax.sql.DataSource;
 @Configuration
 //to override the default configuration of spring security the annotation below is needed
 @EnableWebSecurity
+@Slf4j
 public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 
 //    static final Logger LOG = LoggerFactory.getLogger(SecurityConfigurationJDBC.class);
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private DataSource dataSource;
@@ -50,8 +53,8 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-        //return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        return NoOpPasswordEncoder.getInstance();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
 /*    @Bean
@@ -69,7 +72,7 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)
                 .dataSource(dataSource)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder);
     }
 
 
