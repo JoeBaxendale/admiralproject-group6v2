@@ -57,14 +57,14 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 //                URLs matching for access rights
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/home/**").hasAnyAuthority("Manager", "Admin", "Contractor")
+                .antMatchers("/timeSheetDashboard/**").hasAnyAuthority("Manager", "Admin", "Contractor")
                 .anyRequest().authenticated()
                 .and()
 //                form login
                 .csrf().disable().formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/timeSheetDashboard")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()

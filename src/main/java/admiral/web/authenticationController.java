@@ -24,10 +24,10 @@ public class authenticationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public ModelAndView home(){
+    @RequestMapping(value = "/timeSheetDashboard", method = RequestMethod.GET)
+    public ModelAndView timesheet_dashboard(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home"); //will open home html
+        modelAndView.setViewName("timesheet_dashboard"); //will open home html
         return modelAndView;
     }
 }
