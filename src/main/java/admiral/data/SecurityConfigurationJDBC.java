@@ -60,7 +60,7 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
                 .defaultSuccessUrl("/home")
-                .usernameParameter("admiral_staff_email")
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
 //                form logout
