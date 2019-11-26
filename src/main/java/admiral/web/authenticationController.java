@@ -23,11 +23,11 @@ public class authenticationController {
         modelAndView.setViewName("register"); //will open register html
         return modelAndView;
     }
-
-    @RequestMapping(value = "/timeSheetDashboard", method = RequestMethod.GET)
-    public ModelAndView timesheet_dashboard(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("timesheet_dashboard"); //will open home html
-        return modelAndView;
-    }
+//
+//    @RequestMapping(value = "/Timesheet", method = RequestMethod.GET)
+//    public ModelAndView timesheet(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("timesheet"); //will open home html
+//        return modelAndView;
+//    }
 }
