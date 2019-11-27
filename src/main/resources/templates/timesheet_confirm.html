@@ -20,7 +20,9 @@
         <!-- Broken code to try and display the logo -->
         <!-- <img src="admiral_logo.jpg"> -->
         <H2 class="titlebar_logo">Admiral</H2>
-        <button class="titlebar_button"> Logout </button>
+        <form action="/logout" method="POST">
+            <input class="titlebar_button" action="/logout" method="POST" type="submit" value="Logout"/>
+        </form>
     </div>
 
     <!-- ########################################################################################################### -->
@@ -46,14 +48,6 @@
             <p>Between:</p>
             <span th:text="${timesheetKey.start_date}"></span>
             <span th:text="${timesheetKey.end_date}"></span><br>
-
-            <div class="row mt-4">
-                <div class="col-lg">
-                    <a class="btn btn-primary btn-lg btn-block" href="/TimesheetDetails">
-                        <span>Confirm</span>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 </main>
