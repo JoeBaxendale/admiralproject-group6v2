@@ -55,15 +55,16 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
 //                URLs matching for access rights
-                .antMatchers("/").permitAll()
-                .antMatchers("/").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/Timesheet/**").hasAnyAuthority("Manager", "Admin", "Contractor")
+//                .antMatchers("/Timesheet/**").hasAnyAuthority("Manager", "Admin")
                 .anyRequest().authenticated()
                 .and()
 //                form login
                 .csrf().disable().formLogin()
-                .loginPage("/")
-                .failureUrl("/?error=true")
+                .loginPage("/login")
+                .failureUrl("/login?error=true")
                 .defaultSuccessUrl("/Timesheet")
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -71,7 +72,7 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 //                form logout
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and()
+                .logoutSuccessUrl("/login").and()
                 .exceptionHandling()
                 .accessDeniedPage("/access-denied");
     }
