@@ -63,14 +63,14 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
     @Override
     public void saveTimeSheetEvent(TimeSheetMade timeSheetMade) {
 
-        String sql = "INSERT INTO timesheet values (numberOfDays, overtime, startDate, endDate, dateSubmitted, notes, " +
-                "status) values ('"+ timeSheetMade.getNumber_of_days() +"', '"+ timeSheetMade.getOvertime() +"'," +
+        String sql = "INSERT INTO timesheet (contractor_id, number_days, overtime, start_date, end_date, date_submitted, notes, " +
+                "status) VALUES (3, '"+ timeSheetMade.getNumber_of_days() +"', '"+ timeSheetMade.getOvertime() +"'," +
                 " '"+ timeSheetMade.getStart_date() +"', '"+timeSheetMade.getEnd_date()+"', " +
                 "'"+timeSheetMade.getEnd_date()+"', '"+timeSheetMade.getNotes() +"', 'Pending')";
 
         try {
             Statement st = conn.createStatement();
-            st.executeQuery(sql);
+            st.executeUpdate(sql);
 
         } catch (SQLException e) {
             e.printStackTrace();
