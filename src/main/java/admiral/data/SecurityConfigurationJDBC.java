@@ -80,7 +80,8 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/images/**");
+        web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/images/**",
+                "/fonts.poppins/**", "/js/**", "/vendor/**");
     }
 
 }
