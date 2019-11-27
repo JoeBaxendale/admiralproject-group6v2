@@ -18,17 +18,16 @@ import java.util.List;
 public class TimeSheetRepoJDBC implements TimeSheetRepo {
 
     private JdbcTemplate jdbc;
+    Connection conn;
 
 
     @Autowired
     TimeSheetRepoJDBC(JdbcTemplate aTemplate){
         jdbc = aTemplate;
-
+        conn = new DatabaseConnection().getCon();
     }
 
     public List<TimeSheet> findTimeSheetsByStatus(String searchTerm){
-
-        Connection conn = new DatabaseConnection().getCon();
 
         String sql = "SELECT * FROM timesheet WHERE status = '"+ searchTerm+"'" ;
 
@@ -64,27 +63,18 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
     @Override
     public void saveTimeSheetEvent(TimeSheetMade timeSheetMade) {
 
-        jdbc.update(
-                new PreparedStatementCreator() {
-                    @Override
-                    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+        String sql = "INSERT INTO timesheet values (numberOfDays, overtime, startDate, endDate, dateSubmitted, notes, " +
+                "status) values ('"+ timeSheetMade.getNumber_of_days() +"', '"+ timeSheetMade.getOvertime() +"'," +
+                " '"+ timeSheetMade.getStart_date() +"', '"+timeSheetMade.getEnd_date()+"', " +
+                "'"+timeSheetMade.getEnd_date()+"', '"+timeSheetMade.getNotes() +"', 'Pending')";
 
-                        PreparedStatement ps = con.prepareStatement(
-                                "insert into timesheet values (numberOfDays, overtime, startDate, endDate," +
-                                        " dateSubmitted, notes, status) values (?, ?, ?, ?, ?, ?, ?)");
+        try {
+            Statement st = conn.createStatement();
+            st.executeQuery(sql);
 
-                                ps.setInt(1, timeSheetMade.getNumber_of_days());
-                                ps.setInt(2, timeSheetMade.getOvertime());
-                                ps.setDate(3, timeSheetMade.getStart_date());
-                                ps.setDate(4, timeSheetMade.getEnd_date());
-                                ps.setDate(5, timeSheetMade.getEnd_date());
-                                ps.setString(6, timeSheetMade.getNotes());
-                                ps.setString(7, "Pending");
-                                return ps;
-                    }
-                }
-
-        );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println("DBG:----------------------------------------->>");
     }
 }
