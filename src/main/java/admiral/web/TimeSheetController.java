@@ -47,6 +47,7 @@ public class TimeSheetController {
                                    BindingResult bindingResult,
                                    Model model) {
 
+        System.out.println("---------------------------------------->" + timeSheet.getStart_date());
         //--------------------------------------------------------------------------------------------------------------
         // Validate the form, else force resubmission
         if (bindingResult.hasErrors()) {
