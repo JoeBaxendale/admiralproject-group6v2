@@ -57,7 +57,8 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 //                URLs matching for access rights
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/Timesheet/**").hasAnyAuthority("Manager", "Admin", "Contractor")
+                .antMatchers("/Timesheet/**").hasAnyAuthority("Contractor")
+                .antMatchers("/Timesheet/**").hasAnyAuthority("Manager", "Admin")
                 .anyRequest().authenticated()
                 .and()
 //                form login
