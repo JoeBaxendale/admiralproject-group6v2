@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Class to mapp the time sheet object to the database
@@ -36,15 +37,15 @@ public class TimeSheet {
 
     //------------------------------------------------------------------------------------------------------------------
     @Column(name = "start_date")
-    private Date start_date;
+    private LocalDate start_date;
 
     //------------------------------------------------------------------------------------------------------------------
     @Column(name = "end_date")
-    private Date end_date;
+    private LocalDate end_date;
 
     //------------------------------------------------------------------------------------------------------------------
     @Column(name = "date_submitted")
-    private Date date_submitted;
+    private LocalDate date_submitted;
 
     //------------------------------------------------------------------------------------------------------------------
     @Column(name = "notes")

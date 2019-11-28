@@ -50,14 +50,23 @@ public class TimeSheetController {
         System.out.println("------------------------------------------->");
         System.out.println("------------------------------------------->"+ timeSheet.getNumber_of_days());
         //--------------------------------------------------------------------------------------------------------------
+        // Check that the supplied end date is later or the same as the start date
+        if ((timeSheet.getStart_date() != null) & (timeSheet.getEnd_date() != null)){
+            if(timeSheet.getStart_date().compareTo(timeSheet.getEnd_date()) > 0) {
+                bindingResult.rejectValue("end_date", "error.end_date", "End date must be after the start date");
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
         // Validate the form, else force resubmission
         if (bindingResult.hasErrors()) {
+            model.addAttribute("timesheetKey", timeSheet);
             return "timesheet";
         }
 
         TimeSheetMade timeSheetEvent = new TimeSheetMade(
-                Integer.parseInt(timeSheet.getNumber_of_days()),
-                Integer.parseInt(timeSheet.getOvertime()),
+                timeSheet.getNumber_of_days(),
+                timeSheet.getOvertime(),
                 timeSheet.getStart_date(),
                 timeSheet.getEnd_date(),
                 timeSheet.getNotes()
