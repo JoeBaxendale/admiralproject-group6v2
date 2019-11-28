@@ -47,6 +47,8 @@ public class TimeSheetController {
                                    BindingResult bindingResult,
                                    Model model) {
 
+        System.out.println("------------------------------------------->");
+        System.out.println("------------------------------------------->"+ timeSheet.getNumber_of_days());
         //--------------------------------------------------------------------------------------------------------------
         // Validate the form, else force resubmission
         if (bindingResult.hasErrors()) {

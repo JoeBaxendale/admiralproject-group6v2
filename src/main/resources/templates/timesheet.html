@@ -152,13 +152,13 @@
                                     </div>
 
                                     <div>
-                                    <form method="post" action="/TimesheetDetails" object="${timesheetKey}">
+                                    <form action="#" method="post" th:action="@{/TimesheetDetails}" th:object="${timesheetKey}">
 
                                         <div class="form-group">
                                             <label class="control-label mb-1">Number of days</label>
                                             <input value="0"
                                                    class="form-control"
-                                                   field="*{number_of_days}"
+                                                   th:field="*{number_of_days}"
                                                    type="number"
                                                    min="0"
                                                    max="7"/>
@@ -170,7 +170,7 @@
                                             <input placeholder="0"
                                                    value="0"
                                                    class="form-control"
-                                                   field="*{overtime}"
+                                                   th:field="*{overtime}"
                                                    type="number"
                                                    min="0"
                                                    max="7"/>
@@ -182,7 +182,7 @@
                                             <label class="control-label mb-1">Notes</label>
                                             <input
                                                     class="form-control"
-                                                    field="*{notes}"
+                                                    th:field="*{notes}"
                                                     type="text"/>
                                             <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                         </div>
@@ -194,7 +194,7 @@
                                                     <label class="control-label mb-1">Start Date</label>
                                                     <input
                                                             class="form-control"
-                                                            field="*{start_date}"
+                                                            th:field="*{start_date}"
                                                             type="date"/>
                                                     <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                 </div>
@@ -206,7 +206,7 @@
                                                     <input
                                                             value="11-11-2001"
                                                             class="form-control"
-                                                            field="*{end_date}"
+                                                            th:field="*{end_date}"
                                                             type="date"/>
                                                 </div>
                                             </div>
