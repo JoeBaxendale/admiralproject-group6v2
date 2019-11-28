@@ -154,7 +154,7 @@
                             <div class="table-responsive m-b-40">
                                 <table class="table table-borderless table-data3" id = "timeSheetTable">
                                     <thead>
-                                    <tr>
+                                    <tr class="table_header">
                                         <th>Manager</th>
                                         <th>Contractor</th>
                                         <th>Status</th>
@@ -218,8 +218,9 @@
                                             <td>$10.00</td>
                                         </tr>
                                     </tbody> -->
-                                </table>
+<!--                                </table>-->
 
+                                <tbody>
                                 <script>
 
                                     var tempTimeSheetArray = "[[${pendingTimeSheets}]]";
@@ -234,8 +235,10 @@
 
                                     var count2 = 0;                             //using this to always get the first entry into the timesheet from the time sheet array which will always be 0, then a multiple of 9
 
+                                    var openRow;
+
                                     for(var i=1;i<timeSheetArray2.length;i++){
-                                        var data = timeSheetArray2.toString().split(",").toString().split(" ");
+                                        var data = timeSheetArray2.toString().split(",").toString().split(",");
                                         var toInsert = data.slice(count2,count2+9);         //split the array of timesheets into its own array (array of arrays)
 
                                         var firstEntry = toInsert[0].substring((toInsert[0].indexOf("("))+1); //remove the [TimeSheet from the front of the data
@@ -249,7 +252,7 @@
                                         table.rows[count].cells[1].innerHTML = toInsert[1];         //add the data to each of the respective columns
                                         table.rows[count].cells[2].innerHTML = toInsert[8].substring(toInsert[8].indexOf(","),-1);  //add the data and remove the two ,'s at the end
 
-                                        count2 += 9;        //increase the counter to put the correct data into the correct cells
+                                        count2 += 10;        //increase the counter to put the correct data into the correct cells
 
                                         var spareRow = table.insertRow(count+1);        //add another row to the table to be used later
                                         spareRow.id = "dropDownRow"+count;
@@ -301,7 +304,7 @@
 
                                             var clickPosition = this.id;
                                             var id = clickPosition.substring(3); //create the id for data addition and appending the table
-                                            var arrayPosition = Math.floor(id/2)*9;
+                                            var arrayPosition = Math.floor(id/2)*10;
 
                                             var select = document.createElement("select");
                                             select.setAttribute("id","select"+id);
@@ -323,24 +326,28 @@
                                             option.innerHTML = "Approved";
                                             select.appendChild(option);
 
-                                            dropDownTable.rows[1].cells[0].innerHTML = data[arrayPosition+2].substring(data[arrayPosition+2].indexOf("=")+1,data[arrayPosition+2].length-1);
-                                            dropDownTable.rows[1].cells[1].innerHTML = data[arrayPosition+3].substring(data[arrayPosition+3].indexOf("=")+1,data[arrayPosition+3].length-1);   //adds data into the cells
-                                            dropDownTable.rows[1].cells[2].innerHTML = data[arrayPosition+4].substring(data[arrayPosition+4].indexOf("=")+1,data[arrayPosition+4].length-1);   //and remove specific characters at the start and end of the string
-                                            dropDownTable.rows[1].cells[3].innerHTML = data[arrayPosition+5].substring(data[arrayPosition+5].indexOf("=")+1,data[arrayPosition+5].length-1);
-                                            dropDownTable.rows[1].cells[4].innerHTML = data[arrayPosition+6].substring(data[arrayPosition+6].indexOf("=")+1,data[arrayPosition+6].length-1);
-                                            dropDownTable.rows[1].cells[5].innerHTML = data[arrayPosition+7].substring(data[arrayPosition+7].indexOf("=")+1,data[arrayPosition+7].length-1);
+                                            dropDownTable.rows[1].cells[0].innerHTML = data[arrayPosition+2].substring(data[arrayPosition+2].indexOf("=")+1,data[arrayPosition+2].length);
+                                            dropDownTable.rows[1].cells[1].innerHTML = data[arrayPosition+3].substring(data[arrayPosition+3].indexOf("=")+1,data[arrayPosition+3].length);   //adds data into the cells
+                                            dropDownTable.rows[1].cells[2].innerHTML = data[arrayPosition+4].substring(data[arrayPosition+4].indexOf("=")+1,data[arrayPosition+4].length);   //and remove specific characters at the start and end of the string
+                                            dropDownTable.rows[1].cells[3].innerHTML = data[arrayPosition+5].substring(data[arrayPosition+5].indexOf("=")+1,data[arrayPosition+5].length);
+                                            dropDownTable.rows[1].cells[4].innerHTML = data[arrayPosition+6].substring(data[arrayPosition+6].indexOf("=")+1,data[arrayPosition+6].length);
+                                            dropDownTable.rows[1].cells[5].innerHTML = data[arrayPosition+7].substring(data[arrayPosition+7].indexOf("=")+1,data[arrayPosition+7].length);
                                             dropDownTable.rows[1].cells[6].appendChild(select);
                                             // data[arrayPosition+8].substring(data[arrayPosition+8].indexOf("=")+1,data[arrayPosition+8].length-2);  //remove an extra , on the pending column
 
+                                            if (document.getElementById("dropDownTable") != null){
+                                                document.getElementById(openRow).removeChild(document.getElementById("dropDownTable"));
+                                            }
+
+                                            openRow = "dropDownCell" +id;
 
                                             document.getElementById("dropDownCell" + id).appendChild(dropDownTable);    //appends the new table into the cell we created earlier NEEDS TO CHANGE DEPENDING ON WHAT CELL IS CLICKED
                                         }
                                     }
 
                                 </script>
-
-
-
+                                </tbody>
+                                </table>
 
                             </div>
                             <!-- END DATA TABLE-->
@@ -358,6 +365,10 @@
                 </div>
             </div>
         </div>
+        <!-- END MAIN CONTENT-->
+
+
+
     </div>
 
 </div>

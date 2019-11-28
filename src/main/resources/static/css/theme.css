@@ -83,6 +83,9 @@ p {
 
 .table-responsive {
     padding-right: 1px;
+    /*background-color: white;*/
+
+    /*color: white;*/
 }
 
 .card {
@@ -4676,7 +4679,11 @@ section {
 }
 
 .table-data3 thead {
-    background: #333;
+    background: white;
+}
+
+.table_header{
+    background: #0b2e13;
 }
 
 .table-data3 thead tr th {
