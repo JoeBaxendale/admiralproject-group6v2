@@ -1,159 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Required meta tags-->
     <meta charset="UTF-8">
-    <link rel = "stylesheet" href = /css1/template.css>
-    <link rel = "stylesheet" href = /css1/timesheetDashboard.css>
-    <title>Time Sheet Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashaboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/theme.css" rel="stylesheet" media="all">
+
 </head>
-<body>
 
-<main class="container mt-4" role="main">
-    <div class="template"></div>
-</main>
+<body class="animsition">
+<div class="page-wrapper">
 
-    <div>
-        <table id="timeSheetTable">
-            <tr>
-                <th>Manager</th>
-                <th>Contractor</th>
-                <th>Status</th>
-            </tr>
-        </table>
+    <!-- MENU SIDEBAR-->
+    <aside class="menu-sidebar d-none d-lg-block">
+        <div class="logo">
+            <a href="#">
+                <img src="images/icon/admiral.png" alt="Cool Admin" />
+            </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+            <nav class="navbar-sidebar">
+                <ul class="list-unstyled navbar__list">
+
+                    <li class="active">
+                        <a href="timeSheetDashboard">
+                            <i class="fas fa-table"></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="Timesheet">
+                            <i class="fas fa-tachometer-alt"></i>Timesheet</a>
+                    </li>
+                    <li class="has-sub">
+                        <a class="js-arrow" href="#">
+                            <i class="fas fa-copy"></i>Pages</a>
+                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <li>
+                                <a href="login">Login</a>
+                            </li>
+                            <li>
+                                <a href="register">Register</a>
+                            </li>
+                            <li>
+                                <a href="forget-pass">Forget Password</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <!-- END MENU SIDEBAR-->
+
+    <!-- PAGE CONTAINER-->
+    <div class="page-container1">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="header-wrap">
+                        <form class="form-header" action="" method="POST">
+                            <!-- <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." /> -->
+                            <!-- <button class="au-btn--submit" type="submit">
+                                <i class="zmdi zmdi-search"></i>
+                            </button> -->
+                        </form>
+
+
+                        <div class="header-button">
+
+
+                            <div class="account-wrap">
+                                <div class="account-item clearfix js-item-menu">
+                                    <div class="image">
+                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                    </div>
+                                    <div class="content">
+                                        <a class="js-acc-btn" href="#">john doe</a>
+                                    </div>
+                                    <div class="account-dropdown js-dropdown">
+                                        <div class="info clearfix">
+                                            <div class="image">
+                                                <a href="#">
+                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                </a>
+                                            </div>
+                                            <div class="content">
+                                                <h5 class="name">
+                                                    <a href="#">john doe</a>
+                                                </h5>
+                                                <span class="email">johndoe@example.com</span>
+                                            </div>
+                                        </div>
+                                        <div class="account-dropdown__body">
+                                            <div class="account-dropdown__item">
+                                                <a href="#">
+                                                    <i class="zmdi zmdi-account"></i>Account</a>
+                                            </div>
+                                        </div>
+                                        <div class="account-dropdown__footer">
+                                            <a href="/logout">
+                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- END HEADER DESKTOP-->
+
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+
+                    <!-- DATA TABLE -->
+
+
+                    <div class="m-t-30">
+                        <div class="col-md-12">
+                            <!-- DATA TABLE-->
+                            <div class="table-responsive m-b-40">
+                                <table class="table table-borderless table-data3" id = "timeSheetTable">
+                                    <thead>
+                                    <tr>
+                                        <th>Manager</th>
+                                        <th>Contractor</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <!-- <tbody>
+                                        <tr>
+                                            <td>2018-09-29 05:57</td>
+                                            <td>Mobile</td>
+                                            <td>iPhone X 64Gb Grey</td>
+                                            <td class="process">Processed</td>
+                                            <td>$999.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-28 01:22</td>
+                                            <td>Mobile</td>
+                                            <td>Samsung S8 Black</td>
+                                            <td class="process">Processed</td>
+                                            <td>$756.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-27 02:12</td>
+                                            <td>Game</td>
+                                            <td>Game Console Controller</td>
+                                            <td class="denied">Denied</td>
+                                            <td>$22.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-26 23:06</td>
+                                            <td>Mobile</td>
+                                            <td>iPhone X 256Gb Black</td>
+                                            <td class="denied">Denied</td>
+                                            <td>$1199.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-25 19:03</td>
+                                            <td>Accessories</td>
+                                            <td>USB 3.0 Cable</td>
+                                            <td class="process">Processed</td>
+                                            <td>$10.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-29 05:57</td>
+                                            <td>Accesories</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                            <td class="denied">Denied</td>
+                                            <td>$199.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-24 19:10</td>
+                                            <td>Camera</td>
+                                            <td>Camera C430W 4k</td>
+                                            <td class="process">Processed</td>
+                                            <td>$699.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-22 00:43</td>
+                                            <td>Computer</td>
+                                            <td>Macbook Pro Retina 2017</td>
+                                            <td class="process">Processed</td>
+                                            <td>$10.00</td>
+                                        </tr>
+                                    </tbody> -->
+                                </table>
+
+                                <script>
+
+                                    var tempTimeSheetArray = "[[${pendingTimeSheets}]]";
+
+                                    var timeSheetArray = tempTimeSheetArray.split(",");     //split the string of time sheets into an array of timesheets
+
+                                    var timeSheetArray2 = timeSheetArray.toString().split(")"); //split the string of time sheets into an array of timesheets
+
+                                    var table = document.getElementById("timeSheetTable");
+
+                                    var count = 1;                              //using a counter to add 2 rows per entry in the time sheet array so the extra row can be used to show more data when dropped down
+
+                                    var count2 = 0;                             //using this to always get the first entry into the timesheet from the time sheet array which will always be 0, then a multiple of 9
+
+                                    for(var i=1;i<timeSheetArray2.length;i++){
+                                        var data = timeSheetArray2.toString().split(",").toString().split(" ");
+                                        var toInsert = data.slice(count2,count2+9);         //split the array of timesheets into its own array (array of arrays)
+
+                                        var firstEntry = toInsert[0].substring((toInsert[0].indexOf("("))+1); //remove the [TimeSheet from the front of the data
+
+                                        var row = table.insertRow(count);//add a a new row to the table
+                                        row.id = "row" + count;
+                                        row.insertCell(0);
+                                        row.insertCell(1);  //insert the columns into said row
+                                        row.insertCell(2);
+                                        table.rows[count].cells[0].innerHTML = firstEntry;      //this will need to be changed to get the manager id out of the database
+                                        table.rows[count].cells[1].innerHTML = toInsert[1];         //add the data to each of the respective columns
+                                        table.rows[count].cells[2].innerHTML = toInsert[8].substring(toInsert[8].indexOf(","),-1);  //add the data and remove the two ,'s at the end
+
+                                        count2 += 9;        //increase the counter to put the correct data into the correct cells
+
+                                        var spareRow = table.insertRow(count+1);        //add another row to the table to be used later
+                                        spareRow.id = "dropDownRow"+count;
+
+
+                                        // spareRow.insertCell(0);         //add some empty cells so we can add data to the end cell (stop the table stretching)********************
+                                        // spareRow.insertCell(1);         //could maybe remove this if we can fix it with css? *******************
+
+
+                                        var dropDownCell = spareRow.insertCell(0);       //add a cell to the row and give both the row and the cell an ID
+                                        dropDownCell.id = "dropDownCell" + count;
+
+                                        count+=2;   //incrementing the counter by 2 as 2 rows have been added to the table
+
+                                        document.getElementById(row.id).onclick = function(){           //add an on click function
+
+                                            dropDownTable = document.createElement('table');    //the function creates a new table
+                                            dropDownTable.id = "dropDownTable";
+
+                                            ddHeader = dropDownTable.createTHead();         //add a header
+
+                                            ddRow = ddHeader.insertRow(0);             //adds a row to the header
+                                            ddRow.insertCell(0);
+                                            ddRow.insertCell(1);            //add cells to the new row
+                                            ddRow.insertCell(2);
+                                            ddRow.insertCell(3);
+                                            ddRow.insertCell(4);
+                                            ddRow.insertCell(5);
+                                            ddRow.insertCell(6);
+
+                                            dropDownTable.rows[0].cells[0].innerHTML = "Number Of Days Worked";
+                                            dropDownTable.rows[0].cells[1].innerHTML = "Overtime Worked";   //adds headings into these cells
+                                            dropDownTable.rows[0].cells[2].innerHTML = "Start Date";
+                                            dropDownTable.rows[0].cells[3].innerHTML = "End Date";
+                                            dropDownTable.rows[0].cells[4].innerHTML = "Date Submitted";
+                                            dropDownTable.rows[0].cells[5].innerHTML = "Notes";
+                                            dropDownTable.rows[0].cells[6].innerHTML = "Status";
+
+                                            ddRow2 = dropDownTable.insertRow(1);           //adds another row to the table
+                                            ddRow2.insertCell(0);
+                                            ddRow2.insertCell(1);            //add cells to the new row
+                                            ddRow2.insertCell(2);
+                                            ddRow2.insertCell(3);
+                                            ddRow2.insertCell(4);
+                                            ddRow2.insertCell(5);
+                                            ddRow2.insertCell(6);
+
+                                            console.log(data);
+
+                                            var clickPosition = this.id;
+                                            var id = clickPosition.substring(3); //create the id for data addition and appending the table
+                                            var arrayPosition = Math.floor(id/2)*9;
+
+                                            var select = document.createElement("select");
+                                            select.setAttribute("id","select"+id);
+
+                                            var option;
+
+                                            option = document.createElement("option");
+                                            option.setAttribute("value", "Pending");
+                                            option.innerHTML = "Pending";
+                                            select.appendChild(option);
+
+                                            option = document.createElement("option");
+                                            option.setAttribute("value", "Rejected");
+                                            option.innerHTML = "Rejected";
+                                            select.appendChild(option);
+
+                                            option = document.createElement("option");
+                                            option.setAttribute("value", "Approved");
+                                            option.innerHTML = "Approved";
+                                            select.appendChild(option);
+
+                                            dropDownTable.rows[1].cells[0].innerHTML = data[arrayPosition+2].substring(data[arrayPosition+2].indexOf("=")+1,data[arrayPosition+2].length-1);
+                                            dropDownTable.rows[1].cells[1].innerHTML = data[arrayPosition+3].substring(data[arrayPosition+3].indexOf("=")+1,data[arrayPosition+3].length-1);   //adds data into the cells
+                                            dropDownTable.rows[1].cells[2].innerHTML = data[arrayPosition+4].substring(data[arrayPosition+4].indexOf("=")+1,data[arrayPosition+4].length-1);   //and remove specific characters at the start and end of the string
+                                            dropDownTable.rows[1].cells[3].innerHTML = data[arrayPosition+5].substring(data[arrayPosition+5].indexOf("=")+1,data[arrayPosition+5].length-1);
+                                            dropDownTable.rows[1].cells[4].innerHTML = data[arrayPosition+6].substring(data[arrayPosition+6].indexOf("=")+1,data[arrayPosition+6].length-1);
+                                            dropDownTable.rows[1].cells[5].innerHTML = data[arrayPosition+7].substring(data[arrayPosition+7].indexOf("=")+1,data[arrayPosition+7].length-1);
+                                            dropDownTable.rows[1].cells[6].appendChild(select);
+                                            // data[arrayPosition+8].substring(data[arrayPosition+8].indexOf("=")+1,data[arrayPosition+8].length-2);  //remove an extra , on the pending column
+
+
+                                            document.getElementById("dropDownCell" + id).appendChild(dropDownTable);    //appends the new table into the cell we created earlier NEEDS TO CHANGE DEPENDING ON WHAT CELL IS CLICKED
+                                        }
+                                    }
+
+                                </script>
+
+
+
+
+                            </div>
+                            <!-- END DATA TABLE-->
+                        </div>
+                    </div>
+
+                    <!-- <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script>
+</div>
 
-        var tempTimeSheetArray = "[[${pendingTimeSheets}]]";
+<!-- Jquery JS-->
+<script src="vendor/jquery-3.2.1.min.js"></script>
+<!-- Bootstrap JS-->
+<script src="vendor/bootstrap-4.1/popper.min.js"></script>
+<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+<!-- Vendor JS       -->
+<script src="vendor/slick/slick.min.js">
+</script>
+<script src="vendor/wow/wow.min.js"></script>
+<script src="vendor/animsition/animsition.min.js"></script>
+<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+</script>
+<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+<script src="vendor/counter-up/jquery.counterup.min.js">
+</script>
+<script src="vendor/circle-progress/circle-progress.min.js"></script>
+<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="vendor/chartjs/Chart.bundle.min.js"></script>
+<script src="vendor/select2/select2.min.js">
+</script>
 
-        var timeSheetArray = tempTimeSheetArray.split(",");     //split the string of time sheets into an array of timesheets
-
-        var timeSheetArray2 = timeSheetArray.toString().split(")"); //split the string of time sheets into an array of timesheets
-
-        var table = document.getElementById("timeSheetTable");
-
-        var count = 1;                              //using a counter to add 2 rows per entry in the time sheet array so the extra row can be used to show more data when dropped down
-
-        var count2 = 0;                             //using this to always get the first entry into the timesheet from the time sheet array which will always be 0, then a multiple of 9
-
-        var openRow;
-
-        for(var i=1;i<timeSheetArray2.length;i++){
-            var data = timeSheetArray2.toString().split(",").toString().split(",");
-            console.log("timesheet" + timeSheetArray2);
-            console.log("data" + data);
-            var toInsert = data.slice(count2,count2+9);         //split the array of timesheets into its own array (array of arrays)
-            console.log("toInsert"+toInsert);
-
-            var firstEntry = toInsert[0].substring((toInsert[0].indexOf("("))+1); //remove the [TimeSheet from the front of the data
-
-            var row = table.insertRow(count);//add a a new row to the table
-            row.id = "row" + count;
-            row.insertCell(0);
-            row.insertCell(1);  //insert the columns into said row
-            row.insertCell(2);
-            table.rows[count].cells[0].innerHTML = firstEntry;      //this will need to be changed to get the manager id out of the database
-            table.rows[count].cells[1].innerHTML = toInsert[1];         //add the data to each of the respective columns
-            table.rows[count].cells[2].innerHTML = toInsert[8];  //add the data and remove the two ,'s at the end
-
-            count2 += 10;        //increase the counter to put the correct data into the correct cells
-
-            var spareRow = table.insertRow(count+1);        //add another row to the table to be used later
-            spareRow.id = "dropDownRow"+count;
-
-
-            // spareRow.insertCell(0);         //add some empty cells so we can add data to the end cell (stop the table stretching)********************
-            // spareRow.insertCell(1);         //could maybe remove this if we can fix it with css? *******************
-
-
-            var dropDownCell = spareRow.insertCell(0);       //add a cell to the row and give both the row and the cell an ID
-            dropDownCell.id = "dropDownCell" + count;
-
-            count+=2;   //incrementing the counter by 2 as 2 rows have been added to the table
-
-            document.getElementById(row.id).onclick = function(){           //add an on click function
-
-                dropDownTable = document.createElement('table');    //the function creates a new table
-                dropDownTable.id = "dropDownTable";
-
-                ddHeader = dropDownTable.createTHead();         //add a header
-
-                ddRow = ddHeader.insertRow(0);             //adds a row to the header
-                ddRow.insertCell(0);
-                ddRow.insertCell(1);            //add cells to the new row
-                ddRow.insertCell(2);
-                ddRow.insertCell(3);
-                ddRow.insertCell(4);
-                ddRow.insertCell(5);
-                ddRow.insertCell(6);
-
-                dropDownTable.rows[0].cells[0].innerHTML = "Number Of Days Worked";
-                dropDownTable.rows[0].cells[1].innerHTML = "Overtime Worked";   //adds headings into these cells
-                dropDownTable.rows[0].cells[2].innerHTML = "Start Date";
-                dropDownTable.rows[0].cells[3].innerHTML = "End Date";
-                dropDownTable.rows[0].cells[4].innerHTML = "Date Submitted";
-                dropDownTable.rows[0].cells[5].innerHTML = "Notes";
-                dropDownTable.rows[0].cells[6].innerHTML = "Status";
-
-                ddRow2 = dropDownTable.insertRow(1);           //adds another row to the table
-                ddRow2.insertCell(0);
-                ddRow2.insertCell(1);            //add cells to the new row
-                ddRow2.insertCell(2);
-                ddRow2.insertCell(3);
-                ddRow2.insertCell(4);
-                ddRow2.insertCell(5);
-                ddRow2.insertCell(6);
-
-                var clickPosition = this.id;
-                var id = clickPosition.substring(3); //create the id for data addition and appending the table
-                var arrayPosition = Math.floor(id/2)*10;
-
-                var select = document.createElement("select");
-                select.setAttribute("id","select"+id);
-
-                var option;
-
-                option = document.createElement("option");
-                option.setAttribute("value", "Pending");
-                option.innerHTML = "Pending";
-                select.appendChild(option);
-
-                option = document.createElement("option");
-                option.setAttribute("value", "Rejected");
-                option.innerHTML = "Rejected";
-                select.appendChild(option);
-
-                option = document.createElement("option");
-                option.setAttribute("value", "Approved");
-                option.innerHTML = "Approved";
-                select.appendChild(option);
-
-                dropDownTable.rows[1].cells[0].innerHTML = data[arrayPosition+2].substring(data[arrayPosition+2].indexOf("=")+1,data[arrayPosition+2].length);
-                dropDownTable.rows[1].cells[1].innerHTML = data[arrayPosition+3].substring(data[arrayPosition+3].indexOf("=")+1,data[arrayPosition+3].length);   //adds data into the cells
-                dropDownTable.rows[1].cells[2].innerHTML = data[arrayPosition+4].substring(data[arrayPosition+4].indexOf("=")+1,data[arrayPosition+4].length);   //and remove specific characters at the start and end of the string
-                dropDownTable.rows[1].cells[3].innerHTML = data[arrayPosition+5].substring(data[arrayPosition+5].indexOf("=")+1,data[arrayPosition+5].length);
-                dropDownTable.rows[1].cells[4].innerHTML = data[arrayPosition+6].substring(data[arrayPosition+6].indexOf("=")+1,data[arrayPosition+6].length);
-                dropDownTable.rows[1].cells[5].innerHTML = data[arrayPosition+7].substring(data[arrayPosition+7].indexOf("=")+1,data[arrayPosition+7].length);
-                dropDownTable.rows[1].cells[6].appendChild(select);
-                // data[arrayPosition+8].substring(data[arrayPosition+8].indexOf("=")+1,data[arrayPosition+8].length-2);  //remove an extra , on the pending column
-
-
-
-                if (document.getElementById("dropDownTable") != null){
-                    document.getElementById(openRow).removeChild(document.getElementById("dropDownTable"));
-                }
-
-                openRow = "dropDownCell"+id;
-
-                document.getElementById("dropDownCell" + id).appendChild(dropDownTable);    //appends the new table into the cell we created earlier NEEDS TO CHANGE DEPENDING ON WHAT CELL IS CLICKED
-
-            }
-        }
-
-
-
-
-    </script>
+<!-- Main JS-->
+<script src="js/main.js"></script>
 
 </body>
+
 </html>
+<!-- end document-->
