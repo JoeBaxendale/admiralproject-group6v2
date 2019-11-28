@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 //Controller for the login, register and home
 
@@ -22,6 +24,11 @@ public class authenticationController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register"); //will open register html
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes) {
+        return new RedirectView("/Timesheet");
     }
 //
 //    @RequestMapping(value = "/Timesheet", method = RequestMethod.GET)
