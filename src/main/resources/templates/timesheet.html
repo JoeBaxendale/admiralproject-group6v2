@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <!-- Required meta tags-->
@@ -150,8 +150,9 @@
                                     <div class="card-title">
                                         <h3 class="text-center title-2">Hello {Name} please fill in your time sheet</h3>
                                     </div>
-                                    <hr>
-                                    <form action="@{/TimesheetDetails}" object="${timesheetKey}" method="post">
+
+                                    <div>
+                                    <form method="post" action="/TimesheetDetails" object="${timesheetKey}">
 
                                         <div class="form-group">
                                             <label class="control-label mb-1">Number of days</label>
@@ -217,6 +218,9 @@
                                             </button>
                                         </div>
                                     </form>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
