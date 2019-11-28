@@ -41,9 +41,9 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
                         temp.getInt(2),
                         temp.getInt(3),
                         temp.getInt(4),
-                        temp.getDate(5),
-                        temp.getDate(6),
-                        temp.getDate(7),
+                        temp.getDate(5).toLocalDate(),
+                        temp.getDate(6).toLocalDate(),
+                        temp.getDate(7).toLocalDate(),
                         temp.getString(8),
                         temp.getString(9)));
 
