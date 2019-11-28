@@ -6,11 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Class to mapp the time sheet object to the database
+// Class to map the time sheet object to the database
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
