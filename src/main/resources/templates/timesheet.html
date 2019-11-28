@@ -168,6 +168,11 @@
                                                    type="number"
                                                    min="0"
                                                    max="7"/>
+                                            <div class="alert alert-danger"
+                                                 th:errors="*{number_of_days}"
+                                                 th:if="${#fields.hasErrors('number_of_days')}">
+                                                Number of days Error
+                                            </div>
                                             <span class="help-block" data-valmsg-for="cc-number" dta-valmsg-replace="true"></span>
                                         </div>
 
@@ -180,6 +185,11 @@
                                                    type="number"
                                                    min="0"
                                                    max="7"/>
+                                            <div class="alert alert-danger"
+                                                 th:errors="*{overtime}"
+                                                 th:if="${#fields.hasErrors('overtime')}">
+                                                Overtime of days Error
+                                            </div>
                                             <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                         </div>
 
@@ -190,6 +200,11 @@
                                                     class="form-control"
                                                     th:field="*{notes}"
                                                     type="text"/>
+                                            <div class="alert alert-danger"
+                                                 th:errors="*{notes}"
+                                                 th:if="${#fields.hasErrors('notes')}">
+                                                Notes error
+                                            </div>
                                             <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                         </div>
 
@@ -202,6 +217,11 @@
                                                             class="form-control"
                                                             th:field="*{start_date}"
                                                             type="date"/>
+                                                    <div class="alert alert-danger"
+                                                         th:errors="*{start_date}"
+                                                         th:if="${#fields.hasErrors('start_date')}">
+                                                        Start date of days Error
+                                                    </div>
                                                     <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                 </div>
                                             </div>
@@ -214,6 +234,11 @@
                                                             class="form-control"
                                                             th:field="*{end_date}"
                                                             type="date"/>
+                                                    <div class="alert alert-danger"
+                                                         th:errors="*{end_date}"
+                                                         th:if="${#fields.hasErrors('end_date')}">
+                                                        End date of days Error
+                                                    </div>
                                                 </div>
                                             </div>
 
