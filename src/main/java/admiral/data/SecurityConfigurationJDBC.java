@@ -1,5 +1,7 @@
 package admiral.data;
 
+//----------------------------------------------------------------------------------------------------------------------
+// Imports
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,34 +13,41 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 import javax.sql.DataSource;
 
-//setting up spring security configuration using java config, to use
-//JDBC based authentication and authorization
-
+//----------------------------------------------------------------------------------------------------------------------
+// Setting up spring security configuration using java config, to use
+// JDBC based authentication and authorization
 @Configuration
 //to override the default configuration of spring security the annotation below is needed
 @EnableWebSecurity
 @Slf4j
 public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 
-//    static final Logger LOG = LoggerFactory.getLogger(SecurityConfigurationJDBC.class);
+    // static final Logger LOG = LoggerFactory.getLogger(SecurityConfigurationJDBC.class);
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Attribute to encode the password
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Attribute to identify the source
     @Autowired
     private DataSource dataSource;
 
-//    queries from application properties
+    //------------------------------------------------------------------------------------------------------------------
+    // queries from application properties
     @Value("${spring.users-query}")
     private String usersQuery;
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Sql query to identify role
     @Value("${spring.roles-query}")
     private String rolesQuery;
 
-    //    encoding the password
+    //------------------------------------------------------------------------------------------------------------------
+    // Encoding the password
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -50,18 +59,23 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder);
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Configure method for DB access from http
     @Override
     protected void configure (HttpSecurity http) throws Exception{
 
+        //--------------------------------------------------------------------------------------------------------------
+        // URLs matching for access rights
         http.authorizeRequests()
-//                URLs matching for access rights
                 .antMatchers("/login").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/Timesheet/**").hasAnyAuthority("Manager", "Admin", "Contractor")
 //                .antMatchers("/Timesheet/**").hasAnyAuthority("Manager", "Admin")
                 .anyRequest().authenticated()
                 .and()
-//                form login
+
+                //------------------------------------------------------------------------------------------------------
+                // form login
                 .csrf().disable().formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
@@ -69,7 +83,9 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
-//                form logout
+
+                //------------------------------------------------------------------------------------------------------
+                // Form logout
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login").and()
@@ -77,13 +93,13 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage("/access-denied");
     }
 
-
+    //------------------------------------------------------------------------------------------------------------------
+    // Configure method for DB access from WebSecurity
     @Override
     public void configure(WebSecurity web) throws Exception{
         web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/images/**",
                 "/fonts.poppins/**", "/js/**", "/vendor/**");
     }
-
 }
 
 //Page used for the code above https://tutorials.webencyclop.com/spring-boot/03-create-user-login-registration/
