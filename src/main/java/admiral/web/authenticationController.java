@@ -26,10 +26,10 @@ public class authenticationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/error", method = RequestMethod.GET)
-    public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes) {
-        return new RedirectView("/Timesheet");
-    }
+//    @RequestMapping(value = "/error", method = RequestMethod.GET)
+//    public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes) {
+//        return new RedirectView("/Timesheet");
+//    }
 //
 //    @RequestMapping(value = "/Timesheet", method = RequestMethod.GET)
 //    public ModelAndView timesheet(){
