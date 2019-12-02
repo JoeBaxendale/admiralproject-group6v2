@@ -238,6 +238,23 @@
                                         </div>
 
                                         <!-- ####################################################################### -->
+                                        <!-- Form field for the number of days -->
+                                        <div class="form-group">
+                                            <label class="control-label mb-1">Of those days I worked:  &emsp;</label>
+                                            <input th:field="*{worked_saturday}"
+                                                   type="checkbox"
+                                                   value="Worked Saturday"/>Worked Saturday &emsp;
+
+                                            <input th:field="*{worked_sunday}"
+                                                   type="checkbox"
+                                                   value="Worked Sunday"/>Worked Saturday &emsp;
+
+                                            <span class="help-block" data-valmsg-for="cc-number" dta-valmsg-replace="true"></span>
+                                        </div>
+
+
+
+                                        <!-- ####################################################################### -->
                                         <!-- Form field for the overtime -->
                                         <div class="form-group">
                                             <label class="control-label mb-1">Overtime</label>
@@ -305,8 +322,7 @@
                                             <div class="col-6">
                                                 <label class="control-label mb-1">End Date</label>
                                                 <div class="input-group">
-                                                    <input
-                                                            value="11-11-2001"
+                                                    <input id="theDate"
                                                             class="form-control"
                                                             th:field="*{end_date}"
                                                             type="date"/>
