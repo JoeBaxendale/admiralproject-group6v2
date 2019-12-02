@@ -94,4 +94,20 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
             e.printStackTrace();
         }
     }
+    public void updateTimeSheetEntry(TimeSheet timesheet){
+
+//        String sql = "UPDATE timesheet" +
+//                "SET `status`='" + timesheet.getStatus() + "', `notes`='" + timesheet.getNotes() +      //idk why this isnt working...
+//                "' WHERE timesheet_id=" + timesheet.getTime_sheet_id();                                   //syntax error for sql but not in mysql workbench
+
+        try {
+            PreparedStatement st = conn.prepareStatement("UPDATE timesheet SET `status` = ?, `notes` = ? WHERE timesheet_id = ?");
+            st.setString(1,timesheet.getStatus());
+            st.setString(2,timesheet.getNotes());
+            st.setLong(3,timesheet.getTime_sheet_id());
+            st.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    };
 }

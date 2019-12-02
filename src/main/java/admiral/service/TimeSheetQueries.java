@@ -25,4 +25,8 @@ public class TimeSheetQueries implements TimeSheetFinder{
     public List<TimeSheet> findTimeSheetsByStatus(String searchTerm){
         return timeSheetRepo.findTimeSheetsByStatus(searchTerm);
     }
+
+    public void updateTimeSheetEntry(TimeSheet timesheet){
+        timeSheetRepo.updateTimeSheetEntry(timesheet);
+    };
 }

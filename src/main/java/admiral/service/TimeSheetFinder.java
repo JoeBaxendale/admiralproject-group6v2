@@ -13,4 +13,6 @@ public interface TimeSheetFinder {
     // Retrieves Time Sheets based on search term
     public List<TimeSheet> findTimeSheetsByStatus(String searchTerm);
 
+    public void updateTimeSheetEntry(TimeSheet timesheet);
+
 }
