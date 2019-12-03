@@ -5,7 +5,11 @@ package admiral.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 //----------------------------------------------------------------------------------------------------------------------
 //Defining mapping of the table users
@@ -24,18 +28,24 @@ public class User {
     private int userId;
 
     //------------------------------------------------------------------------------------------------------------------
+    @NotNull(message = "First name is compulsory")
     @Column(name="first_name")
     private String firstName;
 
     //------------------------------------------------------------------------------------------------------------------
+    @NotNull(message = "Last name is compulsory")
     @Column(name="last_name")
     private String lastName;
 
     //------------------------------------------------------------------------------------------------------------------
+    @NotNull(message = "Email is compulsory")
+    @Email(message = "Email is invalid")
     @Column(name="email")
     private String staffEmail;
 
     //------------------------------------------------------------------------------------------------------------------
+    @NotNull(message = "Password is compulsory")
+    @Length(min=5, message = "Password should be at least 5 characters")
     @Column(name="password")
     private String password;
 
