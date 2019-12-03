@@ -96,17 +96,13 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
     }
     public void updateTimeSheetEntry(TimeSheet timesheet){
 
-//        String sql = "UPDATE timesheet" +
-//                "SET `status`='" + timesheet.getStatus() + "', `notes`='" + timesheet.getNotes() +      //idk why this isnt working...
-//                "' WHERE timesheet_id=" + timesheet.getTime_sheet_id();                                   //syntax error for sql but not in mysql workbench
-
         try {
-            PreparedStatement st = conn.prepareStatement("UPDATE timesheet SET `status` = ?, `notes` = ? WHERE timesheet_id = ?");
+            PreparedStatement st = conn.prepareStatement("UPDATE timesheet SET `status` = ?, `notes` = ? WHERE timesheet_id = ?");  //make the sql statement with ?'s as variables
             st.setString(1,timesheet.getStatus());
-            st.setString(2,timesheet.getNotes());
+            st.setString(2,timesheet.getNotes());       //set each ? to be the correct variable from the timesheet
             st.setLong(3,timesheet.getTime_sheet_id());
-            st.executeUpdate();
-        }catch(SQLException e){
+            st.executeUpdate();     //execute the sql which updates the database
+        }catch(SQLException e){ //catch an error that is thrown
             e.printStackTrace();
         }
     };
