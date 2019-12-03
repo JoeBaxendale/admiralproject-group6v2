@@ -24,6 +24,14 @@ public class TimeSheetForm {
     private int number_of_days;
 
     //------------------------------------------------------------------------------------------------------------------
+    // Checks if the user worked Saturday for notes
+    private String worked_saturday;
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Checks if the user worked Sunday for notes
+    private String worked_sunday;
+
+    //------------------------------------------------------------------------------------------------------------------
     // Validates the overtime with reasonable numbers
     @NotNull(message = "Overtime required")
     @PositiveOrZero(message = "Overtime must be greater than or equal to 0")
