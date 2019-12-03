@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!-- ############################################################################################################### -->
 <!-- Page settings and formatting information -->
@@ -123,14 +123,18 @@
 
                                     <!-- ########################################################################### -->
                                     <!-- Logo for the top bar -->
-                                    <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                    </div>
+<!--                                    <div class="image">-->
+<!--                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
+<!--                                    </div>-->
 
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
                                     <div class="content">
-                                        <a class="js-acc-btn" href="#">john doe</a>
+<!--                                        <a class="js-acc-btn">-->
+                                        <div sec:authorize="isAuthenticated()">
+                                            <div sec:authentication="name"></div>
+                                        </div>
+<!--                                        </a>-->
                                     </div>
 
                                     <!-- ########################################################################### -->
@@ -140,21 +144,21 @@
 
                                             <!-- ################################################################### -->
                                             <!-- Profile image -->
-                                            <div class="image">
-                                                <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt=${{first_name}}/>
-                                                </a>
-                                            </div>
+<!--                                            <div class="image">-->
+<!--                                                <a href="#">-->
+<!--                                                    <img src="images/icon/avatar-01.jpg" alt=${{first_name}}/>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
 
                                             <!-- ################################################################### -->
                                             <!-- Account information for dropdown -->
-                                            <div class="content">
-                                                <h5 class="name">
-                                                    <a href="#">${{first_name}}</a>
-                                                </h5>
-                                                <span class="email">${{email}}</span>
-                                            </div>
-                                        </div>
+<!--                                            <div class="content">-->
+<!--                                                <h5 class="name">-->
+<!--                                                    <a href="#">${{first_name}}</a>-->
+<!--                                                </h5>-->
+<!--                                                <span class="email">${{email}}</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
 
                                         <!-- ####################################################################### -->
                                         <!-- Account management link -->
