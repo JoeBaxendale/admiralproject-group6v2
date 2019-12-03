@@ -276,6 +276,7 @@
 
                                             var option;
 
+
                                             option = document.createElement("option");
                                             option.setAttribute("value", "Pending");
                                             option.innerHTML = "Pending";
@@ -290,6 +291,16 @@
                                             option.setAttribute("value", "Approved");
                                             option.innerHTML = "Approved";
                                             select.appendChild(option);
+
+                                            var statusSelected = "[[${filterTerm}]]";
+
+                                            console.log(statusSelected);
+
+                                            for (var k=0;k<select.options.length;k++) {
+                                                if(select.options[k].innerHTML == statusSelected) {
+                                                    select.selectedIndex = k;
+                                                }
+                                            }
 
                                             dropDownTable.rows[1].cells[0].innerHTML = data[arrayPosition + 2].substring(data[arrayPosition + 2].indexOf("=") + 1, data[arrayPosition + 2].length);
                                             dropDownTable.rows[1].cells[1].innerHTML = data[arrayPosition + 3].substring(data[arrayPosition + 3].indexOf("=") + 1, data[arrayPosition + 3].length);   //adds data into the cells
