@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!-- ############################################################################################################### -->
 <!-- Page settings and formatting information -->
@@ -136,14 +136,19 @@
 
                                     <!-- ########################################################################### -->
                                     <!-- Logo for the top bar -->
-                                    <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                    </div>
+<!--                                    <div class="image">-->
+<!--                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
+<!--                                    </div>-->
 
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
                                     <div class="content">
-                                        <a class="js-acc-btn" href="#">john doe</a>
+<!--                                        <a class="js-acc-btn">-->
+                                            <div sec:authorize="isAuthenticated()">
+                                                <div sec:authentication="name"></div>
+                                            </div>
+
+<!--                                        </a>-->
                                     </div>
 
                                     <!-- ########################################################################### -->
@@ -153,21 +158,21 @@
 
                                             <!-- ################################################################### -->
                                             <!-- Profile image -->
-                                            <div class="image">
-                                                <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                </a>
-                                            </div>
+<!--                                            <div class="image">-->
+<!--                                                <a href="#">-->
+<!--                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
+<!--                                                </a>-->
+<!--                                            </div>-->
 
-                                            <!-- ################################################################### -->
-                                            <!-- Account information for dropdown -->
-                                            <div class="content">
-                                                <h5 class="name">
-                                                    <a href="#">john doe</a>
-                                                </h5>
-                                                <span class="email">johndoe@example.com</span>
-                                            </div>
-                                        </div>
+<!--                                            &lt;!&ndash; ################################################################### &ndash;&gt;-->
+<!--                                            &lt;!&ndash; Account information for dropdown &ndash;&gt;-->
+<!--                                            <div class="content">-->
+<!--                                                <h5 class="name">-->
+<!--                                                    <a href="#">john doe</a>-->
+<!--                                                </h5>-->
+<!--                                                <span class="email">johndoe@example.com</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
 
                                         <!-- ####################################################################### -->
                                         <!-- Account management link -->
