@@ -2,6 +2,7 @@ package admiral.web;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
+import admiral.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,8 @@ public class authenticationController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView();
+        User user = new User();
+        modelAndView.addObject("user", user);
         modelAndView.setViewName("register"); //will open register html
         return modelAndView;
     }
