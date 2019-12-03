@@ -31,6 +31,8 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Attribute success handler role dependent redirect
     @Autowired
     private CustomLoginSucessHandler sucessHandler;
 
@@ -74,9 +76,6 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/Timesheet/**").hasAnyAuthority("Contractor")
                 .antMatchers("/timeSheetDashboard/**").hasAnyAuthority("Manager", "Admin")
-//                .antMatchers("/timeSheetDashboard").hasRole("Admin")
-//                .antMatchers("/timeSheetDashboard").hasRole("Manager")
-//                .antMatchers("/Timesheet").hasRole("Contractor")
                 .anyRequest().authenticated()
                 .and()
 

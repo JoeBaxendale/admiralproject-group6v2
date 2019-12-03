@@ -31,4 +31,5 @@ public class authenticationController {
         modelAndView.setViewName("register"); //will open register html
         return modelAndView;
     }
+
 }
