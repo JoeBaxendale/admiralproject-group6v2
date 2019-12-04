@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 //----------------------------------------------------------------------------------------------------------------------
 //Defining mapping of the table users
@@ -56,4 +57,16 @@ public class User {
     //------------------------------------------------------------------------------------------------------------------
     @Column(name="active")
     private Boolean active;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "users", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> users;
+
+    public Set<Role> getRoles() {
+        return users;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.users = roles;
+    }
 }

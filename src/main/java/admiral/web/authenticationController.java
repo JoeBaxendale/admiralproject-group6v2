@@ -3,17 +3,27 @@ package admiral.web;
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 import admiral.domain.User;
+import admiral.service.UserService;
+import org.dom4j.rule.Mode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
+
 //----------------------------------------------------------------------------------------------------------------------
 // Controller for the login, register and home
 @Controller
 public class authenticationController {
+
+    @Autowired
+    UserService userService;
 
     //------------------------------------------------------------------------------------------------------------------
     // Login mapping
@@ -35,4 +45,24 @@ public class authenticationController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView registerUser(@Valid User user, BindingResult bindingResult,
+                                     ModelMap modelMap){
+        ModelAndView modelAndView = new ModelAndView();
+        //Check for the validation
+        if (bindingResult.hasErrors()){
+            modelAndView.addObject("sucessMessage", "Please correct the errors in form!");
+            modelMap.addAttribute("bindingResult", bindingResult);
+        }
+        else if (userService.isUserAlreadyPresent(user)){
+            modelAndView.addObject("SucessMessage", "user is registered successfully!");
+        }
+//        we will save the user if there is not binding errors
+        else {
+            userService.saveUser(user);
+        }
+        modelAndView.addObject("user", new User());
+        modelAndView.setViewName("register");
+        return  modelAndView;
+    }
 }
