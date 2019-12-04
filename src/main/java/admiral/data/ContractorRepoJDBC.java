@@ -39,7 +39,7 @@ public class ContractorRepoJDBC implements ContractorRepo {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Finds and returns a list of all time sheets from the DB
+    // Finds and returns a list of all contractors with the same manager
     public List<ContractorUser> findContractorByManager(String searchTerm){
 
         // Define sql code
@@ -53,7 +53,7 @@ public class ContractorRepoJDBC implements ContractorRepo {
             ResultSet temp = st.executeQuery(sql);
 
             //----------------------------------------------------------------------------------------------------------
-            // Maps the data to a Time Sheet list
+            // Maps the data to a Contractor list
             while (temp.next()) {
                 contractorUserList.add(new ContractorUser(temp.getInt(1),
                         temp.getInt(2),
@@ -77,7 +77,7 @@ public class ContractorRepoJDBC implements ContractorRepo {
     };
 
     //------------------------------------------------------------------------------------------------------------------
-    // Finds and returns a list of all time sheets from the DB
+    // Finds and returns a contractor based on id (List to handle DB errors)
     public List<ContractorUser> findContractorById(String searchTerm){
 
         // Define sql code
@@ -91,7 +91,7 @@ public class ContractorRepoJDBC implements ContractorRepo {
             ResultSet temp = st.executeQuery(sql);
 
             //----------------------------------------------------------------------------------------------------------
-            // Maps the data to a Time Sheet list
+            // Maps the data to a Contractor list
             while (temp.next()) {
                 contractorUserList.add(new ContractorUser(temp.getInt(1),
                         temp.getInt(2),
@@ -115,7 +115,7 @@ public class ContractorRepoJDBC implements ContractorRepo {
     };
 
     //------------------------------------------------------------------------------------------------------------------
-    // Finds and returns a list of all time sheets from the DB
+    // Finds and returns a list of all contractors from DB
     public List<ContractorUser> findContractors(){
 
         // Define sql code
@@ -129,7 +129,7 @@ public class ContractorRepoJDBC implements ContractorRepo {
             ResultSet temp = st.executeQuery(sql);
 
             //----------------------------------------------------------------------------------------------------------
-            // Maps the data to a Time Sheet list
+            // Maps the data to a Contractor list
             while (temp.next()) {
                 contractorUserList.add(new ContractorUser(temp.getInt(1),
                         temp.getInt(2),

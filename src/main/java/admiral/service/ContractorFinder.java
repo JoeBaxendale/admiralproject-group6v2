@@ -8,18 +8,18 @@ import admiral.domain.TimeSheet;
 import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Interface for the retrieval of Time Sheets from the database
+// Interface for the retrieval of Contractor from the database
 public interface ContractorFinder {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Retrieves Time Sheets based on search term
+    // Retrieves Contractor based on Manager
     public List<ContractorUser> findContractorByManager(String searchManager);
 
     //------------------------------------------------------------------------------------------------------------------
-    // Retrieves Time Sheets based on search term
+    // Retrieves Contractor based on ID
     public List<ContractorUser> findContractorById(String searchManager);
 
     //------------------------------------------------------------------------------------------------------------------
-    // Retrieves Time Sheets based on search term
+    // Retrieves Contractors
     public List<ContractorUser> findContractors();
 }

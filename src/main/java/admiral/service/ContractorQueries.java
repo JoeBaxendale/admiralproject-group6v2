@@ -14,29 +14,29 @@ import java.util.List;
 @Service
 public class ContractorQueries implements ContractorFinder{
 
-    // Link to a Time Sheet repository
+    // Link to a Contractor repository
     private ContractorRepo contractorRepo;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Constructor assigning the Time Sheet repository
+    // Constructor assigning the Contractor repository
     public ContractorQueries(ContractorRepo aRepo){
         contractorRepo = aRepo;
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to query the database, retrieving Times Sheets based on a parameter
+    // Method to query the database, retrieving Contractor based on a Manager
     public List<ContractorUser> findContractorByManager(String searchManager){
         return contractorRepo.findContractorByManager(searchManager);
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to query the database, retrieving Times Sheets based on a parameter
+    // Method to query the database, retrieving Contractor based on a id
     public List<ContractorUser> findContractorById(String searchManager){
         return contractorRepo.findContractorById(searchManager);
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to query the database, retrieving Times Sheets based on a parameter
+    // Method to query the database, retrieving Contractors
     public List<ContractorUser> findContractors(){
         return contractorRepo.findContractors();
     }

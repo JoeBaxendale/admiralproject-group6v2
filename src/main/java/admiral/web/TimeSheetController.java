@@ -97,7 +97,7 @@ public class TimeSheetController {
     @GetMapping(path = "/Manager")
     public String contractorManager(Model model) {
 
-        String managerId = "1";
+        String managerId = "0";
         List<ContractorUser> contractorsUnderManager;
 
         if(managerId == "0"){

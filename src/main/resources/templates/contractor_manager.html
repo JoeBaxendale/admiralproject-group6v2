@@ -212,6 +212,8 @@
                                         <h3 class="text-center title-2">Manage Contractors</h3>
                                     </div>
 
+                                    <!-- ########################################################################### -->
+                                    <!-- Table of contractors -->
                                     <div id=ContractorListContainer th:if="${not #lists.isEmpty(contractorsUnderManager)}">
                                         <br><H3>Other Sponsor</H3>
                                         <table class="table">
@@ -224,11 +226,13 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <!-- ################################################################### -->
+                                            <!-- Get each contractor information -->
                                             <tr th:each="currContractor : ${contractorsUnderManager}">
                                                 <td th:text="${currContractor.firstName} + ${currContractor.lastName}"></td>
                                                 <td th:text="${currContractor.staffEmail}"></td>
                                                 <td th:text="${currContractor.active}"></td>
-                                                <td><a href="/Contractor"></a></td> </td>
+                                                <td><a href="/Contractor">Edit</a></td> </td>
 <!--                                                <td><a th:href="@{/Contractor/{id} (id=${currContractor.contractor_id}) }"-->
 <!--                                                   th:id="'contractorLink'+ ${currContractor.contractor_id}">Edit-->
 <!--                                                </a></td>-->
