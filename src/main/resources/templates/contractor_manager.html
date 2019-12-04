@@ -131,7 +131,6 @@
                             </button> -->
                         </form>
 
-
                         <div class="header-button">
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
@@ -183,7 +182,7 @@
                                         <!-- ####################################################################### -->
                                         <!-- Drop down logout button -->
                                         <div class="account-dropdown__footer">
-                                            <a href="#">
+                                            <a href="/logout">
                                                 <i class="zmdi zmdi-power"></i>Logout</a>
                                         </div>
                                     </div>
@@ -204,51 +203,49 @@
                     <div class="m-t-30">
                         <div class="col-lg-6">
                             <div class="card">
-                                <div class="card-header">Admiral TimeSheet Details</div>
+                                <div class="card-header">User Manager</div>
                                 <div class="card-body">
 
                                     <!-- ########################################################################### -->
                                     <!-- Greeting for user -->
-<!--                                    <div class="card-title">-->
-<!--                                        <h3 class="text-center title-2">Hello {Name} please fill in your time sheet</h3>-->
-<!--                                    </div>-->
+                                    <div class="card-title">
+                                        <h3 class="text-center title-2">Hello {Name} Manage you contractors</h3>
+                                    </div>
 
-                                    <!-- ########################################################################### -->
-                                    <!-- Form for Time Sheets date -->
-                                    <form>
-                                        <div>
+                                    <div id=ContractorListContainer th:if="${not #lists.isEmpty(contractorsUnderManager)}">
+                                        <br><H3>Other Sponsor</H3>
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="currContractor : ${contractorsUnderManager}">
+                                                <td th:text="${currContractor.firstName}"></td>
+                                                <td th:text="${currContractor.staffEmail}"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-                                            <!-- ################################################################### -->
-                                            <!-- Form results for the number of days -->
-                                            <p>Number of days:</p>
-                                            <span th:text="${timesheetKey.number_of_days}"></span><br>
-
-                                            <!-- ################################################################### -->
-                                            <!-- Form results for the overtime -->
-                                            <p>Overtime:</p>
-                                            <span th:text="${timesheetKey.overtime}"></span><br>
-
-                                            <!-- ################################################################### -->
-                                            <!-- Form results for the dates -->
-                                            <p>Between:</p>
-                                            <span th:text="${timesheetKey.start_date}"></span>
-                                            <span th:text="${timesheetKey.end_date}"></span><br>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+
+
                     <!-- ########################################################################################### -->
                     <!-- Footer -->
-                    <!--                    <div class="row">-->
-                    <!--                        <div class="col-md-12">-->
-                    <!--                            <div class="copyright">-->
-                    <!--                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-12">-->
+<!--                            <div class="copyright">-->
+<!--                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                 </div>
             </div>
@@ -280,7 +277,6 @@
 
 <!-- ############################################################################################################### -->
 <!-- Main JS-->
-<script src="js/main.js"></script>
 <script src="js/main.js"></script>
 </body>
 
