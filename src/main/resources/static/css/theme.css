@@ -497,7 +497,8 @@ section {
 }
 
 .au-btn--green {
-    background: #63c76a;
+    background: #2350a0;
+    /*blue admiral color I edited*/
 }
 
 .au-btn--green:hover {
@@ -1261,7 +1262,7 @@ section {
     justify-content: space-between;
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1210px) {
     .header-wrap .account-item > .content {
         display: none;
     }

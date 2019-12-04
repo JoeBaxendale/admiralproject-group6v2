@@ -59,6 +59,16 @@ public class TimeSheetController {
             return "timesheet";
         }
 
+        String tempNotes = timeSheet.getNotes();
+
+        if(timeSheet.getWorked_sunday() != null){
+            tempNotes = "Worked Sunday," + timeSheet.getNotes();
+        }
+        if(timeSheet.getWorked_saturday() != null){
+            tempNotes = "Worked Saturday," + timeSheet.getNotes();
+        }
+
+
         //--------------------------------------------------------------------------------------------------------------
         // Inserts the form details to the database
         TimeSheetMade timeSheetEvent = new TimeSheetMade(
@@ -66,7 +76,7 @@ public class TimeSheetController {
                 timeSheet.getOvertime(),
                 timeSheet.getStart_date(),
                 timeSheet.getEnd_date(),
-                timeSheet.getNotes()
+                tempNotes
 
         );
 

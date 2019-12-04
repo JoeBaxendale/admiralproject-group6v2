@@ -2,6 +2,7 @@ package admiral.data;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
+import admiral.config.CustomLoginSucessHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 
@@ -24,12 +26,15 @@ import javax.sql.DataSource;
 @Slf4j
 public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
 
-    // static final Logger LOG = LoggerFactory.getLogger(SecurityConfigurationJDBC.class);
-
     //------------------------------------------------------------------------------------------------------------------
     // Attribute to encode the password
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Attribute success handler role dependent redirect
+    @Autowired
+    private CustomLoginSucessHandler sucessHandler;
 
     //------------------------------------------------------------------------------------------------------------------
     // Attribute to identify the source
@@ -69,8 +74,8 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/Timesheet/**").hasAnyAuthority("Manager", "Admin", "Contractor")
-//                .antMatchers("/Timesheet/**").hasAnyAuthority("Manager", "Admin")
+                .antMatchers("/Timesheet/**").hasAnyAuthority("Contractor")
+                .antMatchers("/timesheetDashboard/**").hasAnyAuthority("Manager", "Admin")
                 .anyRequest().authenticated()
                 .and()
 
@@ -79,7 +84,8 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
                 .csrf().disable().formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
-                .defaultSuccessUrl("/Timesheet")
+                .successHandler(sucessHandler)
+                //.defaultSuccessUrl("/Timesheet")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()

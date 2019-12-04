@@ -32,10 +32,4 @@ public class authenticationController {
         return modelAndView;
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    // error mapping, Where Email and password are correct but unable to retrieve default page
-    @RequestMapping(value = "/error", method = RequestMethod.GET)
-    public RedirectView redirectWithUsingRedirectView(RedirectAttributes attributes) {
-        return new RedirectView("/Timesheet");
-    }
 }
