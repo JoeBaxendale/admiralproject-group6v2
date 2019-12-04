@@ -209,7 +209,7 @@
                                     <!-- ########################################################################### -->
                                     <!-- Greeting for user -->
                                     <div class="card-title">
-                                        <h3 class="text-center title-2">Hello {Name} Manage you contractors</h3>
+                                        <h3 class="text-center title-2">Manage Contractors</h3>
                                     </div>
 
                                     <div id=ContractorListContainer th:if="${not #lists.isEmpty(contractorsUnderManager)}">
@@ -228,8 +228,10 @@
                                                 <td th:text="${currContractor.firstName} + ${currContractor.lastName}"></td>
                                                 <td th:text="${currContractor.staffEmail}"></td>
                                                 <td th:text="${currContractor.active}"></td>
-                                                <td>
-                                                <a th:href="@{/contractor_manager}">Edit</a></td>
+                                                <td><a href="/Contractor"></a></td> </td>
+<!--                                                <td><a th:href="@{/Contractor/{id} (id=${currContractor.contractor_id}) }"-->
+<!--                                                   th:id="'contractorLink'+ ${currContractor.contractor_id}">Edit-->
+<!--                                                </a></td>-->
                                             </tr>
                                             </tbody>
                                         </table>

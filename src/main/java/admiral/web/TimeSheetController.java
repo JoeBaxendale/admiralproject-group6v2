@@ -9,10 +9,8 @@ import admiral.service.events.TimeSheetMade;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -96,12 +94,22 @@ public class TimeSheetController {
 
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
-    @RequestMapping(path = "/Manager/{id}", method = RequestMethod.GET)
-    public String contractorManager(@PathVariable("id") String managerId, Model model) {
+    @GetMapping(path = "/Manager")
+    public String contractorManager(Model model) {
 
-        // Creates and populates a list of TimeSheets, passes it to the dashboard page
-        List<ContractorUser> contractorsUnderManager = finder.findContractorByManager("3");
-        model.addAttribute("contractorsUnderManager",contractorsUnderManager);
+        String managerId = "1";
+        List<ContractorUser> contractorsUnderManager;
+
+        if(managerId == "0"){
+            // Creates and populates a list of TimeSheets, passes it to the dashboard page
+            contractorsUnderManager = finder.findContractors();
+            model.addAttribute("contractorsUnderManager",contractorsUnderManager);
+        } else {
+            // Creates and populates a list of TimeSheets, passes it to the dashboard page
+            contractorsUnderManager = finder.findContractorByManager(managerId);
+            model.addAttribute("contractorsUnderManager",contractorsUnderManager);
+        }
+
 
         for(ContractorUser element: contractorsUnderManager){
             System.out.println(element.getFirstName() + element.getStaffEmail());
@@ -109,7 +117,23 @@ public class TimeSheetController {
 
         // Open managers page
         return "contractor_manager";
+    }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @GetMapping(path = "/Contractor")
+    public String contractorEditor(Model model) {
+
+        String contractorId = "3";
+        System.out.println("----------------------------->" + contractorId);
+        List<ContractorUser> contractor = finder.findContractorById(contractorId);
+
+
+
+
+
+        // Open managers page
+        return "contractor_manager";
     }
 
 }

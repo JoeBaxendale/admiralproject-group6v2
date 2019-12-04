@@ -17,4 +17,13 @@ public interface ContractorRepo {
     // Method to retive Time Sheets based on parameter
     public List<ContractorUser> findContractorByManager(String searchTerm);
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to retive Time Sheets based on parameter
+    public List<ContractorUser> findContractorById(String searchTerm);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to retive Time Sheets based on parameter
+    public List<ContractorUser> findContractors();
+
+
 }

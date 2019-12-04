@@ -28,4 +28,16 @@ public class ContractorQueries implements ContractorFinder{
     public List<ContractorUser> findContractorByManager(String searchManager){
         return contractorRepo.findContractorByManager(searchManager);
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to query the database, retrieving Times Sheets based on a parameter
+    public List<ContractorUser> findContractorById(String searchManager){
+        return contractorRepo.findContractorById(searchManager);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to query the database, retrieving Times Sheets based on a parameter
+    public List<ContractorUser> findContractors(){
+        return contractorRepo.findContractors();
+    }
 }
