@@ -17,4 +17,7 @@ public interface TimeSheetRepo {
     //------------------------------------------------------------------------------------------------------------------
     // Saves a new Time Sheet to the database
     public void saveTimeSheetEvent(TimeSheetMade timeSheetMade);
+
+    // Updates the timesheet entry
+    public void updateTimeSheetEntry(TimeSheet timesheet);
 }
