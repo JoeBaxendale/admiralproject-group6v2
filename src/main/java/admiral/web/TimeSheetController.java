@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
@@ -95,8 +96,8 @@ public class TimeSheetController {
 
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
-    @RequestMapping(path = "/Manager", method = RequestMethod.GET)
-    public String contractorManager(Model model) {
+    @RequestMapping(path = "/Manager/{id}", method = RequestMethod.GET)
+    public String contractorManager(@PathVariable("id") String managerId, Model model) {
 
         // Creates and populates a list of TimeSheets, passes it to the dashboard page
         List<ContractorUser> contractorsUnderManager = finder.findContractorByManager("3");

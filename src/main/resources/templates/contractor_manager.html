@@ -218,13 +218,18 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Active</th>
+                                                <th scope="col">Edit</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr th:each="currContractor : ${contractorsUnderManager}">
-                                                <td th:text="${currContractor.firstName}"></td>
+                                                <td th:text="${currContractor.firstName} + ${currContractor.lastName}"></td>
                                                 <td th:text="${currContractor.staffEmail}"></td>
+                                                <td th:text="${currContractor.active}"></td>
+                                                <td>
+                                                <a th:href="@{/contractor_manager}">Edit</a></td>
                                             </tr>
                                             </tbody>
                                         </table>
