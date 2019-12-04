@@ -128,12 +128,17 @@ public class TimeSheetController {
         System.out.println("----------------------------->" + contractorId);
         List<ContractorUser> contractor = finder.findContractorById(contractorId);
 
+        ContractorForm contractorForm = new ContractorForm(
+                contractor.get(0).getManager_id(),
+                contractor.get(0).getFirstName(),
+                contractor.get(0).getLastName(),
+                contractor.get(0).getStaffEmail(),
+                contractor.get(0).getActive());
 
-
-
+        model.addAttribute("contractorKey", contractorForm);
 
         // Open managers page
-        return "contractor_manager";
+        return "contractor";
     }
 
 }
