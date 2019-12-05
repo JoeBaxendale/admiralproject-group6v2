@@ -9,6 +9,6 @@ import admiral.service.events.TimeSheetMade;
 public interface TimeSheetCreator {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Class to be define, saving the Time Sheet submission to the database
+    // Class to be define, saving the Time Sheet submission to the database.
     public void makeTimeSheet(TimeSheetMade timeSheet);
 }

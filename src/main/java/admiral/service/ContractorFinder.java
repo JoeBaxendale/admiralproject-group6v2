@@ -2,23 +2,24 @@ package admiral.service;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
+import admiral.domain.ContractorUser;
 import admiral.domain.TimeSheet;
-import admiral.domain.TimeSheetPlusExtra;
-import admiral.service.events.TimeSheetMade;
+
 import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Interface for the Time Sheet repository, including all methods for the Time Sheet table
-public interface TimeSheetRepo {
+// Interface for the retrieval of Contractor from the database
+public interface ContractorFinder {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to retive Time Sheets based on parameter
-    public List<TimeSheetPlusExtra> findTimeSheetsByStatus(String searchTerm);
+    // Retrieves Contractor based on Manager
+    public List<ContractorUser> findContractorByManager(String searchManager);
 
     //------------------------------------------------------------------------------------------------------------------
-    // Saves a new Time Sheet to the database
-    public int saveTimeSheetEvent(TimeSheetMade timeSheetMade);
+    // Retrieves Contractor based on ID
+    public List<ContractorUser> findContractorById(String searchManager);
 
-    // Updates the timesheet entry
-    public void updateTimeSheetEntry(TimeSheet timesheet);
+    //------------------------------------------------------------------------------------------------------------------
+    // Retrieves Contractors
+    public List<ContractorUser> findContractors();
 }
