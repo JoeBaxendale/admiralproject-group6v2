@@ -42,7 +42,7 @@ public class CustomLoginSucessHandler extends SimpleUrlAuthenticationSuccessHand
 
 //        Check user role and decide the redirect URL
         if (roles.contains("Admin")) {
-            url = "/timesheetDashboard/Pending";
+            url = "/timesheetDashboard/Approved";
         }
         else if (roles.contains("Manager")) {
             url = "/timesheetDashboard/Pending";
