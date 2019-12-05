@@ -294,7 +294,7 @@
 
                                         //split the array of timesheets into its own array (array of arrays)
                                         var data = timeSheetArray2.toString().split(",").toString().split(",");
-                                        var toInsert = data.slice(count2,count2+9);
+                                        var toInsert = data.slice(count2,count2+13);
 
                                         //remove the [TimeSheet from the front of the data
                                         var firstEntry = toInsert[0].substring((toInsert[0].indexOf("("))+1);
@@ -309,10 +309,11 @@
                                         row.insertCell(2);
 
                                         //this will need to be changed to get the manager id out of the database
-                                        table.rows[count].cells[0].innerHTML = firstEntry;
+                                        table.rows[count].cells[0].innerHTML = toInsert[11].substring(toInsert[11].indexOf("=")+1) + " " + toInsert[12].substring(toInsert[12].indexOf("=")+1);
+
 
                                         //add the data to each of the respective columns
-                                        table.rows[count].cells[1].innerHTML = toInsert[11] + " " + toInsert[12];
+                                        table.rows[count].cells[1].innerHTML = toInsert[9].substring(toInsert[9].indexOf("=")+1) + " " + toInsert[10].substring(toInsert[10].indexOf("=")+1);
 
                                         //add the data and remove the two ,'s at the end
                                         table.rows[count].cells[2].innerHTML = toInsert[8].substring(8);

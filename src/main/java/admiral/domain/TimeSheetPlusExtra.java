@@ -51,8 +51,10 @@ public class TimeSheetPlusExtra {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "first_name")
     private String contractorFirstName;
 
+    @Column(name = "last_name")
     private String contractorSurname;
 
     private String managerFirstName;
