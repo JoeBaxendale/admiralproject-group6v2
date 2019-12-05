@@ -15,7 +15,9 @@ public interface TimeSheetRepo {
     public List<TimeSheet> findTimeSheetsByStatus(String searchTerm);
 
     //------------------------------------------------------------------------------------------------------------------
-    // Saves a new Time Sheet to the database. Retunr the generate timesheet identity
-
+    // Saves a new Time Sheet to the database
     public int saveTimeSheetEvent(TimeSheetMade timeSheetMade);
+
+    // Updates the timesheet entry
+    public void updateTimeSheetEntry(TimeSheet timesheet);
 }

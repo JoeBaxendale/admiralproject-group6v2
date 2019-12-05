@@ -1262,7 +1262,7 @@ section {
     justify-content: space-between;
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1210px) {
     .header-wrap .account-item > .content {
         display: none;
     }

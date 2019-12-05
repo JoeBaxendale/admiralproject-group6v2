@@ -44,13 +44,13 @@ public class NotificationProcessor implements NotificationInterface {
 
         // Construct a URL that links to the Timesheet dashboard which shows all the timesheets with Pending status.
         String dashboardURL = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                                    .replacePath("timeSheetDashboard").toUriString();
+                                    .replacePath("login").toUriString();
 
         // Construct a Microsoft Teams message card JSON string
         String notificationJson = "{\n" +
                 "    \"@type\": \"MessageCard\",\n" +
                 "    \"@context\": \"https://schema.org/extensions\",\n" +
-                "    \"summary\": \"Timeheet Created\",\n" +
+                "    \"summary\": \"Timesheet Created\",\n" +
                 "    \"themeColor\": \"0078D7\",\n" +
                 "    \"title\": \"Timesheet created\",\n" +
                 "    \"sections\": [\n" +

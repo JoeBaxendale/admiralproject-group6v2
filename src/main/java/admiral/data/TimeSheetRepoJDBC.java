@@ -105,4 +105,16 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
         }
         return generated_time_sheet_id;
     }
+    public void updateTimeSheetEntry(TimeSheet timesheet){
+
+        try {
+            PreparedStatement st = conn.prepareStatement("UPDATE timesheet SET `status` = ?, `notes` = ? WHERE timesheet_id = ?");  //make the sql statement with ?'s as variables
+            st.setString(1,timesheet.getStatus());
+            st.setString(2,timesheet.getNotes());       //set each ? to be the correct variable from the timesheet
+            st.setLong(3,timesheet.getTime_sheet_id());
+            st.executeUpdate();     //execute the sql which updates the database
+        }catch(SQLException e){ //catch an error that is thrown
+            e.printStackTrace();
+        }
+    };
 }

@@ -22,6 +22,7 @@ dependencies {
 
 //    security dependencies
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 //    sql dependencies
     runtimeOnly 'mysql:mysql-connector-java'
