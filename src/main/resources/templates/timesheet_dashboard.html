@@ -303,8 +303,8 @@
                                         var data = timeSheetArray2.toString().split(",").toString().split(",");
                                         var toInsert = data.slice(count2,count2+13);
 
-                                        //remove the [TimeSheet from the front of the data
-                                        var firstEntry = toInsert[0].substring((toInsert[0].indexOf("("))+1);
+                                        //remove the [TimeSheet from the front of the timesheet ID
+                                        var timesheetId = toInsert[0].substring((toInsert[0].indexOf("("))+1);
 
                                         //add a a new row to the table
                                         var row = table.insertRow(count);
@@ -314,6 +314,9 @@
                                         row.insertCell(0);
                                         row.insertCell(1);
                                         row.insertCell(2);
+                                        hiddenTimesheetID = row.insertCell(3);
+
+                                        hiddenTimesheetID.style.display = 'none';
 
                                         //this will need to be changed to get the manager id out of the database
                                         table.rows[count].cells[0].innerHTML = toInsert[11].substring(toInsert[11].indexOf("=")+1) + " " + toInsert[12].substring(toInsert[12].indexOf("=")+1);
@@ -324,6 +327,8 @@
 
                                         //add the data and remove the two ,'s at the end
                                         table.rows[count].cells[2].innerHTML = toInsert[8].substring(8);
+
+                                        table.rows[count].cells[3].innerHTML = timesheetId.substring(timesheetId.indexOf("=")+1);
 
                                         //increase the counter to put the correct data into the correct cells
                                         count2 += 14;
@@ -456,7 +461,7 @@
                                             Select = null;                                      //wipe the entry of Select before reassigning it so that duplicates are avoided
                                             Select = document.getElementById("select" + i);
                                             if(Select != null) {                                //only push opened rows to the array as unopened rows are not gonna to have changed
-                                                dataArray.push([table.rows[i].cells[0].innerHTML, Data[13].substring(-4), Select.options[Select.selectedIndex].innerHTML]);
+                                                dataArray.push([table.rows[i].cells[3].innerHTML, Data[13].substring(-4), Select.options[Select.selectedIndex].innerHTML]);
                                             }
 
                                         }

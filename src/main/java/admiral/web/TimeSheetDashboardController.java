@@ -44,11 +44,12 @@ public class TimeSheetDashboardController {
 
     @GetMapping("/submitChanges")
     public String submitChangesToTimeSheetStatus(@RequestParam("alteredTimeSheets") String alterData,
-                                                 @ModelAttribute("TimeSheets") List<TimeSheet> timeSheets,  //get the altered data and the timesheets to compare the differences
+                                                 @ModelAttribute("TimeSheets") List<TimeSheetPlusExtra> timeSheets,  //get the altered data and the timesheets to compare the differences
                                                  Model model){
 
 
         List<String> splitList = List.of(alterData.split(",")); //split the altered data on the comma, as the data is passed as an array in string form
+        System.out.println("YEEEE" + splitList);
 
         for(int j =0; j<timeSheets.size();j++) {        //look through every timesheet
             for (int i = 0; i < splitList.size(); i += 3) {     //look through every entry in the altered data. i+=3 as there are 3 entries in the list for each timesheet
