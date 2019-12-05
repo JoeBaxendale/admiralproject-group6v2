@@ -59,7 +59,7 @@ public class User {
     private Boolean active;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "users", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> users;
 
     public Set<Role> getRoles() {
