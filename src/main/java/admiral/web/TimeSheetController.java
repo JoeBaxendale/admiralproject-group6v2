@@ -94,13 +94,12 @@ public class TimeSheetController {
 
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
-    @GetMapping(path = "/Manager")
-    public String contractorManager(Model model) {
+    @GetMapping(path = "/Manager/{id}")
+    public String contractorManager(@PathVariable("id") String managerId, Model model) {
 
-        String managerId = "0";
         List<ContractorUser> contractorsUnderManager;
 
-        if(managerId == "0"){
+        if(managerId.equals("All")){
             // Creates and populates a list of TimeSheets, passes it to the dashboard page
             contractorsUnderManager = finder.findContractors();
             model.addAttribute("contractorsUnderManager",contractorsUnderManager);
@@ -121,11 +120,9 @@ public class TimeSheetController {
 
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
-    @GetMapping(path = "/Contractor")
-    public String contractorEditor(Model model) {
+    @GetMapping(path = "/Contractor/{id}")
+    public String contractorEditor(@PathVariable("id") String contractorId, Model model) {
 
-        String contractorId = "3";
-        System.out.println("----------------------------->" + contractorId);
         List<ContractorUser> contractor = finder.findContractorById(contractorId);
 
         ContractorForm contractorForm = new ContractorForm(

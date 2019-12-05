@@ -18,28 +18,28 @@
 
     <!-- ########################################################################################################### -->
     <!-- Fontfaces CSS-->
-    <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- ########################################################################################################### -->
     <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- ########################################################################################################### -->
     <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <!-- ########################################################################################################### -->
     <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="/css/theme.css" rel="stylesheet" media="all">
 </head>
 
 <!-- ############################################################################################################### -->
@@ -55,7 +55,7 @@
         <!-- Sidebar logo -->
         <div class="logo">
             <a href="#">
-                <img src="images/icon/admiral.png" alt="Cool Admin" />
+                <img src="/images/icon/admiral.png" alt="Cool Admin" />
             </a>
         </div>
 
@@ -66,10 +66,17 @@
                 <ul class="list-unstyled navbar__list">
 
                     <!-- ########################################################################################### -->
-                    <!-- Link to the Time Sheet -->
-                    <li>
-                        <a href="Timesheet">
-                            <i class="fas fa-tachometer-alt"></i>Timesheet</a>
+                    <!-- Link to the Time Sheet dashboard -->
+                    <li class="active">
+                        <a href="timesheetDashboard/Pending">
+                            <i class="fas fa-table"></i>Dashboard</a>
+                    </li>
+
+                    <!-- ########################################################################################### -->
+                    <!-- Link to the contractor dashboard -->
+                    <li class="active">
+                        <a href="/Manager/All">
+                            <i class="fas fa-table"></i>Contractors</a>
                     </li>
 
                     <!-- ########################################################################################### -->
@@ -84,6 +91,13 @@
                             <li>
                                 <a href="login">Login</a>
                             </li>
+
+                            <!-- ################################################################################### -->
+                            <!-- Sub nav link to register page -->
+                            <li>
+                                <a href="register">Register</a>
+                            </li>
+
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to forget password page -->
                             <li>
@@ -91,6 +105,8 @@
                             </li>
                         </ul>
                     </li>
+
+
                 </ul>
             </nav>
         </div>
@@ -100,7 +116,6 @@
     <!-- ########################################################################################################### -->
     <!-- PAGE CONTAINER-->
     <div class="page-container1">
-
         <!-- ####################################################################################################### -->
         <!-- HEADER DESKTOP-->
         <header class="header-desktop">
@@ -117,63 +132,72 @@
                             </button> -->
                         </form>
 
+
                         <div class="header-button">
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
 
+
+                                    <!--                                    <div class="image">-->
+                                    <!--                                        <img src="/images/icon/avatar-01.jpg" alt="John Doe" />-->
+                                    <!--                                    </div>-->
+                                    <!--                                    <div class="content">-->
+                                    <!--                                        <a class="js-acc-btn" href="#">john doe</a>-->
+
                                     <!-- ########################################################################### -->
                                     <!-- Logo for the top bar -->
-<!--                                    <div class="image">-->
-<!--                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="image">-->
+                                    <!--                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
+                                    <!--                                    </div>-->
 
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
                                     <div class="content">
-<!--                                        <a class="js-acc-btn">-->
+                                        <!--                                        <a class="js-acc-btn">-->
                                         <div sec:authorize="isAuthenticated()">
                                             <div sec:authentication="name"></div>
                                         </div>
-<!--                                        </a>-->
+
+                                        <!--                                        </a>-->
                                     </div>
 
                                     <!-- ########################################################################### -->
                                     <!-- Account dropdown -->
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
-
                                             <!-- ################################################################### -->
                                             <!-- Profile image -->
-<!--                                            <div class="image">-->
-<!--                                                <a href="#">-->
-<!--                                                    <img src="images/icon/avatar-01.jpg" alt=${{first_name}}/>-->
-<!--                                                </a>-->
-<!--                                            </div>-->
+                                            <!--                                            <div class="image">-->
+                                            <!--                                                <a href="#">-->
+                                            <!--                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
+                                            <!--                                                </a>-->
+                                            <!--                                            </div>-->
 
-                                            <!-- ################################################################### -->
-                                            <!-- Account information for dropdown -->
-<!--                                            <div class="content">-->
-<!--                                                <h5 class="name">-->
-<!--                                                    <a href="#">${{first_name}}</a>-->
-<!--                                                </h5>-->
-<!--                                                <span class="email">${{email}}</span>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
+                                            <!--                                            &lt;!&ndash; ################################################################### &ndash;&gt;-->
+                                            <!--                                            &lt;!&ndash; Account information for dropdown &ndash;&gt;-->
+                                            <!--                                            <div class="content">-->
+                                            <!--                                                <h5 class="name">-->
+                                            <!--                                                    <a href="#">john doe</a>-->
+                                            <!--                                                </h5>-->
+                                            <!--                                                <span class="email">johndoe@example.com</span>-->
+                                            <!--                                            </div>-->
+                                            <!--                                        </div>-->
 
-                                        <!-- ####################################################################### -->
-                                        <!-- Account management link -->
-                                        <div class="account-dropdown__body">
-                                            <div class="account-dropdown__item">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-account"></i>Account</a>
+                                            <!-- ####################################################################### -->
+                                            <!-- Account management link -->
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <!-- ####################################################################### -->
-                                        <!-- Drop down logout button -->
-                                        <div class="account-dropdown__footer">
-                                            <a href="/logout">
-                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <!-- ####################################################################### -->
+                                            <!-- Drop down logout button -->
+                                            <div class="account-dropdown__footer">
+                                                <a href="/logout">
+                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +205,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </header>
         <!-- END HEADER DESKTOP-->
 
@@ -338,29 +361,29 @@
 
 <!-- ############################################################################################################### -->
 <!-- Jquery JS-->
-<script src="vendor/jquery-3.2.1.min.js"></script>
+<script src="/vendor/jquery-3.2.1.min.js"></script>
 
 <!-- ############################################################################################################### -->
 <!-- Bootstrap JS-->
-<script src="vendor/bootstrap-4.1/popper.min.js"></script>
-<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+<script src="/vendor/bootstrap-4.1/popper.min.js"></script>
+<script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
 
 <!-- ############################################################################################################### -->
 <!-- Vendor JS       -->
-<script src="vendor/slick/slick.min.js"></script>
-<script src="vendor/wow/wow.min.js"></script>
-<script src="vendor/animsition/animsition.min.js"></script>
-<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-<script src="vendor/counter-up/jquery.counterup.min.js"></script>
-<script src="vendor/circle-progress/circle-progress.min.js"></script>
-<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="vendor/chartjs/Chart.bundle.min.js"></script>
-<script src="vendor/select2/select2.min.js"></script>
+<script src="/vendor/slick/slick.min.js"></script>
+<script src="/vendor/wow/wow.min.js"></script>
+<script src="/vendor/animsition/animsition.min.js"></script>
+<script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
+<script src="/vendor/counter-up/jquery.counterup.min.js"></script>
+<script src="/vendor/circle-progress/circle-progress.min.js"></script>
+<script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/vendor/chartjs/Chart.bundle.min.js"></script>
+<script src="/vendor/select2/select2.min.js"></script>
 
 <!-- ############################################################################################################### -->
 <!-- Main JS-->
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
 </body>
 
 </html>
