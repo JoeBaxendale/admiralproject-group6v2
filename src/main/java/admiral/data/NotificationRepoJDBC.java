@@ -44,7 +44,8 @@ public class NotificationRepoJDBC implements NotificationRepo {
                 "ts.overtime," +
                 "ts.start_date," +
                 "ts.end_date," +
-                "ts.date_submitted " +
+                "ts.date_submitted, " +
+                "ts.notes " +
                 "FROM " +
                 " timesheet as ts INNER JOIN " +
                 " contractors as con " +
@@ -75,6 +76,7 @@ public class NotificationRepoJDBC implements NotificationRepo {
                 notificationDetails.setStart_date(temp.getDate(8).toLocalDate());
                 notificationDetails.setEnd_date(temp.getDate(9).toLocalDate());
                 notificationDetails.setDate_submitted(temp.getDate(10).toLocalDate());
+                notificationDetails.setNotes(temp.getString(11));
             } else {
 
                 throw new IllegalArgumentException("Row not found, invalid time_sheet_id: " + time_sheet_id);

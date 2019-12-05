@@ -69,6 +69,10 @@ public class NotificationProcessor implements NotificationInterface {
                 "                {\n" +
                 "                    \"name\": \"Manager:\",\n" +
                 "                    \"value\": \"" + notificationDetails.getManager_name() + "\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"Notes:\",\n" +
+                "                    \"value\": \"" + notificationDetails.getNotes() + "\"\n" +
                 "                }\n" +
                 "            ],\n" +
                 "            \"text\": \"A timesheet has been created. Please review.\"\n" +
