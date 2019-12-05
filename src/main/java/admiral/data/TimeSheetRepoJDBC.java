@@ -4,6 +4,7 @@ package admiral.data;
 // Imports
 import admiral.DatabaseConnection;
 import admiral.domain.TimeSheet;
+import admiral.domain.TimeSheetPlusExtra;
 import admiral.service.TimeSheetRepo;
 import admiral.service.events.TimeSheetMade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,22 +34,29 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
 
     //------------------------------------------------------------------------------------------------------------------
     // Finds and returns a list of all time sheets from the DB
-    public List<TimeSheet> findTimeSheetsByStatus(String searchTerm){
+    public List<TimeSheetPlusExtra> findTimeSheetsByStatus(String searchTerm){
 
         // Define sql code
-        String sql = "SELECT * FROM timesheet WHERE status = '"+ searchTerm+"'" ;
+//        String sql = "SELECT * FROM timesheet WHERE status = '"+ searchTerm+"'" ;
+
+        String sql = "SELECT timesheet.*, users.first_name, users.last_name FROM timesheet, users WHERE timesheet.contractor_id = users.user_id " +
+                "AND timesheet.status = '" + searchTerm + "'";
+
+
+
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
-        List<TimeSheet> timesheetList = new ArrayList<TimeSheet>();
+        List<TimeSheetPlusExtra> timesheetList = new ArrayList<TimeSheetPlusExtra>();
         try {
             Statement st = conn.createStatement();
             ResultSet temp = st.executeQuery(sql);
 
             //----------------------------------------------------------------------------------------------------------
             // Maps the data to a Time Sheet list
+
             while(temp.next()){
-                timesheetList.add(new TimeSheet(temp.getInt(1),
+                timesheetList.add(new TimeSheetPlusExtra(temp.getInt(1),
                         temp.getInt(2),
                         temp.getInt(3),
                         temp.getInt(4),
@@ -56,7 +64,11 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
                         temp.getDate(6).toLocalDate(),
                         temp.getDate(7).toLocalDate(),
                         temp.getString(8),
-                        temp.getString(9)));
+                        temp.getString(9),
+                        temp.getString(10),
+                        temp.getString(11),
+                        "temp",
+                        "temp"));
 
             }
         }

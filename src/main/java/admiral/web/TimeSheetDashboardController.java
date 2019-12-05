@@ -3,6 +3,7 @@ package admiral.web;
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 import admiral.domain.TimeSheet;
+import admiral.domain.TimeSheetPlusExtra;
 import admiral.service.TimeSheetFinder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,7 @@ public class TimeSheetDashboardController {
     public String showTimeSheetDashboard(@PathVariable("filterTerm") String filterTerm, Model model){ //get the filter term from the url
 
         // Creates and populates a list of TimeSheets, passes it to the dashboard page
-        List<TimeSheet> TimeSheets = finder.findTimeSheetsByStatus(filterTerm);
+        List<TimeSheetPlusExtra> TimeSheets = finder.findTimeSheetsByStatus(filterTerm);
         model.addAttribute("TimeSheets",TimeSheets);
         model.addAttribute("filterTerm",filterTerm);
         model.addAttribute("alteredTimeSheets", new String());

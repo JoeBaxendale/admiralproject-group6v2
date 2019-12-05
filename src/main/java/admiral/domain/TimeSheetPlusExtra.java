@@ -1,20 +1,17 @@
 package admiral.domain;
 
-//----------------------------------------------------------------------------------------------------------------------
-// Imports
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-
-//----------------------------------------------------------------------------------------------------------------------
 // Class to map the time sheet object to the database
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TimeSheet {
+public class TimeSheetPlusExtra {
 
     //------------------------------------------------------------------------------------------------------------------
     // Unique identifier
@@ -54,5 +51,12 @@ public class TimeSheet {
     @Column(name = "status")
     private String status;
 
+    private String contractorFirstName;
 
+    private String contractorSurname;
+
+    private String managerFirstName;
+
+    private String managerSurname;
 }
+

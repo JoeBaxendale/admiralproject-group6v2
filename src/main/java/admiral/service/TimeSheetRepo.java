@@ -3,6 +3,7 @@ package admiral.service;
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 import admiral.domain.TimeSheet;
+import admiral.domain.TimeSheetPlusExtra;
 import admiral.service.events.TimeSheetMade;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface TimeSheetRepo {
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to retive Time Sheets based on parameter
-    public List<TimeSheet> findTimeSheetsByStatus(String searchTerm);
+    public List<TimeSheetPlusExtra> findTimeSheetsByStatus(String searchTerm);
 
     //------------------------------------------------------------------------------------------------------------------
     // Saves a new Time Sheet to the database
