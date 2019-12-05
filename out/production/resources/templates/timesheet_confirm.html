@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!-- ############################################################################################################### -->
 <!-- Page settings and formatting information -->
@@ -73,13 +73,6 @@
                     </li>
 
                     <!-- ########################################################################################### -->
-                    <!-- Link to the Time Sheet dashboard -->
-                    <li class="active">
-                        <a href="timeSheetDashboard">
-                            <i class="fas fa-table"></i>Dashboard</a>
-                    </li>
-
-                    <!-- ########################################################################################### -->
                     <!-- Sub navigation drop down -->
                     <li class="has-sub">
                         <a class="js-arrow" href="#">
@@ -91,13 +84,6 @@
                             <li>
                                 <a href="login">Login</a>
                             </li>
-
-                            <!-- ################################################################################### -->
-                            <!-- Sub nav link to register page -->
-                            <li>
-                                <a href="register">Register</a>
-                            </li>
-
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to forget password page -->
                             <li>
@@ -138,14 +124,18 @@
 
                                     <!-- ########################################################################### -->
                                     <!-- Logo for the top bar -->
-                                    <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                    </div>
+<!--                                    <div class="image">-->
+<!--                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
+<!--                                    </div>-->
 
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
                                     <div class="content">
-                                        <a class="js-acc-btn" href="#">john doe</a>
+<!--                                        <a class="js-acc-btn">-->
+                                            <div sec:authorize="isAuthenticated()">
+                                                <div sec:authentication="name"></div>
+                                            </div>
+<!--                                        </a>-->
                                     </div>
 
                                     <!-- ########################################################################### -->
@@ -155,21 +145,21 @@
 
                                             <!-- ################################################################### -->
                                             <!-- Profile image -->
-                                            <div class="image">
-                                                <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                </a>
-                                            </div>
+<!--                                            <div class="image">-->
+<!--                                                <a href="#">-->
+<!--                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
+<!--                                                </a>-->
+<!--                                            </div>-->
 
                                             <!-- ################################################################### -->
                                             <!-- Account information for dropdown -->
-                                            <div class="content">
-                                                <h5 class="name">
-                                                    <a href="#">john doe</a>
-                                                </h5>
-                                                <span class="email">johndoe@example.com</span>
-                                            </div>
-                                        </div>
+<!--                                            <div class="content">-->
+<!--                                                <h5 class="name">-->
+<!--                                                    <a href="#">john doe</a>-->
+<!--                                                </h5>-->
+<!--                                                <span class="email">johndoe@example.com</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
 
                                         <!-- ####################################################################### -->
                                         <!-- Account management link -->
@@ -183,7 +173,7 @@
                                         <!-- ####################################################################### -->
                                         <!-- Drop down logout button -->
                                         <div class="account-dropdown__footer">
-                                            <a href="#">
+                                            <a href="/logout">
                                                 <i class="zmdi zmdi-power"></i>Logout</a>
                                         </div>
                                     </div>

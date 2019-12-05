@@ -31,6 +31,8 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
         conn = new DatabaseConnection().getCon();
     }
 
+
+
     //------------------------------------------------------------------------------------------------------------------
     // Finds and returns a list of all time sheets from the DB
     public List<TimeSheet> findTimeSheetsByStatus(String searchTerm){
@@ -71,9 +73,9 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
     };
 
     //------------------------------------------------------------------------------------------------------------------
-    // Saves new Time Sheets to the database
+    // Saves new Time Sheets to the database. Returns the generated timesheet identity
     @Override
-    public void saveTimeSheetEvent(TimeSheetMade timeSheetMade) {
+    public int saveTimeSheetEvent(TimeSheetMade timeSheetMade) {
 
         // Define sql code, pulling data from passed TimeSheetMade object
         String sql = "INSERT INTO timesheet (contractor_id, number_days, overtime, start_date, end_date, date_submitted, notes, " +
@@ -81,18 +83,27 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
                 " '"+ timeSheetMade.getStart_date() +"', '"+timeSheetMade.getEnd_date()+"', " +
                 "'"+timeSheetMade.getEnd_date()+"', '"+timeSheetMade.getNotes() +"', 'Pending')";
 
+        int generated_time_sheet_id = 0;
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
         try {
             Statement st = conn.createStatement();
-            st.executeUpdate(sql);
-
+            if (st.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS) == 1) {
+                ResultSet result = st.getGeneratedKeys();
+                if (result.next()) {
+                    generated_time_sheet_id = result.getInt(1);
+                }
+            } else {
+                throw new SQLDataException("Timesheet wasn't inserted");
+            }
         }
+
         //--------------------------------------------------------------------------------------------------------------
         // Outputs DBG error message on DB connection failure
         catch (SQLException e) {
             e.printStackTrace();
         }
+        return generated_time_sheet_id;
     }
     public void updateTimeSheetEntry(TimeSheet timesheet){
 
