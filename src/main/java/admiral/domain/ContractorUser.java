@@ -2,57 +2,52 @@ package admiral.domain;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import java.time.LocalDate;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Class to map the time sheet object to the database
+//Defining mapping of the table users
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TimeSheet {
+public class ContractorUser {
 
     //------------------------------------------------------------------------------------------------------------------
     // Unique identifier
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int time_sheet_id;
+    @Column(name = "contractor_id")
+    private int contractor_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "admiral_role_id")
-    private int admiral_role_id;
+    @Column(name = "manager_id")
+    private int manager_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "number_days")
-    private int number_days;
+    @Column(name = "user_id")
+    private int user_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "overtime")
-    private int overtime;
+    @Column(name="first_name")
+    private String firstName;
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "start_date")
-    private LocalDate start_date;
+    @Column(name="last_name")
+    private String lastName;
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "end_date")
-    private LocalDate end_date;
+    @Column(name="email")
+    private String staffEmail;
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "date_submitted")
-    private LocalDate date_submitted;
+    @Column(name="role_id")
+    private int roleId;
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "notes")
-    private String notes;
-
-    //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "status")
-    private String status;
-
-
+    @Column(name="active")
+    private Boolean active;
 }

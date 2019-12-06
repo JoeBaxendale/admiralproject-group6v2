@@ -199,7 +199,15 @@
                                     <!-- ########################################################################### -->
                                     <!-- Greeting for user -->
                                     <div class="card-title">
-                                        <h3 class="text-center title-2">Hello {Name} please fill in your time sheet</h3>
+                                        <h3 class="text-center title-2">
+
+                                            Hello
+
+                                            <div sec:authorize="isAuthenticated()">
+                                                <div sec:authentication="name"></div>
+                                            </div>
+
+                                            please fill in your time sheet</h3>
                                     </div>
 
                                     <!-- ########################################################################### -->
@@ -237,7 +245,7 @@
 
                                             <input th:field="*{worked_sunday}"
                                                    type="checkbox"
-                                                   value="Worked Sunday"/>Worked Saturday &emsp;
+                                                   value="Worked Sunday"/>Worked Sunday &emsp;
 
                                             <span class="help-block" data-valmsg-for="cc-number" dta-valmsg-replace="true"></span>
                                         </div>

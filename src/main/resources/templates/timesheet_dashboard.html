@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!-- ############################################################################################################### -->
 <!-- Page settings and formatting information -->
@@ -14,32 +14,33 @@
 
     <!-- ########################################################################################################### -->
     <!-- Title Page-->
-    <title>TimeSheet</title>
+    <title>Dashboard</title>
 
     <!-- ########################################################################################################### -->
     <!-- Fontfaces CSS-->
-    <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- ########################################################################################################### -->
     <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- ########################################################################################################### -->
     <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <!-- ########################################################################################################### -->
     <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+
 </head>
 
 <!-- ############################################################################################################### -->
@@ -55,7 +56,7 @@
         <!-- Sidebar logo -->
         <div class="logo">
             <a href="#">
-                <img src="images/icon/admiral.png" alt="Cool Admin" />
+                <img src="/images/icon/admiral.png" alt="Cool Admin" />
             </a>
         </div>
 
@@ -68,8 +69,15 @@
                     <!-- ########################################################################################### -->
                     <!-- Link to the Time Sheet dashboard -->
                     <li class="active">
-                        <a href="timeSheetDashboard">
+                        <a href="timesheetDashboard/Pending">
                             <i class="fas fa-table"></i>Dashboard</a>
+                    </li>
+
+                    <!-- ########################################################################################### -->
+                    <!-- Link to the contractor dashboard -->
+                    <li class="active">
+                        <a href="/Manager/All">
+                            <i class="fas fa-table"></i>Contractors</a>
                     </li>
 
                     <!-- ########################################################################################### -->
@@ -98,6 +106,8 @@
                             </li>
                         </ul>
                     </li>
+
+
                 </ul>
             </nav>
         </div>
@@ -123,9 +133,17 @@
                             </button> -->
                         </form>
 
+
                         <div class="header-button">
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
+
+
+<!--                                    <div class="image">-->
+<!--                                        <img src="/images/icon/avatar-01.jpg" alt="John Doe" />-->
+<!--                                    </div>-->
+<!--                                    <div class="content">-->
+<!--                                        <a class="js-acc-btn" href="#">john doe</a>-->
 
                                     <!-- ########################################################################### -->
                                     <!-- Logo for the top bar -->
@@ -148,7 +166,6 @@
                                     <!-- Account dropdown -->
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
-
                                             <!-- ################################################################### -->
                                             <!-- Profile image -->
 <!--                                            <div class="image">-->
@@ -202,6 +219,30 @@
                     <!-- DATA TABLE -->
                     <div class="m-t-30">
                         <div class="col-md-12">
+                            <label>Status:</label>
+                            <select  id = "statusFilter" onchange="location = this.options[this.selectedIndex].value;">Status
+                                <option value = "/timesheetDashboard/Pending">Pending</option>
+                                <option value = "/timesheetDashboard/Approved">Approved</option>
+                                <option value = "/timesheetDashboard/Rejected">Rejected</option>
+                            </select>
+                            <script>
+                                var statusSelected = "[[${filterTerm}]]"; //get the status from the model-->
+                                var statusFilter = document.getElementById("statusFilter"); //get the status drop down-->
+                                for (var i=0;i<statusFilter.options.length;i++)
+                                    if (statusFilter.options[i].innerHTML == statusSelected) { //if the status is in the options, select that option by default when the page loads-->
+                                        statusFilter.selectedIndex = i;
+                                    }
+                            </script>
+                            <!--                            this is to set the value of the select box to what was selected when the user changes pages&ndash;&gt;-->
+                            <label>Date:</label>
+                            <select>Date
+                                <option>Test</option>
+                            </select>
+
+                            <form action = "/submitChanges">
+                                <input id = "submitBox" type="hidden" th:name = "alteredTimeSheets">
+                                <button id="submitChanges" onclick="getData()"  type="submit" style="float:right">Submit Changes</button>
+                            </form>
 
                             <!-- ################################################################################### -->
                             <!-- DATA TABLE-->
@@ -217,17 +258,28 @@
                                         <th>Status</th>
                                     </tr>
                                     </thead>
-                                <tbody>
+                                    <tbody>
 
                                 <!-- ############################################################################### -->
                                 <!-- Populate table from database results -->
                                 <script>
 
-                                    //----------------------------------------------------------------------------------
                                     // Attributes
-                                    var tempTimeSheetArray = "[[${pendingTimeSheets}]]";
+                                    var tempTimeSheetArray = "[[${TimeSheets}]]";
+
+                                    var timeSheetArray = tempTimeSheetArray.split(",");     //split the string of time sheets into an array of timesheets
+
+                                    var timeSheetArray2 = timeSheetArray.toString().split(")"); //split the string of time sheets into an array of timesheets
+
                                     var table = document.getElementById("timeSheetTable");
-                                    var openRow;
+
+                                    var count = 1;                              //using a counter to add 2 rows per entry in the time sheet array so the extra row can be used to show more data when dropped down
+
+                                    var count2 = 0;                             //using this to always get the first entry into the timesheet from the time sheet array which will always be 0, then a multiple of 9
+
+                                    var openRow;        //initialise global variables for later use
+
+                                    var openedRows = [];
 
                                     // Split the string of time sheets into an array of timesheets
                                     var timeSheetArray = tempTimeSheetArray.split(",");
@@ -249,10 +301,10 @@
 
                                         //split the array of timesheets into its own array (array of arrays)
                                         var data = timeSheetArray2.toString().split(",").toString().split(",");
-                                        var toInsert = data.slice(count2,count2+9);
+                                        var toInsert = data.slice(count2,count2+13);
 
-                                        //remove the [TimeSheet from the front of the data
-                                        var firstEntry = toInsert[0].substring((toInsert[0].indexOf("("))+1);
+                                        //remove the [TimeSheet from the front of the timesheet ID
+                                        var timesheetId = toInsert[0].substring((toInsert[0].indexOf("("))+1);
 
                                         //add a a new row to the table
                                         var row = table.insertRow(count);
@@ -262,32 +314,33 @@
                                         row.insertCell(0);
                                         row.insertCell(1);
                                         row.insertCell(2);
+                                        hiddenTimesheetID = row.insertCell(3);
+
+                                        hiddenTimesheetID.style.display = 'none';
 
                                         //this will need to be changed to get the manager id out of the database
-                                        table.rows[count].cells[0].innerHTML = firstEntry;
+                                        table.rows[count].cells[0].innerHTML = toInsert[11].substring(toInsert[11].indexOf("=")+1) + " " + toInsert[12].substring(toInsert[12].indexOf("=")+1);
+
 
                                         //add the data to each of the respective columns
-                                        table.rows[count].cells[1].innerHTML = toInsert[1];
+                                        table.rows[count].cells[1].innerHTML = toInsert[9].substring(toInsert[9].indexOf("=")+1) + " " + toInsert[10].substring(toInsert[10].indexOf("=")+1);
 
                                         //add the data and remove the two ,'s at the end
                                         table.rows[count].cells[2].innerHTML = toInsert[8].substring(8);
 
+                                        table.rows[count].cells[3].innerHTML = timesheetId.substring(timesheetId.indexOf("=")+1);
+
                                         //increase the counter to put the correct data into the correct cells
-                                        count2 += 10;
+                                        count2 += 14;
 
                                         //add another row to the table to be used later
                                         var spareRow = table.insertRow(count+1);
                                         spareRow.id = "dropDownRow"+count;
 
-                                        //add some empty cells so we can add data to the end cell (stop the table stretching)********************
-                                        // spareRow.insertCell(0);
 
-                                        //could maybe remove this if we can fix it with css? *******************
-                                        // spareRow.insertCell(1);
-
-                                        //add a cell to the row and give both the row and the cell an ID
-                                        var dropDownCell = spareRow.insertCell(0);
+                                        var dropDownCell = spareRow.insertCell(0);       //add a cell to the row and give both the row and the cell an ID
                                         dropDownCell.id = "dropDownCell" + count;
+                                        dropDownCell.colSpan = 3;
 
                                         //incrementing the counter by 2 as 2 rows have been added to the table
                                         count+=2;
@@ -334,18 +387,16 @@
                                             ddRow2.insertCell(5);
                                             ddRow2.insertCell(6);
 
-                                            console.log(data);
-
                                             var clickPosition = this.id;
                                             var id = clickPosition.substring(3); //create the id for data addition and appending the table
-                                            var arrayPosition = Math.floor(id/2)*10;
+                                            var arrayPosition = Math.floor(id / 2) * 10;        // * 10 as there are 10 options in the array for each entry
 
-                                            var select = document.createElement("select");
-                                            select.setAttribute("id","select"+id);
+                                            var select = document.createElement("select");  //create a select drop down
+                                            select.setAttribute("id", "select" + id);
 
                                             var option;
 
-                                            option = document.createElement("option");
+                                            option = document.createElement("option");      //and add the status options to it
                                             option.setAttribute("value", "Pending");
                                             option.innerHTML = "Pending";
                                             select.appendChild(option);
@@ -360,25 +411,62 @@
                                             option.innerHTML = "Approved";
                                             select.appendChild(option);
 
-                                            dropDownTable.rows[1].cells[0].innerHTML = data[arrayPosition+2].substring(data[arrayPosition+2].indexOf("=")+1,data[arrayPosition+2].length);
-                                            dropDownTable.rows[1].cells[1].innerHTML = data[arrayPosition+3].substring(data[arrayPosition+3].indexOf("=")+1,data[arrayPosition+3].length);   //adds data into the cells
-                                            dropDownTable.rows[1].cells[2].innerHTML = data[arrayPosition+4].substring(data[arrayPosition+4].indexOf("=")+1,data[arrayPosition+4].length);   //and remove specific characters at the start and end of the string
-                                            dropDownTable.rows[1].cells[3].innerHTML = data[arrayPosition+5].substring(data[arrayPosition+5].indexOf("=")+1,data[arrayPosition+5].length);
-                                            dropDownTable.rows[1].cells[4].innerHTML = data[arrayPosition+6].substring(data[arrayPosition+6].indexOf("=")+1,data[arrayPosition+6].length);
-                                            dropDownTable.rows[1].cells[5].innerHTML = data[arrayPosition+7].substring(data[arrayPosition+7].indexOf("=")+1,data[arrayPosition+7].length);
+                                            var statusSelected = "[[${filterTerm}]]";
+
+                                            for (var k=0;k<select.options.length;k++) {
+                                                if(select.options[k].innerHTML == statusSelected) {     //make the correct status be shown by default, getting the filter term as they will only display when it is on the specific filter term page
+                                                    select.selectedIndex = k;
+                                                }
+                                            }
+
+                                            dropDownTable.rows[1].cells[0].innerHTML = data[arrayPosition + 2].substring(data[arrayPosition + 2].indexOf("=") + 1, data[arrayPosition + 2].length);
+                                            dropDownTable.rows[1].cells[1].innerHTML = data[arrayPosition + 3].substring(data[arrayPosition + 3].indexOf("=") + 1, data[arrayPosition + 3].length);   //adds data into the cells
+                                            dropDownTable.rows[1].cells[2].innerHTML = data[arrayPosition + 4].substring(data[arrayPosition + 4].indexOf("=") + 1, data[arrayPosition + 4].length);   //and remove specific characters at the start and end of the string
+                                            dropDownTable.rows[1].cells[3].innerHTML = data[arrayPosition + 5].substring(data[arrayPosition + 5].indexOf("=") + 1, data[arrayPosition + 5].length);
+                                            dropDownTable.rows[1].cells[4].innerHTML = data[arrayPosition + 6].substring(data[arrayPosition + 6].indexOf("=") + 1, data[arrayPosition + 6].length);
+                                            dropDownTable.rows[1].cells[5].innerHTML = data[arrayPosition + 7].substring(data[arrayPosition + 7].indexOf("=") + 1, data[arrayPosition + 7].length);
                                             dropDownTable.rows[1].cells[6].appendChild(select);
                                             // data[arrayPosition+8].substring(data[arrayPosition+8].indexOf("=")+1,data[arrayPosition+8].length-2);  //remove an extra , on the pending column
 
-                                            if (document.getElementById("dropDownTable") != null){
-                                                document.getElementById(openRow).removeChild(document.getElementById("dropDownTable"));
+                                            if (document.getElementById("dropDownTable") != null) {
+                                                document.getElementById(openRow).style.display = 'none';    //hide the open row when another is open and add it to a list of opened rows
+                                                openedRows.push(document.getElementById((openRow)));
                                             }
 
-                                            openRow = "dropDownCell" +id;
+                                            openRow = "dropDownCell" + id;
 
-                                            document.getElementById("dropDownCell" + id).appendChild(dropDownTable);    //appends the new table into the cell we created earlier NEEDS TO CHANGE DEPENDING ON WHAT CELL IS CLICKED
+
+                                            if (openedRows.length == 0) {
+                                                document.getElementById("dropDownCell" + id).appendChild(dropDownTable);    //open the first row
+                                            }
+
+                                            var found = false;
+                                            for(var i=0;i<openedRows.length;i++) {
+                                                if (document.getElementById(openRow) == openedRows[i]) {    //if the row being opened has already been opened, show the opened one instead of creating a new child
+                                                    document.getElementById(openRow).style.display = '';
+                                                    found = true;
+                                                }
+                                            }
+                                            if(found == false) {
+                                                document.getElementById("dropDownCell" + id).appendChild(dropDownTable);    //appends the new table into the cell we created earlier
+                                            }
                                         }
                                     }
 
+                                    var dataArray = [];     //wipe the dataArray on each new page to avoid duplication
+
+                                    function getData() {
+                                        for(var i=1;(i<(table.rows.length)-1);i+=2){
+                                            var Data = document.getElementById("dropDownRow"+i).firstElementChild.innerHTML.split("<td>");
+                                            Select = null;                                      //wipe the entry of Select before reassigning it so that duplicates are avoided
+                                            Select = document.getElementById("select" + i);
+                                            if(Select != null) {                                //only push opened rows to the array as unopened rows are not gonna to have changed
+                                                dataArray.push([table.rows[i].cells[3].innerHTML, Data[13].substring(-4), Select.options[Select.selectedIndex].innerHTML]);
+                                            }
+
+                                        }
+                                        document.getElementById("submitBox").value = dataArray.toString();  //add the string of the array to a hidden input on a form to pass it into the controller
+                                    }
                                 </script>
                                 </tbody>
                                 </table>
@@ -404,33 +492,34 @@
 
 
     </div>
+
 </div>
 
 <!-- ############################################################################################################### -->
 <!-- Jquery JS-->
-<script src="vendor/jquery-3.2.1.min.js"></script>
-
-<!-- ############################################################################################################### -->
+<script src="/vendor/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap JS-->
-<script src="vendor/bootstrap-4.1/popper.min.js"></script>
-<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-
-<!-- ############################################################################################################### -->
+<script src="/vendor/bootstrap-4.1/popper.min.js"></script>
+<script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
 <!-- Vendor JS       -->
-<script src="vendor/slick/slick.min.js"></script>
-<script src="vendor/wow/wow.min.js"></script>
-<script src="vendor/animsition/animsition.min.js"></script>
-<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-<script src="vendor/counter-up/jquery.counterup.min.js"></script>
-<script src="vendor/circle-progress/circle-progress.min.js"></script>
-<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="vendor/chartjs/Chart.bundle.min.js"></script>
-<script src="vendor/select2/select2.min.js"></script>
+<script src="/vendor/slick/slick.min.js">
+</script>
+<script src="/vendor/wow/wow.min.js"></script>
+<script src="/vendor/animsition/animsition.min.js"></script>
+<script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+</script>
+<script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
+<script src="/vendor/counter-up/jquery.counterup.min.js">
+</script>
+<script src="/vendor/circle-progress/circle-progress.min.js"></script>
+<script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/vendor/chartjs/Chart.bundle.min.js"></script>
+<script src="/vendor/select2/select2.min.js">
+</script>
 
-<!-- ############################################################################################################### -->
 <!-- Main JS-->
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
+
 </body>
 
 </html>

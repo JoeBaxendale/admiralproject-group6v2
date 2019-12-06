@@ -3,6 +3,7 @@ package admiral.service;
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 import admiral.domain.TimeSheet;
+import admiral.domain.TimeSheetPlusExtra;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -22,7 +23,12 @@ public class TimeSheetQueries implements TimeSheetFinder{
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to query the database, retrieving Times Sheets based on a parameter
-    public List<TimeSheet> findTimeSheetsByStatus(String searchTerm){
+    public List<TimeSheetPlusExtra> findTimeSheetsByStatus(String searchTerm){
         return timeSheetRepo.findTimeSheetsByStatus(searchTerm);
     }
+
+    //Method to update the database for each timesheet
+    public void updateTimeSheetEntry(TimeSheet timesheet){
+        timeSheetRepo.updateTimeSheetEntry(timesheet);
+    };
 }

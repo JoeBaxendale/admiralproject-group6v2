@@ -2,15 +2,17 @@ package admiral.web;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
+import admiral.domain.ContractorUser;
+import admiral.service.ContractorFinder;
 import admiral.service.TimeSheetCreator;
 import admiral.service.events.TimeSheetMade;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
+import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Controller for Time Sheet and Time Sheet processing
@@ -20,10 +22,14 @@ public class TimeSheetController {
     // Set Creator for database access
     private TimeSheetCreator timeSheetCreator;
 
+    // Finder for the Time Sheet queries
+    private ContractorFinder finder;
+
     //------------------------------------------------------------------------------------------------------------------
     // Constructor setting creator
-    public TimeSheetController(TimeSheetCreator iCreator) {
+    public TimeSheetController(TimeSheetCreator iCreator, ContractorFinder iFinder) {
         timeSheetCreator = iCreator;
+        finder = iFinder;
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -62,10 +68,10 @@ public class TimeSheetController {
         String tempNotes = timeSheet.getNotes();
 
         if(timeSheet.getWorked_sunday() != null){
-            tempNotes = "Worked Sunday," + timeSheet.getNotes();
+            tempNotes = "Worked Sunday;" + timeSheet.getNotes();
         }
         if(timeSheet.getWorked_saturday() != null){
-            tempNotes = "Worked Saturday," + timeSheet.getNotes();
+            tempNotes = "Worked Saturday;" + timeSheet.getNotes();
         }
 
 
@@ -85,4 +91,51 @@ public class TimeSheetController {
         // Go to the confirmation page
         return "timesheet_confirm";
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @GetMapping(path = "/Manager/{id}")
+    public String contractorManager(@PathVariable("id") String managerId, Model model) {
+
+        List<ContractorUser> contractorsUnderManager;
+
+        if(managerId.equals("All")){
+            // Creates and populates a list of TimeSheets, passes it to the dashboard page
+            contractorsUnderManager = finder.findContractors();
+            model.addAttribute("contractorsUnderManager",contractorsUnderManager);
+        } else {
+            // Creates and populates a list of TimeSheets, passes it to the dashboard page
+            contractorsUnderManager = finder.findContractorByManager(managerId);
+            model.addAttribute("contractorsUnderManager",contractorsUnderManager);
+        }
+
+
+        for(ContractorUser element: contractorsUnderManager){
+            System.out.println(element.getFirstName() + element.getStaffEmail());
+        }
+
+        // Open managers page
+        return "contractor_manager";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @GetMapping(path = "/Contractor/{id}")
+    public String contractorEditor(@PathVariable("id") String contractorId, Model model) {
+
+        List<ContractorUser> contractor = finder.findContractorById(contractorId);
+
+        ContractorForm contractorForm = new ContractorForm(
+                contractor.get(0).getManager_id(),
+                contractor.get(0).getFirstName(),
+                contractor.get(0).getLastName(),
+                contractor.get(0).getStaffEmail(),
+                contractor.get(0).getActive());
+
+        model.addAttribute("contractorKey", contractorForm);
+
+        // Open managers page
+        return "contractor";
+    }
+
 }
