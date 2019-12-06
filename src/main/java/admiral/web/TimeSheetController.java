@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -37,8 +38,12 @@ public class TimeSheetController {
     @RequestMapping(path = "/Timesheet", method = RequestMethod.GET)
     public String timeSheetDetails(Model model) {
 
+        // Gets date for form
+        LocalDate currentdate = LocalDate.now();
+        LocalDate weekPast = currentdate.minusDays(7);
+
         // Open time sheet form
-        model.addAttribute("timesheetKey", new TimeSheetForm());
+        model.addAttribute("timesheetKey", new TimeSheetForm(0, false, false, 0, weekPast, currentdate, ""));
         return "timesheet";
 
     }
