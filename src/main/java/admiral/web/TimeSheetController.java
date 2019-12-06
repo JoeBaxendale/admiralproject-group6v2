@@ -71,12 +71,15 @@ public class TimeSheetController {
         }
 
         String tempNotes = timeSheet.getNotes();
+        System.out.println("------------------------------------------------------------>"+ timeSheet.getWorked_saturday() + timeSheet.getWorked_sunday());
 
-        if(timeSheet.getWorked_sunday() != null){
-            tempNotes = "Worked Sunday;" + timeSheet.getNotes();
+        if(timeSheet.getWorked_sunday() == true){
+            tempNotes = "Worked Sunday;" + tempNotes;
         }
-        if(timeSheet.getWorked_saturday() != null){
-            tempNotes = "Worked Saturday;" + timeSheet.getNotes();
+
+
+        if(timeSheet.getWorked_saturday() == true){
+            tempNotes = "Worked Saturday;" + tempNotes;
         }
 
 
