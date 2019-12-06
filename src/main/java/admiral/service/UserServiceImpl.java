@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService{
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Autowired
-    RoleRepository roleRepository;
+//    @Autowired
+//    RoleRepository roleRepository;
 
     @Autowired
     UserRepositoy userRepositoy;
@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService{
     public void saveUser (User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
-        Role userRole = roleRepository.findByRole("contractor");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+//        Role userRole = roleRepository.findByRole("contractor");
+//        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepositoy.save(user);
 
     }
