@@ -89,6 +89,9 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
     @Override
     public int saveTimeSheetEvent(TimeSheetMade timeSheetMade) {
 
+        int contractorId = timeSheetMade.getContractor_id();
+        System.out.println(contractorId);
+
         // Define sql code, pulling data from passed TimeSheetMade object
         String sql = "INSERT INTO timesheet (contractor_id, number_days, overtime, start_date, end_date, date_submitted, notes, " +
                 "status) VALUES (3, '"+ timeSheetMade.getNumber_of_days() +"', '"+ timeSheetMade.getOvertime() +"'," +

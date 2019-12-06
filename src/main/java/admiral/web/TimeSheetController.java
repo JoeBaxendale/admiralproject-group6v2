@@ -39,11 +39,11 @@ public class TimeSheetController {
     public String timeSheetDetails(Model model) {
 
         // Gets date for form
-        LocalDate currentdate = LocalDate.now();
-        LocalDate weekPast = currentdate.minusDays(7);
+        LocalDate currentDate = LocalDate.now();
+        LocalDate weekPast = currentDate.minusDays(7);
 
         // Open time sheet form
-        model.addAttribute("timesheetKey", new TimeSheetForm(0, false, false, 0, weekPast, currentdate, ""));
+        model.addAttribute("timesheetKey", new TimeSheetForm(0, false, false, 0, weekPast, currentDate, ""));
         return "timesheet";
 
     }
@@ -83,6 +83,7 @@ public class TimeSheetController {
         //--------------------------------------------------------------------------------------------------------------
         // Inserts the form details to the database
         TimeSheetMade timeSheetEvent = new TimeSheetMade(
+                2,
                 timeSheet.getNumber_of_days(),
                 timeSheet.getOvertime(),
                 timeSheet.getStart_date(),
