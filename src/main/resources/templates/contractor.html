@@ -138,18 +138,6 @@
                                 <div class="account-item clearfix js-item-menu">
 
 
-                                    <!--                                    <div class="image">-->
-                                    <!--                                        <img src="/images/icon/avatar-01.jpg" alt="John Doe" />-->
-                                    <!--                                    </div>-->
-                                    <!--                                    <div class="content">-->
-                                    <!--                                        <a class="js-acc-btn" href="#">john doe</a>-->
-
-                                    <!-- ########################################################################### -->
-                                    <!-- Logo for the top bar -->
-                                    <!--                                    <div class="image">-->
-                                    <!--                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
-                                    <!--                                    </div>-->
-
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
                                     <div class="content">
@@ -165,23 +153,6 @@
                                     <!-- Account dropdown -->
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
-                                            <!-- ################################################################### -->
-                                            <!-- Profile image -->
-                                            <!--                                            <div class="image">-->
-                                            <!--                                                <a href="#">-->
-                                            <!--                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
-                                            <!--                                                </a>-->
-                                            <!--                                            </div>-->
-
-                                            <!--                                            &lt;!&ndash; ################################################################### &ndash;&gt;-->
-                                            <!--                                            &lt;!&ndash; Account information for dropdown &ndash;&gt;-->
-                                            <!--                                            <div class="content">-->
-                                            <!--                                                <h5 class="name">-->
-                                            <!--                                                    <a href="#">john doe</a>-->
-                                            <!--                                                </h5>-->
-                                            <!--                                                <span class="email">johndoe@example.com</span>-->
-                                            <!--                                            </div>-->
-                                            <!--                                        </div>-->
 
                                             <!-- ####################################################################### -->
                                             <!-- Account management link -->
@@ -229,14 +200,12 @@
                                             <div sec:authorize="isAuthenticated()">
                                                 <div sec:authentication="name"></div>
                                             </div>
-
-                                            please fill in your time sheet</h3>
                                     </div>
 
                                     <!-- ########################################################################### -->
                                     <!-- Form for Time Sheets submission -->
                                     <div>
-                                    <form action="#" method="post" th:action="@{/Contractor}" th:object="${contractorKey}">
+                                    <form action="#" method="post" th:action="@{/ContractorUpdate/{id} (id=${contractorId})}" th:object="${contractorKey}">
 
                                         <!-- ####################################################################### -->
                                         <!-- Form field for the number of days -->

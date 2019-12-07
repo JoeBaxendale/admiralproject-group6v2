@@ -3,8 +3,10 @@ package admiral.web;
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 import admiral.domain.ContractorUser;
-import admiral.service.ContractorFinder;
+import admiral.service.StaffCreator;
+import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
+import admiral.service.events.ContractorUpdated;
 import admiral.service.events.TimeSheetMade;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,14 +24,16 @@ public class TimeSheetController {
 
     // Set Creator for database access
     private TimeSheetCreator timeSheetCreator;
+    private StaffCreator staffCreator;
 
     // Finder for the Time Sheet queries
-    private ContractorFinder finder;
+    private StaffFinder finder;
 
     //------------------------------------------------------------------------------------------------------------------
     // Constructor setting creator
-    public TimeSheetController(TimeSheetCreator iCreator, ContractorFinder iFinder) {
+    public TimeSheetController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder) {
         timeSheetCreator = iCreator;
+        staffCreator = iStaffCreator;
         finder = iFinder;
     }
 
@@ -134,14 +138,50 @@ public class TimeSheetController {
 
         List<ContractorUser> contractor = finder.findContractorById(contractorId);
 
-        ContractorForm contractorForm = new ContractorForm(
+        StaffForm staffForm = new StaffForm(
                 contractor.get(0).getManager_id(),
                 contractor.get(0).getFirstName(),
                 contractor.get(0).getLastName(),
                 contractor.get(0).getStaffEmail(),
-                contractor.get(0).getActive());
+                contractor.get(0).getActive()
+                );
 
-        model.addAttribute("contractorKey", contractorForm);
+        model.addAttribute("contractorKey", staffForm);
+        model.addAttribute("contractorId", contractorId);
+
+        // Open managers page
+        return "contractor";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @RequestMapping(path = "/ContractorUpdate/{id}", method = RequestMethod.POST)
+    public String contractorDetails(@PathVariable("id") String contractorId,
+                                    @ModelAttribute("contractorKey") @Valid StaffForm contractorForm,
+                                    BindingResult bindingResult, Model model) {
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Validate the form, else force resubmission
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("contractorKey", contractorForm);
+            return "contractor";
+        }
+
+        // Convert active boolean to bit
+        int active = 1;
+        if (contractorForm.getActive() == false){
+            active = 0;
+        }
+
+        ContractorUpdated contractorUpdated = new ContractorUpdated(
+                Integer.parseInt(contractorId),
+                contractorForm.getManager_id(),
+                contractorForm.getFirst_name(),
+                contractorForm.getLast_name(),
+                contractorForm.getEmail(),
+                false);
+
+        staffCreator.updateContractor(contractorUpdated);
 
         // Open managers page
         return "contractor";

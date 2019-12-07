@@ -9,7 +9,7 @@ import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Interface for the retrieval of Contractor from the database
-public interface ContractorFinder {
+public interface StaffFinder {
 
     //------------------------------------------------------------------------------------------------------------------
     // Retrieves Contractor based on Manager

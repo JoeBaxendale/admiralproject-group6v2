@@ -5,13 +5,14 @@ package admiral.service;
 
 import admiral.domain.ContractorUser;
 import admiral.domain.TimeSheet;
+import admiral.service.events.ContractorUpdated;
 import admiral.service.events.TimeSheetMade;
 
 import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Interface for the Contractor repository, including all methods for the Contractor table
-public interface ContractorRepo {
+public interface StaffRepo {
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to retrieve Contractor based on manager
@@ -24,6 +25,10 @@ public interface ContractorRepo {
     //------------------------------------------------------------------------------------------------------------------
     // Method to retrieve Contractors
     public List<ContractorUser> findContractors();
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to update Contractors
+    public void updateContractor(ContractorUpdated contractorUpdated);
 
 
 }
