@@ -37,6 +37,7 @@ public class TimeSheetDashboardController {
         model.addAttribute("TimeSheets",TimeSheets);
         model.addAttribute("filterTerm",filterTerm);
         model.addAttribute("alteredTimeSheets", new String());
+        model.addAttribute("accessLevel","Manager"); //change this later*
 
         // Opens the dashboard html page
         return "timesheet_dashboard";
@@ -49,7 +50,6 @@ public class TimeSheetDashboardController {
 
 
         List<String> splitList = List.of(alterData.split(",")); //split the altered data on the comma, as the data is passed as an array in string form
-        System.out.println("YEEEE" + splitList);
 
         for(int j =0; j<timeSheets.size();j++) {        //look through every timesheet
             for (int i = 0; i < splitList.size(); i += 3) {     //look through every entry in the altered data. i+=3 as there are 3 entries in the list for each timesheet
