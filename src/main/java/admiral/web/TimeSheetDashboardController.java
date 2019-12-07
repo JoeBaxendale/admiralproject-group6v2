@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -34,6 +36,13 @@ public class TimeSheetDashboardController {
 
         // Creates and populates a list of TimeSheets, passes it to the dashboard page
         List<TimeSheetPlusExtra> TimeSheets = finder.findTimeSheetsByStatus(filterTerm);
+        List<String> managerNames = new ArrayList<>();
+        for(int i=0;i< TimeSheets.size();i++) {
+            String managerName = finder.findManagerByContractorId(TimeSheets.get(i).getAdmiral_role_id()); //not sure why contractorID is called admiral role id here?
+            TimeSheets.get(i).setManagerFirstName(managerName.substring(0,managerName.indexOf(" ")));
+            TimeSheets.get(i).setManagerSurname(managerName.substring(managerName.indexOf(" ")));
+        }
+
         model.addAttribute("TimeSheets",TimeSheets);
         model.addAttribute("filterTerm",filterTerm);
         model.addAttribute("alteredTimeSheets", new String());

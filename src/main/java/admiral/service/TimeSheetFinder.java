@@ -18,4 +18,8 @@ public interface TimeSheetFinder {
     //Updates a timesheet in the database
     public void updateTimeSheetEntry(TimeSheet timesheet);
 
+    //Gets the manager name based on the contractorId
+    //included this in timesheet repositories as it applies to the timesheet data
+    public String findManagerByContractorId(int contractorId);
+
 }

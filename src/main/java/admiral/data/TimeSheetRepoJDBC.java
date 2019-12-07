@@ -10,6 +10,8 @@ import admiral.service.events.TimeSheetMade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,4 +131,22 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
             e.printStackTrace();
         }
     };
+
+    public String findManagerByContractorId(int contractorId){
+        String managerName = "";
+
+        String sql = "SELECT first_name, last_name FROM users WHERE user_id IN" +
+                "(SELECT user_id FROM managers WHERE manager_id IN " +
+                "(SELECT manager_id FROM contractors WHERE contractor_id =" + contractorId + "))";
+
+        try {
+            Statement st = conn.createStatement();
+            ResultSet temp =  st.executeQuery(sql);
+            while(temp.next()) {
+                managerName = temp.getString(1) + " " + temp.getString(2);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }return managerName;
+    }
 }

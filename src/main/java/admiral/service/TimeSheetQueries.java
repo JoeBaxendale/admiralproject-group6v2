@@ -31,4 +31,8 @@ public class TimeSheetQueries implements TimeSheetFinder{
     public void updateTimeSheetEntry(TimeSheet timesheet){
         timeSheetRepo.updateTimeSheetEntry(timesheet);
     };
+
+    public String findManagerByContractorId(int contractorId){
+        return timeSheetRepo.findManagerByContractorId(contractorId);
+    };
 }

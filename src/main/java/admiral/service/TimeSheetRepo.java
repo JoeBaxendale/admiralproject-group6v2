@@ -21,4 +21,6 @@ public interface TimeSheetRepo {
 
     // Updates the timesheet entry
     public void updateTimeSheetEntry(TimeSheet timesheet);
+
+    public String findManagerByContractorId(int contractorId);
 }
