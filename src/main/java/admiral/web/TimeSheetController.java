@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -156,21 +157,15 @@ public class TimeSheetController {
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
     @RequestMapping(path = "/ContractorUpdate/{id}", method = RequestMethod.POST)
-    public String contractorDetails(@PathVariable("id") String contractorId,
-                                    @ModelAttribute("contractorKey") @Valid StaffForm contractorForm,
-                                    BindingResult bindingResult, Model model) {
+    public RedirectView contractorDetails(@PathVariable("id") String contractorId,
+                                          @ModelAttribute("contractorKey") @Valid StaffForm contractorForm,
+                                          BindingResult bindingResult, Model model) {
 
         //--------------------------------------------------------------------------------------------------------------
         // Validate the form, else force resubmission
         if (bindingResult.hasErrors()) {
             model.addAttribute("contractorKey", contractorForm);
-            return "contractor";
-        }
-
-        // Convert active boolean to bit
-        int active = 1;
-        if (contractorForm.getActive() == false){
-            active = 0;
+            return new RedirectView("/Contractor/contractorId");
         }
 
         ContractorUpdated contractorUpdated = new ContractorUpdated(
@@ -179,12 +174,12 @@ public class TimeSheetController {
                 contractorForm.getFirst_name(),
                 contractorForm.getLast_name(),
                 contractorForm.getEmail(),
-                false);
+                contractorForm.getActive());
 
         staffCreator.updateContractor(contractorUpdated);
 
         // Open managers page
-        return "contractor";
+        return new RedirectView("/Manager/All");
     }
 
 }
