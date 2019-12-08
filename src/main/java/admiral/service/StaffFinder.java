@@ -3,6 +3,7 @@ package admiral.service;
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 import admiral.domain.ContractorUser;
+import admiral.domain.ManagerUser;
 import admiral.domain.TimeSheet;
 
 import java.util.List;
@@ -22,4 +23,8 @@ public interface StaffFinder {
     //------------------------------------------------------------------------------------------------------------------
     // Retrieves Contractors
     public List<ContractorUser> findContractors();
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Retrieves Contractors
+    public List<ManagerUser> findManagers();
 }

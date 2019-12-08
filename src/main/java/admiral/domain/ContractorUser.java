@@ -28,6 +28,10 @@ public class ContractorUser {
     private int manager_id;
 
     //------------------------------------------------------------------------------------------------------------------
+    @Column(name = "manager_name")
+    private String manager_name;
+
+    //------------------------------------------------------------------------------------------------------------------
     @Column(name = "user_id")
     private int user_id;
 

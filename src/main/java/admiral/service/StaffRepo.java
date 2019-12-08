@@ -4,6 +4,7 @@ package admiral.service;
 // Imports
 
 import admiral.domain.ContractorUser;
+import admiral.domain.ManagerUser;
 import admiral.domain.TimeSheet;
 import admiral.service.events.ContractorUpdated;
 import admiral.service.events.TimeSheetMade;
@@ -25,6 +26,10 @@ public interface StaffRepo {
     //------------------------------------------------------------------------------------------------------------------
     // Method to retrieve Contractors
     public List<ContractorUser> findContractors();
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to retrieve Managers
+    public List<ManagerUser> findManagers();
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to update Contractors

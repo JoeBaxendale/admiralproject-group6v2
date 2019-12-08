@@ -3,6 +3,7 @@ package admiral.web;
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 import admiral.domain.ContractorUser;
+import admiral.domain.ManagerUser;
 import admiral.service.StaffCreator;
 import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
@@ -112,24 +113,38 @@ public class TimeSheetController {
     public String contractorManager(@PathVariable("id") String managerId, Model model) {
 
         List<ContractorUser> contractorsUnderManager;
+        List<ManagerUser> managers = finder.findManagers();
 
         if(managerId.equals("All")){
             // Creates and populates a list of TimeSheets, passes it to the dashboard page
             contractorsUnderManager = finder.findContractors();
+            contractorsUnderManager = getManagerNames(contractorsUnderManager, managers);
             model.addAttribute("contractorsUnderManager",contractorsUnderManager);
         } else {
             // Creates and populates a list of TimeSheets, passes it to the dashboard page
             contractorsUnderManager = finder.findContractorByManager(managerId);
+            contractorsUnderManager = getManagerNames(contractorsUnderManager, managers);
             model.addAttribute("contractorsUnderManager",contractorsUnderManager);
         }
 
-
-        for(ContractorUser element: contractorsUnderManager){
-            System.out.println(element.getFirstName() + element.getStaffEmail());
-        }
-
         // Open managers page
+        model.addAttribute("managersKey",managers);
+        model.addAttribute("searchKey",managerId);
         return "contractor_manager";
+    }
+
+    public List<ContractorUser> getManagerNames(List<ContractorUser> iContractors, List<ManagerUser> iManagers){
+
+        List<ContractorUser> temp = iContractors;
+
+        for(ContractorUser element: temp){
+            for(ManagerUser managerElement: iManagers){
+                if(element.getManager_id() == managerElement.getManager_id()){
+                    element.setManager_name(managerElement.getFirstName() + " " + managerElement.getLastName());
+                }
+            }
+        }
+        return temp;
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -165,7 +180,7 @@ public class TimeSheetController {
         // Validate the form, else force resubmission
         if (bindingResult.hasErrors()) {
             model.addAttribute("contractorKey", contractorForm);
-            return new RedirectView("/Contractor/contractorId");
+            return new RedirectView("/Contractor/ ${contractorId}");
         }
 
         ContractorUpdated contractorUpdated = new ContractorUpdated(

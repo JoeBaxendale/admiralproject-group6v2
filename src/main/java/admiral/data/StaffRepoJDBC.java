@@ -5,6 +5,7 @@ package admiral.data;
 
 import admiral.DatabaseConnection;
 import admiral.domain.ContractorUser;
+import admiral.domain.ManagerUser;
 import admiral.service.StaffRepo;
 import admiral.service.events.ContractorUpdated;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,7 @@ public class StaffRepoJDBC implements StaffRepo {
             while (temp.next()) {
                 contractorUserList.add(new ContractorUser(temp.getInt(1),
                         temp.getInt(2),
+                        " ",
                         temp.getInt(3),
                         temp.getString(4),
                         temp.getString(5),
@@ -90,6 +92,7 @@ public class StaffRepoJDBC implements StaffRepo {
             while (temp.next()) {
                 contractorUserList.add(new ContractorUser(temp.getInt(1),
                         temp.getInt(2),
+                        " ",
                         temp.getInt(3),
                         temp.getString(4),
                         temp.getString(5),
@@ -128,6 +131,7 @@ public class StaffRepoJDBC implements StaffRepo {
             while (temp.next()) {
                 contractorUserList.add(new ContractorUser(temp.getInt(1),
                         temp.getInt(2),
+                        " ",
                         temp.getInt(3),
                         temp.getString(4),
                         temp.getString(5),
@@ -174,5 +178,39 @@ public class StaffRepoJDBC implements StaffRepo {
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Finds and returns a list of all contractors from DB
+    public List<ManagerUser> findManagers(){
 
+        // Define sql code
+        String sql = "Select manager_id, managers.user_id, first_name, last_name, email, active from managers inner join users on managers.user_id = users.user_id" ;
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        List<ManagerUser> managerUserList = new ArrayList<ManagerUser>();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet temp = st.executeQuery(sql);
+
+            //----------------------------------------------------------------------------------------------------------
+            // Maps the data to a Contractor list
+            while (temp.next()) {
+                managerUserList.add(new ManagerUser(temp.getInt(1),
+                        temp.getInt(2),
+                        temp.getString(3),
+                        temp.getString(4),
+                        temp.getString(5),
+                        temp.getBoolean(6)));
+
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return managerUserList;
+    };
 }

@@ -1,4 +1,4 @@
-package admiral.web;
+package admiral.domain;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
@@ -6,40 +6,42 @@ package admiral.web;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.*;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Form mapper with validation for the time sheet
+//Defining mapping of the table users
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class StaffForm {
+@NoArgsConstructor
+@Entity
+public class ManagerUser {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Validates the number of days is less than a week
-    @NotNull(message = "Manager Cannot be empty")
-    @Min(1)
+    // Unique identifier
+    @Id
+    @Column(name = "manager_id")
     private int manager_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Checks if the user worked Saturday for notes
-    @NotNull(message = "First name Cannot be empty")
-    private String first_name;
+    @Column(name = "user_id")
+    private int user_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Checks if the user worked Sunday for notes
-    @NotNull(message = "Last name Cannot be empty")
-    private String last_name;
+    @Column(name="first_name")
+    private String firstName;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Checks if the user worked Sunday for notes
-    @NotNull(message = "Email Cannot be empty")
-    private String email;
+    @Column(name="last_name")
+    private String lastName;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Checks if the user worked Sunday for notes
+    @Column(name="email")
+    private String staffEmail;
+
+    //------------------------------------------------------------------------------------------------------------------
+    @Column(name="active")
     private Boolean active;
 }

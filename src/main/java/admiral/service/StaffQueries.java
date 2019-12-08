@@ -4,6 +4,7 @@ package admiral.service;
 // Imports
 
 import admiral.domain.ContractorUser;
+import admiral.domain.ManagerUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,5 +39,11 @@ public class StaffQueries implements StaffFinder {
     // Method to query the database, retrieving Contractors
     public List<ContractorUser> findContractors(){
         return staffRepo.findContractors();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to query the database, retrieving manager
+    public List<ManagerUser> findManagers(){
+        return staffRepo.findManagers();
     }
 }
