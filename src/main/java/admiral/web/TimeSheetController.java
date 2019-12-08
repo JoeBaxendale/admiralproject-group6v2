@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
@@ -114,7 +115,6 @@ public class TimeSheetController {
 
         List<ContractorUser> contractorsUnderManager;
         List<ManagerUser> managers = finder.findManagers();
-        System.out.println("---------------------------------------->" + managers.get(0).getFirstName());
 
         if(managerId.equals("All")){
             // Creates and populates a list of TimeSheets, passes it to the dashboard page
@@ -173,7 +173,7 @@ public class TimeSheetController {
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
     @RequestMapping(path = "/ContractorUpdate/{id}", method = RequestMethod.POST)
-    public RedirectView contractorDetails(@PathVariable("id") String contractorId,
+    public String contractorDetails(@PathVariable("id") String contractorId,
                                           @ModelAttribute("contractorKey") @Valid StaffForm contractorForm,
                                           BindingResult bindingResult, Model model) {
 
@@ -181,7 +181,8 @@ public class TimeSheetController {
         // Validate the form, else force resubmission
         if (bindingResult.hasErrors()) {
             model.addAttribute("contractorKey", contractorForm);
-            return new RedirectView("/Contractor/ ${contractorId}");
+            model.addAttribute("contractorId", contractorId);
+            return "contractor";
         }
 
         ContractorUpdated contractorUpdated = new ContractorUpdated(
@@ -195,7 +196,7 @@ public class TimeSheetController {
         staffCreator.updateContractor(contractorUpdated);
 
         // Open managers page
-        return new RedirectView("/Manager/All");
+        return "redirect:/Manager/All";
     }
 
 }
