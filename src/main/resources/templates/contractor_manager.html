@@ -241,10 +241,10 @@
 
                                             <tr th:each="currManager : ${managersKey}">
                                                 <div id="manager" th:if="${searchKey} == ${currManager.manager_id}">
-                                                    <option th:attr="value= ${currManager.manager_id}" selected="selected">Text</option>
+                                                    <option th:attr="value= ${currManager.manager_id}" selected="selected" th:text="${currManager.firstName} + ' ' + ${currManager.lastName}"></option>
                                                 </div>
                                                 <div id="not_manager" th:if="${searchKey} != ${currManager.manager_id}">
-                                                    <option th:attr="value= ${currManager.manager_id}">Text</option>
+                                                    <option th:attr="value= ${currManager.manager_id}" th:text="${currManager.firstName} + ' ' + ${currManager.lastName}"></option>
                                                 </div>
                                             </tr>
                                         </select>

@@ -114,6 +114,7 @@ public class TimeSheetController {
 
         List<ContractorUser> contractorsUnderManager;
         List<ManagerUser> managers = finder.findManagers();
+        System.out.println("---------------------------------------->" + managers.get(0).getFirstName());
 
         if(managerId.equals("All")){
             // Creates and populates a list of TimeSheets, passes it to the dashboard page
