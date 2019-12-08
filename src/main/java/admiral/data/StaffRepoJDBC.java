@@ -157,8 +157,6 @@ public class StaffRepoJDBC implements StaffRepo {
 
         int userId = 3;
 
-        System.out.println("----------------------------------------------------------------------->" +contractorUpdated.isActive());
-
         // Define sql code, pulling data from passed TimeSheetMade object
         String sql = "update contractors inner join users on contractors.user_id = users.user_id Set first_name = '"+
                 contractorUpdated.getFirst_name() +"', manager_id = '"+ contractorUpdated.getManager_id() +"', last_name ='"+

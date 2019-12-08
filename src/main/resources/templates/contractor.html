@@ -212,24 +212,18 @@
                                         <div class="form-group">
 
                                             <br><label class="control-label mb-1">Manager</label>
-                                            <select class="form-control" th:feild="*{manager_id}">
-                                                <option th:each="manager : ${managersKey}"
-                                                th:value="${manager.manager_id}"
-                                                th:utext="${manager.firstName}"></option>
+                                            <select id="managers_select" class="form-control" th:field="*{manager_id}">
+
+                                                <tr th:each="manager : ${managersKey}">
+                                                    <div id="manager_select" th:if="${manager.manager_id} == ${managerId}">
+                                                        <option th:attr="value= ${manager.manager_id}" selected="selected" th:text="${manager.firstName} + ' ' + ${manager.lastName}"></option>
+                                                    </div>
+                                                    <div id="not_manager" th:if="${manager.manager_id} != ${managerId}">
+                                                        <option th:attr="value= ${manager.manager_id}" th:text="${manager.firstName} + ' ' + ${manager.lastName}"></option>
+                                                    </div>
+                                                </tr>
+
                                             </select>
-
-
-<!--                                            <label class="control-label mb-1">Manager</label>-->
-<!--                                            <input class="form-control"-->
-<!--                                                   th:field="*{manager_id}"-->
-<!--                                                   type="number"/>-->
-<!--                                            &lt;!&ndash; ################################################################### &ndash;&gt;-->
-<!--                                            &lt;!&ndash; Error message for the number of days &ndash;&gt;-->
-<!--                                            <div class="alert alert-danger"-->
-<!--                                                 th:errors="*{manager_id}"-->
-<!--                                                 th:if="${#fields.hasErrors('manager_id')}">-->
-<!--                                                manager id Error-->
-<!--                                            </div>-->
                                             <span class="help-block" data-valmsg-for="cc-number" dta-valmsg-replace="true"></span>
                                         </div>
 

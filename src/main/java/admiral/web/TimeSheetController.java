@@ -167,6 +167,7 @@ public class TimeSheetController {
         model.addAttribute("contractorKey", staffForm);
         model.addAttribute("managersKey", managers);
         model.addAttribute("contractorId", contractorId);
+        model.addAttribute("managerId", contractor.get(0).getManager_id());
 
         // Open managers page
         return "contractor";
@@ -186,7 +187,6 @@ public class TimeSheetController {
             model.addAttribute("contractorId", contractorId);
             return "contractor";
         }
-        System.out.println("----------------------------------------> "+ contractorForm.getManager_id());
 
         ContractorUpdated contractorUpdated = new ContractorUpdated(
                 Integer.parseInt(contractorId),
