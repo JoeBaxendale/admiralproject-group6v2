@@ -263,7 +263,7 @@
                                             <tr>
                                                 <th scope="col">Manager</th>
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Email</th>
+                                                <th scope="col">E-mail</th>
                                                 <th scope="col">Active</th>
                                                 <th scope="col">Edit</th>
                                             </tr>
@@ -273,7 +273,7 @@
                                             <!-- Get each contractor information -->
                                             <tr th:each="currContractor : ${contractorsUnderManager}">
                                                 <td th:text="${currContractor.manager_name}"></td>
-                                                <td th:text="${currContractor.firstName} + ${currContractor.lastName}"></td>
+                                                <td th:text="${currContractor.firstName} + ' ' + ${currContractor.lastName}"></td>
                                                 <td th:text="${currContractor.staffEmail}"></td>
                                                 <td th:text="${currContractor.active}"></td>
                                                 <td><a th:href="@{/Contractor/{id} (id=${currContractor.contractor_id}) }"

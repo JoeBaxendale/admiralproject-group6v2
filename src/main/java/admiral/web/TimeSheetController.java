@@ -154,6 +154,7 @@ public class TimeSheetController {
     public String contractorEditor(@PathVariable("id") String contractorId, Model model) {
 
         List<ContractorUser> contractor = finder.findContractorById(contractorId);
+        List<ManagerUser> managers = finder.findManagers();
 
         StaffForm staffForm = new StaffForm(
                 contractor.get(0).getManager_id(),
@@ -164,6 +165,7 @@ public class TimeSheetController {
                 );
 
         model.addAttribute("contractorKey", staffForm);
+        model.addAttribute("managersKey", managers);
         model.addAttribute("contractorId", contractorId);
 
         // Open managers page
@@ -184,6 +186,7 @@ public class TimeSheetController {
             model.addAttribute("contractorId", contractorId);
             return "contractor";
         }
+        System.out.println("----------------------------------------> "+ contractorForm.getManager_id());
 
         ContractorUpdated contractorUpdated = new ContractorUpdated(
                 Integer.parseInt(contractorId),

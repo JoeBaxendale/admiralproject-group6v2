@@ -208,19 +208,28 @@
                                     <form action="#" method="post" th:action="@{/ContractorUpdate/{id} (id=${contractorId})}" th:object="${contractorKey}">
 
                                         <!-- ####################################################################### -->
-                                        <!-- Form field for the number of days -->
+                                        <!-- Form field for the manager -->
                                         <div class="form-group">
-                                            <label class="control-label mb-1">Manager</label>
-                                            <input class="form-control"
-                                                   th:field="*{manager_id}"
-                                                   type="number"/>
-                                            <!-- ################################################################### -->
-                                            <!-- Error message for the number of days -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{manager_id}"
-                                                 th:if="${#fields.hasErrors('manager_id')}">
-                                                manager id Error
-                                            </div>
+
+                                            <br><label class="control-label mb-1">Manager</label>
+                                            <select class="form-control" th:feild="*{manager_id}">
+                                                <option th:each="manager : ${managersKey}"
+                                                th:value="${manager.manager_id}"
+                                                th:utext="${manager.firstName}"></option>
+                                            </select>
+
+
+<!--                                            <label class="control-label mb-1">Manager</label>-->
+<!--                                            <input class="form-control"-->
+<!--                                                   th:field="*{manager_id}"-->
+<!--                                                   type="number"/>-->
+<!--                                            &lt;!&ndash; ################################################################### &ndash;&gt;-->
+<!--                                            &lt;!&ndash; Error message for the number of days &ndash;&gt;-->
+<!--                                            <div class="alert alert-danger"-->
+<!--                                                 th:errors="*{manager_id}"-->
+<!--                                                 th:if="${#fields.hasErrors('manager_id')}">-->
+<!--                                                manager id Error-->
+<!--                                            </div>-->
                                             <span class="help-block" data-valmsg-for="cc-number" dta-valmsg-replace="true"></span>
                                         </div>
 

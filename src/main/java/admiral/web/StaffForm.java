@@ -21,7 +21,6 @@ public class StaffForm {
     //------------------------------------------------------------------------------------------------------------------
     // Validates the number of days is less than a week
     @NotNull(message = "Manager Cannot be empty")
-    @Min(1)
     private int manager_id;
 
     //------------------------------------------------------------------------------------------------------------------
