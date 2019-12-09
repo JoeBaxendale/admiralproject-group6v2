@@ -129,6 +129,48 @@ public class AdminController {
 
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
+    @RequestMapping(path = "/SetPasswordContractor/{id}", method = RequestMethod.GET)
+    public String setContractorPassword(@PathVariable("id") String contractorId, Model model) {
+
+        model.addAttribute("passKey", new PasswordForm());
+        model.addAttribute("contractorId", contractorId);
+
+        // Open managers page
+        return "contractor_password";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @RequestMapping(path = "/PasswordContractorDetails/{id}", method = RequestMethod.POST)
+    public String ContractorPasswordProcess(@PathVariable("id") String contractorId,
+                                            @ModelAttribute("contractorKey") @Valid PasswordForm passwordForm,
+                                            BindingResult bindingResult, Model model) {
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Validate the form, else force resubmission
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("passKey", passwordForm);
+            model.addAttribute("contractorId", contractorId);
+            return "contractor_password";
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Check that the supplied end date is later or the same as the start date
+        if ((passwordForm.getPassword1() != null) & (passwordForm.getPassword2() != null)){
+            if(!passwordForm.getPassword1().equals(passwordForm.getPassword2())) {
+                bindingResult.rejectValue("getPassword2", "error.password1", "Passwords must match");
+            }
+        }
+
+        // Breaks without encrypting
+        //staffCreator.updateContractorPassword(Integer.parseInt(contractorId), passwordForm.getPassword1());
+
+        // Open managers page
+        return "redirect:/Manager/All";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
     @RequestMapping(path = "/Deactivate/{id}", method = RequestMethod.GET)
     public String deactivateContractor(@PathVariable("id") String contractorId, Model model) {
 

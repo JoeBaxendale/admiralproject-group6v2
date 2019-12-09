@@ -37,6 +37,10 @@ public interface StaffRepo {
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to update Contractors
+    public void updateContractorPassword(int contractorId, String newPassword);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to update Contractors
     public void deactivateContractor(int contractorId);
 
 }

@@ -175,6 +175,28 @@ public class StaffRepoJDBC implements StaffRepo {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // Upadtes users password
+    public void updateContractorPassword(int contractorId, String newPassword) {
+
+        // Define sql code, pulling data from passed TimeSheetMade object
+        String sql = "update contractors inner join users on contractors.user_id = users.user_id Set password ='"+
+                newPassword +"' WHERE contractor_id = '"+ contractorId +"'";
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
     // Finds and returns a list of all contractors from DB
     public void deactivateContractor(int contractorId) {
 
