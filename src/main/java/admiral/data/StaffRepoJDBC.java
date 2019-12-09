@@ -39,7 +39,7 @@ public class StaffRepoJDBC implements StaffRepo {
     public List<ContractorUser> findContractorByManager(String searchTerm){
 
         // Define sql code
-        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id where manager_id = '"+ searchTerm+"'" ;
+        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id where manager_id = '"+ searchTerm+"' AND active = 1" ;
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
@@ -78,7 +78,7 @@ public class StaffRepoJDBC implements StaffRepo {
     public List<ContractorUser> findContractorById(String searchTerm){
 
         // Define sql code
-        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id where contractor_id = '"+ searchTerm+"'" ;
+        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id where contractor_id = '"+ searchTerm+"' AND active = 1";
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
@@ -117,7 +117,7 @@ public class StaffRepoJDBC implements StaffRepo {
     public List<ContractorUser> findContractors(){
 
         // Define sql code
-        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id" ;
+        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id WHERE active = 1" ;
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
@@ -201,7 +201,7 @@ public class StaffRepoJDBC implements StaffRepo {
     public List<ManagerUser> findManagers(){
 
         // Define sql code
-        String sql = "Select manager_id, managers.user_id, first_name, last_name, email, active from managers inner join users on managers.user_id = users.user_id" ;
+        String sql = "Select manager_id, managers.user_id, first_name, last_name, email, active from managers inner join users on managers.user_id = users.user_id WHERE active = 1" ;
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
