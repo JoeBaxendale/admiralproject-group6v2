@@ -23,11 +23,15 @@ public class StaffProcessor implements StaffCreator {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to insert Time Sheet entry into the database. A notification will be sent to Teams after the timesheet has
-    // been created.
+    // update contractor information
     public void updateContractor(ContractorUpdated contractorUpdated) {
-
         staffRepo.updateContractor(contractorUpdated);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Deactivates contractor by id
+    public void deactivateContractor(int contractorId) {
+        staffRepo.deactivateContractor(contractorId);
 
     }
 

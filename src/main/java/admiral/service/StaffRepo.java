@@ -35,5 +35,8 @@ public interface StaffRepo {
     // Method to update Contractors
     public void updateContractor(ContractorUpdated contractorUpdated);
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to update Contractors
+    public void deactivateContractor(int contractorId);
 
 }

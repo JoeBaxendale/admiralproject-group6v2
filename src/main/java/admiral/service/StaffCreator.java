@@ -11,4 +11,8 @@ public interface StaffCreator {
     //------------------------------------------------------------------------------------------------------------------
     // Class to be define, saving the Time Sheet submission to the database.
     public void updateContractor(ContractorUpdated contractorUpdated);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Class to be define, saving the Time Sheet submission to the database.
+    public void deactivateContractor(int contractorId);
 }

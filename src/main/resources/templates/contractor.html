@@ -187,7 +187,7 @@
                     <div class="m-t-30">
                         <div class="col-lg-6">
                             <div class="card">
-                                <div class="card-header">Admiral TimeSheet</div>
+                                <div class="card-header">Admiral Contractor Editor</div>
                                 <div class="card-body">
 
                                     <!-- ########################################################################### -->
@@ -286,7 +286,9 @@
                                         <!-- Form field for the Start date -->
                                         <div class="row">
                                             <div class="col-6">
-                                                <center><a href="/SetPassword"><button id="set_password" class="btn btn-lg btn-info btn-block">
+                                                <center><a th:href="@{/SetPassword/{id} (id=${contractorId}) }"
+                                                           th:id="'contractorPassLink'+ ${contractorId}">
+                                                    <button id="set_password" class="btn btn-lg btn-info btn-block">
                                                     <span>Change password</span>
                                                 </button></a></center>
                                             </div>
@@ -294,9 +296,11 @@
                                             <!-- ################################################################### -->
                                             <!-- Form field for the end date -->
                                             <div class="col-6">
-                                                <center><a href="/SetPassword"><button id="set_inactive" class="btn btn-lg btn-info btn-block">
-                                                    <span>Deactivate account</span>
-                                                </button></a></center>
+                                                <center><a th:href="@{/Deactivate/{id} (id=${contractorId}) }"
+                                                           th:id="'contractorPassLink'+ ${contractorId}">
+                                                    <button id="set_deactive" class="btn btn-lg btn-info btn-block">
+                                                        <span>Deactivate account</span>
+                                                    </button></a></center>
                                             </div>
                                         </div><br>
 

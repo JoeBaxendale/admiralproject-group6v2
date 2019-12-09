@@ -176,6 +176,28 @@ public class StaffRepoJDBC implements StaffRepo {
 
     //------------------------------------------------------------------------------------------------------------------
     // Finds and returns a list of all contractors from DB
+    public void deactivateContractor(int contractorId) {
+
+        // Define sql code, pulling data from passed TimeSheetMade object
+        String sql = "update contractors inner join users on contractors.user_id = users.user_id Set active = 0 WHERE " +
+                "contractor_id = '"+ contractorId +"'";
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Finds and returns a list of all contractors from DB
     public List<ManagerUser> findManagers(){
 
         // Define sql code
