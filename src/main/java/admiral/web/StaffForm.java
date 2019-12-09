@@ -37,8 +37,4 @@ public class StaffForm {
     // Checks if the user worked Sunday for notes
     @NotNull(message = "Email Cannot be empty")
     private String email;
-
-    //------------------------------------------------------------------------------------------------------------------
-    // Checks if the user worked Sunday for notes
-    private Boolean active;
 }

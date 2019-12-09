@@ -160,9 +160,7 @@ public class TimeSheetController {
                 contractor.get(0).getManager_id(),
                 contractor.get(0).getFirstName(),
                 contractor.get(0).getLastName(),
-                contractor.get(0).getStaffEmail(),
-                contractor.get(0).getActive()
-                );
+                contractor.get(0).getStaffEmail());
 
         model.addAttribute("contractorKey", staffForm);
         model.addAttribute("managersKey", managers);
@@ -193,8 +191,7 @@ public class TimeSheetController {
                 contractorForm.getManager_id(),
                 contractorForm.getFirst_name(),
                 contractorForm.getLast_name(),
-                contractorForm.getEmail(),
-                contractorForm.getActive());
+                contractorForm.getEmail());
 
         staffCreator.updateContractor(contractorUpdated);
 

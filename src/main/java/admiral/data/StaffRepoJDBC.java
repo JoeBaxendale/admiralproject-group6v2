@@ -155,12 +155,10 @@ public class StaffRepoJDBC implements StaffRepo {
     // Finds and returns a list of all contractors from DB
     public void updateContractor(ContractorUpdated contractorUpdated) {
 
-        int userId = 3;
-
         // Define sql code, pulling data from passed TimeSheetMade object
         String sql = "update contractors inner join users on contractors.user_id = users.user_id Set first_name = '"+
                 contractorUpdated.getFirst_name() +"', manager_id = '"+ contractorUpdated.getManager_id() +"', last_name ='"+
-                contractorUpdated.getLast_name() +"', email ='"+ contractorUpdated.getEmail() +"', active = 1 WHERE contractor_id = '"+ contractorUpdated.getContractor_id() +"'";
+                contractorUpdated.getLast_name() +"', email ='"+ contractorUpdated.getEmail() +"' WHERE contractor_id = '"+ contractorUpdated.getContractor_id() +"'";
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code

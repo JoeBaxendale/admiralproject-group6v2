@@ -283,21 +283,21 @@
                                         </div>
 
                                         <!-- ####################################################################### -->
-                                        <!-- Form field for the overtime -->
-                                        <div class="form-group">
-                                            <label class="control-label mb-1">Currently active</label>
-                                            <input class="form-control"
-                                                   th:field="*{active}"
-                                                   type="checkbox"/>
+                                        <!-- Form field for the Start date -->
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <center><a href="/SetPassword"><button id="set_password" class="btn btn-lg btn-info btn-block">
+                                                    <span>Change password</span>
+                                                </button></a></center>
+                                            </div>
 
                                             <!-- ################################################################### -->
-                                            <!-- Error message for the number of days -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{active}"
-                                                 th:if="${#fields.hasErrors('active')}">
-                                                active Error
+                                            <!-- Form field for the end date -->
+                                            <div class="col-6">
+                                                <center><a href="/SetPassword"><button id="set_inactive" class="btn btn-lg btn-info btn-block">
+                                                    <span>Deactivate account</span>
+                                                </button></a></center>
                                             </div>
-                                            <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                         </div><br>
 
 
