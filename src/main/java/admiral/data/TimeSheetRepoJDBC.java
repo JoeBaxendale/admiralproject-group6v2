@@ -64,6 +64,7 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
     @Override
     public void saveTimeSheetEvent(TimeSheetMade timeSheetMade) {
 
+        // Paired Programming between Dan and Dexter 25/11/2019
         String sql = "INSERT INTO timesheet (contractor_id, number_days, overtime, start_date, end_date, date_submitted, notes, " +
                 "status) VALUES (3, '"+ timeSheetMade.getNumber_of_days() +"', '"+ timeSheetMade.getOvertime() +"'," +
                 " '"+ timeSheetMade.getStart_date() +"', '"+timeSheetMade.getEnd_date()+"', " +
