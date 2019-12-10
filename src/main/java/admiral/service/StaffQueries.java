@@ -4,7 +4,7 @@ package admiral.service;
 // Imports
 
 import admiral.domain.ContractorUser;
-import admiral.domain.TimeSheet;
+import admiral.domain.ManagerUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,32 +12,38 @@ import java.util.List;
 //----------------------------------------------------------------------------------------------------------------------
 // Queries class for accessing the database
 @Service
-public class ContractorQueries implements ContractorFinder{
+public class StaffQueries implements StaffFinder {
 
     // Link to a Contractor repository
-    private ContractorRepo contractorRepo;
+    private StaffRepo staffRepo;
 
     //------------------------------------------------------------------------------------------------------------------
     // Constructor assigning the Contractor repository
-    public ContractorQueries(ContractorRepo aRepo){
-        contractorRepo = aRepo;
+    public StaffQueries(StaffRepo aRepo){
+        staffRepo = aRepo;
     }
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to query the database, retrieving Contractor based on a Manager
     public List<ContractorUser> findContractorByManager(String searchManager){
-        return contractorRepo.findContractorByManager(searchManager);
+        return staffRepo.findContractorByManager(searchManager);
     }
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to query the database, retrieving Contractor based on a id
     public List<ContractorUser> findContractorById(String searchManager){
-        return contractorRepo.findContractorById(searchManager);
+        return staffRepo.findContractorById(searchManager);
     }
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to query the database, retrieving Contractors
     public List<ContractorUser> findContractors(){
-        return contractorRepo.findContractors();
+        return staffRepo.findContractors();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to query the database, retrieving manager
+    public List<ManagerUser> findManagers(){
+        return staffRepo.findManagers();
     }
 }

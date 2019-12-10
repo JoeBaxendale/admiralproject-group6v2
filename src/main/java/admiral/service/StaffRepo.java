@@ -1,57 +1,46 @@
-package admiral.domain;
+package admiral.service;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import admiral.domain.ContractorUser;
+import admiral.domain.ManagerUser;
+import admiral.domain.TimeSheet;
+import admiral.service.events.ContractorUpdated;
+import admiral.service.events.TimeSheetMade;
 
-import javax.persistence.*;
+import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
-//Defining mapping of the table users
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-public class ContractorUser {
+// Interface for the Contractor repository, including all methods for the Contractor table
+public interface StaffRepo {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Unique identifier
-    @Id
-    @Column(name = "contractor_id")
-    private int contractor_id;
+    // Method to retrieve Contractor based on manager
+    public List<ContractorUser> findContractorByManager(String searchTerm);
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "manager_id")
-    private int manager_id;
+    // Method to retrieve Contractor based on id
+    public List<ContractorUser> findContractorById(String searchTerm);
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "manager_name")
-    private String manager_name;
+    // Method to retrieve Contractors
+    public List<ContractorUser> findContractors();
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name = "user_id")
-    private int user_id;
+    // Method to retrieve Managers
+    public List<ManagerUser> findManagers();
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name="first_name")
-    private String firstName;
+    // Method to update Contractors
+    public void updateContractor(ContractorUpdated contractorUpdated);
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name="last_name")
-    private String lastName;
+    // Method to update Contractors
+    public void updateContractorPassword(int contractorId, String newPassword);
 
     //------------------------------------------------------------------------------------------------------------------
-    @Column(name="email")
-    private String staffEmail;
+    // Method to update Contractors
+    public void deactivateContractor(int contractorId);
 
-    //------------------------------------------------------------------------------------------------------------------
-    @Column(name="role_id")
-    private int roleId;
-
-    //------------------------------------------------------------------------------------------------------------------
-    @Column(name="active")
-    private Boolean active;
 }

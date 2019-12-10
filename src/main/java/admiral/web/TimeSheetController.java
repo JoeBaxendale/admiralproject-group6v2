@@ -3,15 +3,21 @@ package admiral.web;
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 import admiral.domain.ContractorUser;
-import admiral.service.ContractorFinder;
+import admiral.domain.ManagerUser;
+import admiral.service.StaffCreator;
+import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
+import admiral.service.events.ContractorUpdated;
 import admiral.service.events.TimeSheetMade;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -21,14 +27,16 @@ public class TimeSheetController {
 
     // Set Creator for database access
     private TimeSheetCreator timeSheetCreator;
+    private StaffCreator staffCreator;
 
     // Finder for the Time Sheet queries
-    private ContractorFinder finder;
+    private StaffFinder finder;
 
     //------------------------------------------------------------------------------------------------------------------
     // Constructor setting creator
-    public TimeSheetController(TimeSheetCreator iCreator, ContractorFinder iFinder) {
+    public TimeSheetController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder) {
         timeSheetCreator = iCreator;
+        staffCreator = iStaffCreator;
         finder = iFinder;
     }
 
@@ -37,8 +45,12 @@ public class TimeSheetController {
     @RequestMapping(path = "/Timesheet", method = RequestMethod.GET)
     public String timeSheetDetails(Model model) {
 
+        // Gets date for form
+        LocalDate currentDate = LocalDate.now();
+        LocalDate weekPast = currentDate.minusDays(7);
+
         // Open time sheet form
-        model.addAttribute("timesheetKey", new TimeSheetForm());
+        model.addAttribute("timesheetKey", new TimeSheetForm(0, false, false, 0, weekPast, currentDate, ""));
         return "timesheet";
 
     }
@@ -67,17 +79,20 @@ public class TimeSheetController {
 
         String tempNotes = timeSheet.getNotes();
 
-        if(timeSheet.getWorked_sunday() != null){
-            tempNotes = "Worked Sunday;" + timeSheet.getNotes();
+        if(timeSheet.getWorked_sunday() == true){
+            tempNotes = "Worked Sunday;" + tempNotes;
         }
-        if(timeSheet.getWorked_saturday() != null){
-            tempNotes = "Worked Saturday;" + timeSheet.getNotes();
+
+
+        if(timeSheet.getWorked_saturday() == true){
+            tempNotes = "Worked Saturday;" + tempNotes;
         }
 
 
         //--------------------------------------------------------------------------------------------------------------
         // Inserts the form details to the database
         TimeSheetMade timeSheetEvent = new TimeSheetMade(
+                2,
                 timeSheet.getNumber_of_days(),
                 timeSheet.getOvertime(),
                 timeSheet.getStart_date(),
@@ -90,52 +105,6 @@ public class TimeSheetController {
 
         // Go to the confirmation page
         return "timesheet_confirm";
-    }
-
-    //------------------------------------------------------------------------------------------------------------------
-    // Mangers page to manager users
-    @GetMapping(path = "/Manager/{id}")
-    public String contractorManager(@PathVariable("id") String managerId, Model model) {
-
-        List<ContractorUser> contractorsUnderManager;
-
-        if(managerId.equals("All")){
-            // Creates and populates a list of TimeSheets, passes it to the dashboard page
-            contractorsUnderManager = finder.findContractors();
-            model.addAttribute("contractorsUnderManager",contractorsUnderManager);
-        } else {
-            // Creates and populates a list of TimeSheets, passes it to the dashboard page
-            contractorsUnderManager = finder.findContractorByManager(managerId);
-            model.addAttribute("contractorsUnderManager",contractorsUnderManager);
-        }
-
-
-        for(ContractorUser element: contractorsUnderManager){
-            System.out.println(element.getFirstName() + element.getStaffEmail());
-        }
-
-        // Open managers page
-        return "contractor_manager";
-    }
-
-    //------------------------------------------------------------------------------------------------------------------
-    // Mangers page to manager users
-    @GetMapping(path = "/Contractor/{id}")
-    public String contractorEditor(@PathVariable("id") String contractorId, Model model) {
-
-        List<ContractorUser> contractor = finder.findContractorById(contractorId);
-
-        ContractorForm contractorForm = new ContractorForm(
-                contractor.get(0).getManager_id(),
-                contractor.get(0).getFirstName(),
-                contractor.get(0).getLastName(),
-                contractor.get(0).getStaffEmail(),
-                contractor.get(0).getActive());
-
-        model.addAttribute("contractorKey", contractorForm);
-
-        // Open managers page
-        return "contractor";
     }
 
 }

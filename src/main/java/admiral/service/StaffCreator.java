@@ -2,28 +2,21 @@ package admiral.service;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
-
-import admiral.domain.ContractorUser;
-import admiral.domain.TimeSheet;
-import admiral.service.events.TimeSheetMade;
-
-import java.util.List;
+import admiral.service.events.ContractorUpdated;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Interface for the Contractor repository, including all methods for the Contractor table
-public interface ContractorRepo {
+// Interface for the inserting of Time sheets into the DB
+public interface StaffCreator {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to retrieve Contractor based on manager
-    public List<ContractorUser> findContractorByManager(String searchTerm);
+    // Class to be define, saving the Time Sheet submission to the database.
+    public void updateContractor(ContractorUpdated contractorUpdated);
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to retrieve Contractor based on id
-    public List<ContractorUser> findContractorById(String searchTerm);
+    // Class to be define, saving the Time Sheet submission to the database.
+    public void updateContractorPassword(int contractorId, String newPassword);
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to retrieve Contractors
-    public List<ContractorUser> findContractors();
-
-
+    // Class to be define, saving the Time Sheet submission to the database.
+    public void deactivateContractor(int contractorId);
 }

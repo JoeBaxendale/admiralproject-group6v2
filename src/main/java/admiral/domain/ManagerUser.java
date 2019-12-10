@@ -1,32 +1,47 @@
-package admiral.service.events;
+package admiral.domain;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.time.LocalDate;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Class to map the submission of the Time Sheet form
+//Defining mapping of the table users
 @Data
 @AllArgsConstructor
-public class TimeSheetMade {
+@NoArgsConstructor
+@Entity
+public class ManagerUser {
 
     //------------------------------------------------------------------------------------------------------------------
-    private int contractor_id;
+    // Unique identifier
+    @Id
+    @Column(name = "manager_id")
+    private int manager_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    private int number_of_days;
+    @Column(name = "user_id")
+    private int user_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    private int overtime;
+    @Column(name="first_name")
+    private String firstName;
 
     //------------------------------------------------------------------------------------------------------------------
-    private LocalDate start_date;
+    @Column(name="last_name")
+    private String lastName;
 
     //------------------------------------------------------------------------------------------------------------------
-    private LocalDate end_date;
+    @Column(name="email")
+    private String staffEmail;
 
     //------------------------------------------------------------------------------------------------------------------
-    private String notes;
+    @Column(name="active")
+    private Boolean active;
 }
