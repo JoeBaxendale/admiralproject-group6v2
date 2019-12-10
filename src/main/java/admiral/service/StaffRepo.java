@@ -56,4 +56,11 @@ public interface StaffRepo {
     // Method to update Manager
     public void updateManager(ManagerUpdated managerUpdated);
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to update Manager
+    public void updateManagerPassword(int managerId, String newPassword);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to update manager
+    public void deactivateManager(int managerId);
 }

@@ -175,7 +175,7 @@ public class AdminController {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Mangers page to manager users
+    // Disables a contractor account
     @RequestMapping(path = "/DeactivateContractor/{id}", method = RequestMethod.GET)
     public String deactivateContractor(@PathVariable("id") String contractorId, Model model) {
 
@@ -246,4 +246,61 @@ public class AdminController {
         return "redirect:/ManagerDash";
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Set the managers password
+    @RequestMapping(path = "/SetPasswordManager/{id}", method = RequestMethod.GET)
+    public String setManagersPassword(@PathVariable("id") String managerId, Model model) {
+
+        model.addAttribute("passKey", new PasswordForm());
+        model.addAttribute("managerId", managerId);
+
+        // Open managers page
+        return "manager_password";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @RequestMapping(path = "/PasswordManagerDetails/{id}", method = RequestMethod.POST)
+    public String ManagerPasswordProcess(@PathVariable("id") String managerId,
+                                            @ModelAttribute("passKey") @Valid PasswordForm passwordForm,
+                                            BindingResult bindingResult, Model model) {
+
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Check that the supplied end date is later or the same as the start date
+        if ((passwordForm.getPassword1() != null) & (passwordForm.getPassword2() != null)){
+            if(!passwordForm.getPassword1().equals(passwordForm.getPassword2())) {
+                bindingResult.rejectValue("password2", "error.password2", "Passwords must match");
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Validate the form, else force resubmission
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("passKey", passwordForm);
+            model.addAttribute("managerId", managerId);
+            return "manager_password";
+        }
+
+
+        // Breaks without encrypting
+        String tempPassword = passwordEncoder.encode(passwordForm.getPassword1());
+        staffCreator.updateManagerPassword(Integer.parseInt(managerId), tempPassword);
+
+        // Open managers page
+        return "redirect:/ManagerDash";
+    }
+
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @RequestMapping(path = "/DeactivateManager/{id}", method = RequestMethod.GET)
+    public String deactivateManager(@PathVariable("id") String managerId, Model model) {
+
+
+        staffCreator.deactivateManager(Integer.parseInt(managerId));
+
+        // Open managers page
+        return "redirect:/ManagerDash";
+    }
 }

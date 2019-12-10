@@ -43,8 +43,21 @@ public class StaffProcessor implements StaffCreator {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // update contractor information
+    // update manager information
     public void updateManager(ManagerUpdated managerUpdated) {
         staffRepo.updateManager(managerUpdated);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // update manager information
+    public void updateManagerPassword(int managerId, String newPassword) {
+        staffRepo.updateManagerPassword(managerId, newPassword);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Deactivates contractor by id
+    public void deactivateManager(int managerId) {
+        staffRepo.deactivateManager(managerId);
+
     }
 }

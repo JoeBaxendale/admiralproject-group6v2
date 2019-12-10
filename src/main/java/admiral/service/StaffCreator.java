@@ -24,4 +24,12 @@ public interface StaffCreator {
     //------------------------------------------------------------------------------------------------------------------
     // Updates the manager info
     public void updateManager(ManagerUpdated managerUpdated);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Updates a manager password
+    public void updateManagerPassword(int managerId, String newPassword);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Deactivates a contractor account
+    public void deactivateManager(int managerId);
 }
