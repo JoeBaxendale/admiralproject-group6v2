@@ -45,6 +45,7 @@ public class TimeSheetController {
     @RequestMapping(path = "/Timesheet", method = RequestMethod.GET)
     public String timeSheetDetails(Model model) {
 
+        System.out.println("---------------------------------------------------------------------------------------->");
         // Gets date for form
         LocalDate currentDate = LocalDate.now();
         LocalDate weekPast = currentDate.minusDays(7);
