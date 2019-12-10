@@ -8,14 +8,12 @@ import admiral.service.StaffCreator;
 import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
 import admiral.service.events.ContractorUpdated;
-import admiral.service.events.TimeSheetMade;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -59,7 +57,7 @@ public class AdminController {
         // Open managers page
         model.addAttribute("managersKey",managers);
         model.addAttribute("searchKey",managerId);
-        return "contractor_manager";
+        return "contractor_dashboard";
     }
 
     public List<ContractorUser> getManagerNames(List<ContractorUser> iContractors, List<ManagerUser> iManagers){
@@ -146,6 +144,15 @@ public class AdminController {
                                             @ModelAttribute("contractorKey") @Valid PasswordForm passwordForm,
                                             BindingResult bindingResult, Model model) {
 
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Check that the supplied end date is later or the same as the start date
+        if ((passwordForm.getPassword1() != null) & (passwordForm.getPassword2() != null)){
+            if(!passwordForm.getPassword1().equals(passwordForm.getPassword2())) {
+                bindingResult.rejectValue("getPassword2", "error.password2", "Passwords must match");
+            }
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // Validate the form, else force resubmission
         if (bindingResult.hasErrors()) {
@@ -154,13 +161,6 @@ public class AdminController {
             return "contractor_password";
         }
 
-        //--------------------------------------------------------------------------------------------------------------
-        // Check that the supplied end date is later or the same as the start date
-        if ((passwordForm.getPassword1() != null) & (passwordForm.getPassword2() != null)){
-            if(!passwordForm.getPassword1().equals(passwordForm.getPassword2())) {
-                bindingResult.rejectValue("getPassword2", "error.password1", "Passwords must match");
-            }
-        }
 
         // Breaks without encrypting
         //staffCreator.updateContractorPassword(Integer.parseInt(contractorId), passwordForm.getPassword1());

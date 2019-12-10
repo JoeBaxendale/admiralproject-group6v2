@@ -45,7 +45,6 @@ public class TimeSheetController {
     @RequestMapping(path = "/Timesheet", method = RequestMethod.GET)
     public String timeSheetDetails(Model model) {
 
-        System.out.println("---------------------------------------------------------------------------------------->");
         // Gets date for form
         LocalDate currentDate = LocalDate.now();
         LocalDate weekPast = currentDate.minusDays(7);
@@ -79,7 +78,6 @@ public class TimeSheetController {
         }
 
         String tempNotes = timeSheet.getNotes();
-        System.out.println("------------------------------------------------------------>"+ timeSheet.getWorked_saturday() + timeSheet.getWorked_sunday());
 
         if(timeSheet.getWorked_sunday() == true){
             tempNotes = "Worked Sunday;" + tempNotes;
