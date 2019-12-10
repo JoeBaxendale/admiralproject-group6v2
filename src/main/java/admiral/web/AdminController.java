@@ -198,4 +198,24 @@ public class AdminController {
         return "manager_dashboard";
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @GetMapping(path = "/Manager/{id}")
+    public String managerEditor(@PathVariable("id") String managerId, Model model) {
+
+        List<ManagerUser> manager = finder.findManagerById(Integer.parseInt(managerId));
+
+        StaffForm staffForm = new StaffForm(
+                manager.get(0).getManager_id(),
+                manager.get(0).getFirstName(),
+                manager.get(0).getLastName(),
+                manager.get(0).getStaffEmail());
+
+        model.addAttribute("managerKey", staffForm);
+        model.addAttribute("managerId", managerId);
+
+        // Open managers page
+        return "manager";
+    }
+
 }

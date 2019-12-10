@@ -16,24 +16,20 @@ import java.util.List;
 public interface StaffRepo {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to retrieve Contractor based on manager
-    public List<ContractorUser> findContractorByManager(String searchTerm);
+    // Method to retrieve Contractors
+    public List<ContractorUser> findContractors();
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to retrieve Contractor based on id
     public List<ContractorUser> findContractorById(String searchTerm);
 
     //------------------------------------------------------------------------------------------------------------------
+    // Method to retrieve Contractor based on manager
+    public List<ContractorUser> findContractorByManager(String searchTerm);
+
+    //------------------------------------------------------------------------------------------------------------------
     // Method to retrieve Contractor based on id
     public int getContractorByUser(long userId);
-
-    //------------------------------------------------------------------------------------------------------------------
-    // Method to retrieve Contractors
-    public List<ContractorUser> findContractors();
-
-    //------------------------------------------------------------------------------------------------------------------
-    // Method to retrieve Managers
-    public List<ManagerUser> findManagers();
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to update Contractors
@@ -46,5 +42,13 @@ public interface StaffRepo {
     //------------------------------------------------------------------------------------------------------------------
     // Method to update Contractors
     public void deactivateContractor(int contractorId);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to retrieve Managers
+    public List<ManagerUser> findManagers();
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to retrieve Managers based on id
+    public List<ManagerUser> findManagerById(int searchId);
 
 }
