@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -19,11 +20,13 @@ public class PasswordForm {
     //------------------------------------------------------------------------------------------------------------------
     // Checks if the user worked Saturday for notes
     @NotNull(message = "Password Cannot be empty")
+    @NotBlank(message = "Password Cannot be empty")
     private String password1;
 
     //------------------------------------------------------------------------------------------------------------------
     // Checks if the user worked Sunday for notes
     @NotNull(message = "Password Cannot be empty")
+    @NotBlank(message = "Password Cannot be empty")
     private String password2;
 
 }

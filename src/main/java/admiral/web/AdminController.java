@@ -144,7 +144,7 @@ public class AdminController {
     // Mangers page to manager users
     @RequestMapping(path = "/PasswordContractorDetails/{id}", method = RequestMethod.POST)
     public String ContractorPasswordProcess(@PathVariable("id") String contractorId,
-                                            @ModelAttribute("contractorKey") @Valid PasswordForm passwordForm,
+                                            @ModelAttribute("passKey") @Valid PasswordForm passwordForm,
                                             BindingResult bindingResult, Model model) {
 
 
@@ -152,7 +152,7 @@ public class AdminController {
         // Check that the supplied end date is later or the same as the start date
         if ((passwordForm.getPassword1() != null) & (passwordForm.getPassword2() != null)){
             if(!passwordForm.getPassword1().equals(passwordForm.getPassword2())) {
-                bindingResult.rejectValue("getPassword2", "error.password2", "Passwords must match");
+                bindingResult.rejectValue("password2", "error.password2", "Passwords must match");
             }
         }
 
