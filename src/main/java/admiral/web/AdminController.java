@@ -39,7 +39,7 @@ public class AdminController {
 
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
-    @GetMapping(path = "/Manager/{id}")
+    @GetMapping(path = "/ContractorDash/{id}")
     public String contractorManager(@PathVariable("id") String managerId, Model model) {
 
         List<ContractorUser> contractorsUnderManager;
@@ -125,7 +125,7 @@ public class AdminController {
         staffCreator.updateContractor(contractorUpdated);
 
         // Open managers page
-        return "redirect:/Manager/All";
+        return "redirect:/ContractorDash/All";
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -170,19 +170,32 @@ public class AdminController {
         staffCreator.updateContractorPassword(Integer.parseInt(contractorId), tempPassword);
 
         // Open managers page
-        return "redirect:/Manager/All";
+        return "redirect:/ContractorDash/All";
     }
 
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
-    @RequestMapping(path = "/Deactivate/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/DeactivateContractor/{id}", method = RequestMethod.GET)
     public String deactivateContractor(@PathVariable("id") String contractorId, Model model) {
 
 
         staffCreator.deactivateContractor(Integer.parseInt(contractorId));
 
         // Open managers page
-        return "redirect:/Manager/All";
+        return "redirect:/ContractorDash/All";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @GetMapping(path = "/ManagerDash")
+    public String managerManager(Model model) {
+
+        // Creates and populates a list of TimeSheets, passes it to the dashboard page
+        List<ManagerUser> managers = finder.findManagers();
+        model.addAttribute("managers",managers);
+
+        // Open managers page
+        return "manager_dashboard";
     }
 
 }
