@@ -46,49 +46,86 @@
                             <img src="images/icon/admiral.png" alt="CoolAdmin">
                         </a>
                     </div>
+
+
                     <div class="login-form">
-                        <div th:action="@{/register}" th:object="${user}" method="post">
+                        <div>
+
+                            <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
+
+
                             <div class="form-group">
                                 <label>First Name</label>
-                                <input class="au-input au-input--full" th:field="*{first_name}" type="text" name="first_name" placeholder="Username">
+                                <input class="au-input au-input--full" th:field="*{firstName}" type="text" name="first_name" placeholder="Username">
                             </div>
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input class="au-input au-input--full"  th:field="*{last_name}" type="text" name="last_name" placeholder="Username">
+                                <input class="au-input au-input--full"  th:field="*{lastName}" type="text" name="last_name" placeholder="Username">
                             </div>
                             <div class="form-group">
                                 <label>Email Address</label>
-                                <input class="au-input au-input--full" th:field="*{email}" type="email" name="email" placeholder="Email">
+                                <input class="au-input au-input--full" th:field="*{staffEmail}" type="email" name="email" placeholder="Email">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
                                 <input class="au-input au-input--full"  th:field="*{password}" type="password" name="password" placeholder="Password">
                             </div>
+                                <div class="form-group">
+                                    <label>Active</label>
+                                    <input class="au-input au-input--full"  th:field="*{active}" type="text" name="active" placeholder="Active">
+                                </div>
+
+                                <label>Role ID</label></br>
+                                <div class="rs-select2--dark rs-select2--sm rs-select2--border" th:field="*{roleId}">
+                                    <select class="js-select2 au-select-dark" name="roleId">
+                                        <option selected="selected"></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                    <div class="dropDownSelect2"></div>
+                                </div>
+
+<!--                                <div class="dropdown"  th:field="*{roleId}">-->
+<!--                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                        Role ID-->
+<!--                                    </button>-->
+<!--                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">-->
+<!--                                        <button class="dropdown-item" type="button">Admin</button>-->
+<!--                                        <button class="dropdown-item" type="button">Manager</button>-->
+<!--                                        <button class="dropdown-item" type="button">Contractor</button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                </br>
+                                </br>
+
                             <div class="login-checkbox">
                                 <label>
                                     <input type="checkbox" name="aggree">Agree the terms and policy
                                 </label>
                             </div>
+
                             <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
                             <span th:utext="${successMessage}"></span>
 
                             <div class="alert alert-sucess alert-dismissible"
-                                 th:if="${{bindingResult !=null bindingResult.getAllErrors() != null}}">
+                                 th:if="${{bindingResult != null && bindingResult.getAllErrors() != null}}">
                                 <button type="button" class="close" data-dismiss="alert"
                                         aria-hidden="true">x</button>
-                                <ul th:each="data: ${bindingresult.getAllErrors()}">
-                                    <li th: text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+                                <ul th:each="data: ${bindingResult.getAllErrors()}">
+                                    <li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
                                 </ul>
                             </div>
 
 
-                        </form>
-                    </div>
+                             </form>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
 
+</div>
 </div>
 
 <!-- Jquery JS-->

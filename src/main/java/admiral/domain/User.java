@@ -51,10 +51,12 @@ public class User {
     private String password;
 
     //------------------------------------------------------------------------------------------------------------------
+    @NotNull(message = "Role ID is compulsory")
     @Column(name="role_id")
-    private String roleId;
+    private Integer roleId;
 
     //------------------------------------------------------------------------------------------------------------------
+    @NotNull(message = "Status is compulsory")
     @Column(name="active")
     private Boolean active;
 

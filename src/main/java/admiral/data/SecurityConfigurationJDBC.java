@@ -76,6 +76,7 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/Timesheet/**").hasAnyAuthority("Contractor")
                 .antMatchers("/timesheetDashboard/**").hasAnyAuthority("Manager", "Admin")
+                .antMatchers("/register/**").hasAnyAuthority("Admin")
                 .anyRequest().authenticated()
                 .and()
 
