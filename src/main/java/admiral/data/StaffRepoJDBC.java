@@ -8,6 +8,7 @@ import admiral.domain.ContractorUser;
 import admiral.domain.ManagerUser;
 import admiral.service.StaffRepo;
 import admiral.service.events.ContractorUpdated;
+import admiral.service.events.ManagerUpdated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -320,4 +321,27 @@ public class StaffRepoJDBC implements StaffRepo {
 
         return managerUserList;
     };
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Update managers details
+    public void updateManager(ManagerUpdated managerUpdated) {
+
+        // Define sql code, pulling data from passed TimeSheetMade object
+        String sql = "update managers inner join users on managers.user_id = users.user_id Set first_name = '"+
+                managerUpdated.getFirst_name() +"', last_name ='"+ managerUpdated.getLast_name() +"', email ='"+
+                managerUpdated.getEmail() +"' WHERE manager_id = '"+ managerUpdated.getManager_id() +"'";
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

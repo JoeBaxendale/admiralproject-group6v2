@@ -3,6 +3,7 @@ package admiral.service;
 //----------------------------------------------------------------------------------------------------------------------
 // Import
 import admiral.service.events.ContractorUpdated;
+import admiral.service.events.ManagerUpdated;
 import admiral.service.events.TimeSheetMade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,4 +42,9 @@ public class StaffProcessor implements StaffCreator {
 
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // update contractor information
+    public void updateManager(ManagerUpdated managerUpdated) {
+        staffRepo.updateManager(managerUpdated);
+    }
 }

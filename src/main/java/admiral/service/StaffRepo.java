@@ -7,6 +7,7 @@ import admiral.domain.ContractorUser;
 import admiral.domain.ManagerUser;
 import admiral.domain.TimeSheet;
 import admiral.service.events.ContractorUpdated;
+import admiral.service.events.ManagerUpdated;
 import admiral.service.events.TimeSheetMade;
 
 import java.util.List;
@@ -50,5 +51,9 @@ public interface StaffRepo {
     //------------------------------------------------------------------------------------------------------------------
     // Method to retrieve Managers based on id
     public List<ManagerUser> findManagerById(int searchId);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to update Manager
+    public void updateManager(ManagerUpdated managerUpdated);
 
 }

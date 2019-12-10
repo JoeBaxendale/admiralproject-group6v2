@@ -1,27 +1,26 @@
-package admiral.service;
+package admiral.service.events;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
-import admiral.service.events.ContractorUpdated;
-import admiral.service.events.ManagerUpdated;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Interface for the inserting of staff
-public interface StaffCreator {
+// Class to map the submission of the Time Sheet form
+@Data
+@AllArgsConstructor
+public class ManagerUpdated {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Updates the contractors info
-    public void updateContractor(ContractorUpdated contractorUpdated);
+    private int manager_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Updates a contractors password
-    public void updateContractorPassword(int contractorId, String newPassword);
+    private String first_name;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Deactivates a contractor account
-    public void deactivateContractor(int contractorId);
+    private String last_name;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Updates the manager info
-    public void updateManager(ManagerUpdated managerUpdated);
+    private String email;
 }

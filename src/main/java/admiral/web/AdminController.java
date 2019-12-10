@@ -8,6 +8,7 @@ import admiral.service.StaffCreator;
 import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
 import admiral.service.events.ContractorUpdated;
+import admiral.service.events.ManagerUpdated;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -216,6 +217,33 @@ public class AdminController {
 
         // Open managers page
         return "manager";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @RequestMapping(path = "/ManagerUpdate/{id}", method = RequestMethod.POST)
+    public String managerDetails(@PathVariable("id") String managerId,
+                                    @ModelAttribute("managerKey") @Valid StaffForm managerForm,
+                                    BindingResult bindingResult, Model model) {
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Validate the form, else force resubmission
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("managerKey", managerForm);
+            model.addAttribute("managerId", managerId);
+            return "manager";
+        }
+
+        ManagerUpdated managerUpdated = new ManagerUpdated(
+                managerForm.getManager_id(),
+                managerForm.getFirst_name(),
+                managerForm.getLast_name(),
+                managerForm.getEmail());
+
+        staffCreator.updateManager(managerUpdated);
+
+        // Open managers page
+        return "redirect:/ManagerDash";
     }
 
 }
