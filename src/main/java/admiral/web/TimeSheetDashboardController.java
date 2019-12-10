@@ -17,7 +17,7 @@ import java.util.List;
 // Controller for the Time Sheet dashboard
 
 @Controller
-@SessionAttributes("TimeSheets")
+@SessionAttributes({"TimeSheets","LoginID"})
 public class TimeSheetDashboardController {
 
     // Finder for the Time Sheet queries
@@ -29,10 +29,28 @@ public class TimeSheetDashboardController {
         finder = afinder;
     }
 
+    @GetMapping("/timesheetDashboard")
+    public String decideWhichFiltersForDashboard(@SessionAttribute("loginEmail") String loginEmail){
+        long userId = finder.getUserIdByEmail(loginEmail);
+        long accessLevel = finder.getUserLevelFromId(userId);
+
+        System.out.println("YEEE" + userId + "     " + accessLevel);
+
+        if (accessLevel == 1){
+            return "redirect:/timesheetDashboard/"+ userId +"/Pending";
+        }else if (accessLevel == 2){
+            return "redirect:/timesheetDashboard/"+ userId +"/Approved";
+        }
+
+        return "redirect:/timesheetDashboard/0/Pending";
+    }
+
     //------------------------------------------------------------------------------------------------------------------
     // Time Sheet dashboard to review submitted Time Sheets
-    @GetMapping("/timesheetDashboard/{filterTerm}")
-    public String showTimeSheetDashboard(@PathVariable("filterTerm") String filterTerm, Model model){ //get the filter term from the url
+    @GetMapping("/timesheetDashboard/{id}/{filterTerm}")
+    public String showTimeSheetDashboard(@PathVariable("filterTerm") String filterTerm, //get the filter term from the url
+                                         @PathVariable("id") long userId,
+                                         Model model){
 
         // Creates and populates a list of TimeSheets, passes it to the dashboard page
         List<TimeSheetPlusExtra> TimeSheets = finder.findTimeSheetsByStatus(filterTerm);
@@ -46,8 +64,12 @@ public class TimeSheetDashboardController {
         model.addAttribute("TimeSheets",TimeSheets);
         model.addAttribute("filterTerm",filterTerm);
         model.addAttribute("alteredTimeSheets", new String());
-        model.addAttribute("accessLevel","Manager"); //change this later*
-
+        if(filterTerm.equals("Pending")) {
+            model.addAttribute("accessLevel", "Manager");
+        }
+        if(filterTerm.equals("Approved")) {
+            model.addAttribute("accessLevel", "Admin");
+        }
         // Opens the dashboard html page
         return "timesheet_dashboard";
     }

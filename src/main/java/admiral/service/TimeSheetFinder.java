@@ -22,4 +22,8 @@ public interface TimeSheetFinder {
     //included this in timesheet repositories as it applies to the timesheet data
     public String findManagerByContractorId(int contractorId);
 
+    public long getUserIdByEmail(String loginEmail);
+
+    public long getUserLevelFromId(long userId);
+
 }

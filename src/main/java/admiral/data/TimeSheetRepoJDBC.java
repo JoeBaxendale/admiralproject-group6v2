@@ -149,4 +149,38 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
             e.printStackTrace();
         }return managerName;
     }
+
+    public long getUserIdByEmail(String loginEmail){
+
+        long userId = -1;
+
+        String sql = "SELECT user_id FROM users WHERE email = '" + loginEmail + "'";
+        try {
+            Statement st = conn.createStatement();
+            ResultSet temp = st.executeQuery(sql);
+            while(temp.next()){
+                userId = temp.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userId;
+    };
+
+    public long getUserLevelFromId(long userId){
+
+        long userLevel = -1;
+
+        String sql = "SELECT role_id FROM users WHERE user_id = " + userId;
+        try {
+            Statement st = conn.createStatement();
+            ResultSet temp = st.executeQuery(sql);
+            while(temp.next()){
+                userLevel = temp.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userLevel;
+    };
 }

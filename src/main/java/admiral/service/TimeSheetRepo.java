@@ -23,4 +23,8 @@ public interface TimeSheetRepo {
     public void updateTimeSheetEntry(TimeSheet timesheet);
 
     public String findManagerByContractorId(int contractorId);
+
+    public long getUserIdByEmail(String loginEmail);
+
+    public long getUserLevelFromId(long userId);
 }
