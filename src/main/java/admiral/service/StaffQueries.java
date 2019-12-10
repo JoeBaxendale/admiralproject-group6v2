@@ -36,6 +36,12 @@ public class StaffQueries implements StaffFinder {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    // Method to query the database, retrieving Contractor based on a id
+    public int getContractorByUser(long userId){
+        return staffRepo.getContractorByUser(userId);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
     // Method to query the database, retrieving Contractors
     public List<ContractorUser> findContractors(){
         return staffRepo.findContractors();

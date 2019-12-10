@@ -7,6 +7,7 @@ import admiral.domain.ManagerUser;
 import admiral.service.StaffCreator;
 import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
+import admiral.service.TimeSheetFinder;
 import admiral.service.events.ContractorUpdated;
 import admiral.service.events.TimeSheetMade;
 import org.springframework.stereotype.Controller;
@@ -31,13 +32,15 @@ public class TimeSheetController {
 
     // Finder for the Time Sheet queries
     private StaffFinder finder;
+    private TimeSheetFinder tFinder;
 
     //------------------------------------------------------------------------------------------------------------------
     // Constructor setting creator
-    public TimeSheetController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder) {
+    public TimeSheetController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder, TimeSheetFinder iTFinder) {
         timeSheetCreator = iCreator;
         staffCreator = iStaffCreator;
         finder = iFinder;
+        tFinder = iTFinder;
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -58,9 +61,12 @@ public class TimeSheetController {
     //------------------------------------------------------------------------------------------------------------------
     // Time sheet details page; form validation, processing and receipt page
     @RequestMapping(path = "/TimesheetDetails", method = RequestMethod.POST)
-    public String timeSheetProcess(@ModelAttribute("timesheetKey") @Valid TimeSheetForm timeSheet,
+    public String timeSheetProcess(@SessionAttribute("loginEmail") String loginEmail, @ModelAttribute("timesheetKey") @Valid TimeSheetForm timeSheet,
                                    BindingResult bindingResult,
                                    Model model) {
+
+        long userId = tFinder.getUserIdByEmail(loginEmail);
+        int contractorId = finder.getContractorByUser(userId);
 
         //--------------------------------------------------------------------------------------------------------------
         // Check that the supplied end date is later or the same as the start date
@@ -89,10 +95,11 @@ public class TimeSheetController {
         }
 
 
+
         //--------------------------------------------------------------------------------------------------------------
         // Inserts the form details to the database
         TimeSheetMade timeSheetEvent = new TimeSheetMade(
-                2,
+                contractorId,
                 timeSheet.getNumber_of_days(),
                 timeSheet.getOvertime(),
                 timeSheet.getStart_date(),

@@ -113,6 +113,37 @@ public class StaffRepoJDBC implements StaffRepo {
     };
 
     //------------------------------------------------------------------------------------------------------------------
+    // Finds and returns a contractor based on id (List to handle DB errors)
+    public int getContractorByUser(long userId){
+
+        // Define sql code
+        String sql = "Select contractor_id from contractors where user_id = '"+ userId+"'";
+        int tempId = 0;
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        List<ContractorUser> contractorUserList = new ArrayList<ContractorUser>();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet temp = st.executeQuery(sql);
+
+            while(temp.next()){
+                tempId = temp.getInt(1);
+            }
+            return tempId;
+
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tempId;
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
     // Finds and returns a list of all contractors from DB
     public List<ContractorUser> findContractors(){
 

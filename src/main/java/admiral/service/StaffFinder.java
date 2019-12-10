@@ -21,6 +21,10 @@ public interface StaffFinder {
     public List<ContractorUser> findContractorById(String searchManager);
 
     //------------------------------------------------------------------------------------------------------------------
+    // Retrieves Contractor based on ID
+    public int getContractorByUser(long searchUserId);
+
+    //------------------------------------------------------------------------------------------------------------------
     // Retrieves Contractors
     public List<ContractorUser> findContractors();
 

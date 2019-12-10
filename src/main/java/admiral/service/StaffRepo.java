@@ -24,6 +24,10 @@ public interface StaffRepo {
     public List<ContractorUser> findContractorById(String searchTerm);
 
     //------------------------------------------------------------------------------------------------------------------
+    // Method to retrieve Contractor based on id
+    public int getContractorByUser(long userId);
+
+    //------------------------------------------------------------------------------------------------------------------
     // Method to retrieve Contractors
     public List<ContractorUser> findContractors();
 
