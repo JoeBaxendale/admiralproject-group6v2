@@ -3,6 +3,8 @@ package admiral.data;
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
 import admiral.config.CustomLoginSucessHandler;
+import admiral.config.RememberMeConfig;
+import admiral.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,6 +44,16 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
     //------------------------------------------------------------------------------------------------------------------
+    // Attribute to identify the implementation of the Spring Security UserDetailsService
+    @Autowired
+    private UserInfoService userInfoService;
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Attribute to identify configuration for remember me
+    @Autowired
+    private RememberMeConfig rememberMeConfig;
+
+    //------------------------------------------------------------------------------------------------------------------
     // queries from application properties
     @Value("${spring.users-query}")
     private String usersQuery;
@@ -56,12 +68,12 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth
-                .jdbcAuthentication()
-                .usersByUsernameQuery(usersQuery)
-                .authoritiesByUsernameQuery(rolesQuery)
-                .dataSource(dataSource)
-                .passwordEncoder(passwordEncoder);
+        auth      .userDetailsService(userInfoService).passwordEncoder((passwordEncoder));
+//                .jdbcAuthentication()
+//                .usersByUsernameQuery(usersQuery)
+//                .authoritiesByUsernameQuery(rolesQuery)
+//                .dataSource(dataSource)
+//                .passwordEncoder(passwordEncoder);
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -94,7 +106,12 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
                 // Form logout
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login").and()
+                .logoutSuccessUrl("/login")
+                .and()
+                .rememberMe().authenticationSuccessHandler(sucessHandler)
+                .key(rememberMeConfig.getSecret())
+                .tokenValiditySeconds(rememberMeConfig.getValidityPeriod())
+                .and()
                 .exceptionHandling()
                 .accessDeniedPage("/access-denied");
     }
