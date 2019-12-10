@@ -17,7 +17,7 @@ import java.util.List;
 // Controller for the Time Sheet dashboard
 
 @Controller
-@SessionAttributes({"TimeSheets","LoginID"})
+@SessionAttributes({"TimeSheets","LoginID","userId"})
 public class TimeSheetDashboardController {
 
     // Finder for the Time Sheet queries
@@ -30,11 +30,9 @@ public class TimeSheetDashboardController {
     }
 
     @GetMapping("/timesheetDashboard")
-    public String decideWhichFiltersForDashboard(@SessionAttribute("loginEmail") String loginEmail){
+    public String decideWhichFiltersForDashboard(@SessionAttribute("loginEmail") String loginEmail,Model model){
         long userId = finder.getUserIdByEmail(loginEmail);
         long accessLevel = finder.getUserLevelFromId(userId);
-
-        System.out.println("YEEE" + userId + "     " + accessLevel);
 
         if (accessLevel == 1){
             return "redirect:/timesheetDashboard/"+ userId +"/Pending";
@@ -51,6 +49,8 @@ public class TimeSheetDashboardController {
     public String showTimeSheetDashboard(@PathVariable("filterTerm") String filterTerm, //get the filter term from the url
                                          @PathVariable("id") long userId,
                                          Model model){
+
+        model.addAttribute("userId",userId);
 
         // Creates and populates a list of TimeSheets, passes it to the dashboard page
         List<TimeSheetPlusExtra> TimeSheets = finder.findTimeSheetsByStatus(filterTerm);
@@ -77,8 +77,8 @@ public class TimeSheetDashboardController {
     @GetMapping("/submitChanges")
     public String submitChangesToTimeSheetStatus(@RequestParam("alteredTimeSheets") String alterData,
                                                  @ModelAttribute("TimeSheets") List<TimeSheetPlusExtra> timeSheets,  //get the altered data and the timesheets to compare the differences
+                                                 @ModelAttribute("userId") String userId,
                                                  Model model){
-
 
         List<String> splitList = List.of(alterData.split(",")); //split the altered data on the comma, as the data is passed as an array in string form
 
@@ -101,6 +101,6 @@ public class TimeSheetDashboardController {
             }
         }
 
-        return "redirect:/timesheetDashboard/Pending";      //redirect back to the timesheet dashboard with the pending filter after updating the database
+        return "redirect:/timesheetDashboard/"+ userId +"/Pending";      //redirect back to the timesheet dashboard with the pending filter after updating the database
     }
 }
