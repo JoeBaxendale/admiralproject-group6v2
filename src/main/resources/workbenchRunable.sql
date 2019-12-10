@@ -88,10 +88,10 @@ CREATE TABLE IF NOT EXISTS contractors
 )
     ENGINE = InnoDB;
 
-INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (1,1,1);
-INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (2,2,2);
-INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (3,3,3);
-INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (4,4,4);
+INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (1,1,2);
+INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (2,2,1);
+INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (3,3,4);
+INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (4,4,3);
 
 -- -----------------------------------------------------
 -- Table `time_sheets`
