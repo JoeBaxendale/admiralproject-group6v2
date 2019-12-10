@@ -8,11 +8,11 @@ import admiral.service.StaffCreator;
 import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
 import admiral.service.events.ContractorUpdated;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -27,11 +27,14 @@ public class AdminController {
     // Finder for the Time Sheet queries
     private StaffFinder finder;
 
+    private PasswordEncoder passwordEncoder;
+
     //------------------------------------------------------------------------------------------------------------------
     // Constructor setting creator
-    public AdminController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder) {
+    public AdminController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder, PasswordEncoder iPasswordEncoder) {
         staffCreator = iStaffCreator;
         finder = iFinder;
+        passwordEncoder = iPasswordEncoder;
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -163,7 +166,8 @@ public class AdminController {
 
 
         // Breaks without encrypting
-        //staffCreator.updateContractorPassword(Integer.parseInt(contractorId), passwordForm.getPassword1());
+        String tempPassword = passwordEncoder.encode(passwordForm.getPassword1());
+        staffCreator.updateContractorPassword(Integer.parseInt(contractorId), tempPassword);
 
         // Open managers page
         return "redirect:/Manager/All";
