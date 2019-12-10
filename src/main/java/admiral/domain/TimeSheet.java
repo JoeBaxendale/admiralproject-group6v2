@@ -10,7 +10,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Class to mapp the time sheet object to the database
+// Class to map the time sheet object to the database
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +19,7 @@ public class TimeSheet {
 
     //------------------------------------------------------------------------------------------------------------------
     // Unique identifier
+    // Paired Programming between Dan and Dexter 25/11/2019
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int time_sheet_id;
