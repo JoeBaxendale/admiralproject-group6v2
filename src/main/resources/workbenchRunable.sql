@@ -49,9 +49,9 @@ CREATE TABLE IF NOT EXISTS users
 
     
 insert into users (user_id, first_name, last_name, email, password, role_id, active) values (1,'Karla', 'Mendivelso', 'karla@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 1, 1);
-insert into users (user_id, first_name, last_name, email, password, role_id, active) values (2,'Joe', 'Baxendale', 'joe@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 1, 1);
-insert into users (user_id, first_name, last_name, email, password, role_id, active) values (3,'Daniel', 'Addis', 'daniel@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 1, 1);
-insert into users (user_id, first_name, last_name, email, password, role_id, active) values (4,'Dexter', 'Gordon', 'dexter@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 1, 1);
+insert into users (user_id, first_name, last_name, email, password, role_id, active) values (2,'Joe', 'Baxendale', 'joe@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 2, 1);
+insert into users (user_id, first_name, last_name, email, password, role_id, active) values (3,'Daniel', 'Addis', 'daniel@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 3, 1);
+insert into users (user_id, first_name, last_name, email, password, role_id, active) values (4,'Dexter', 'Gordon', 'dexter@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 3, 1);
 
 -- -----------------------------------------------------
 -- Table `managers`
@@ -84,8 +84,7 @@ CREATE TABLE IF NOT EXISTS contractors
 
 
     PRIMARY KEY (`contractor_id`),
-    FOREIGN KEY (`user_id`) REFERENCES users (`user_id`),
-    FOREIGN KEY (`manager_id`) REFERENCES managers (`manager_id`)
+    FOREIGN KEY (`user_id`) REFERENCES users (`user_id`)
 )
     ENGINE = InnoDB;
 

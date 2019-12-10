@@ -25,11 +25,11 @@ public class TimeSheetForm {
 
     //------------------------------------------------------------------------------------------------------------------
     // Checks if the user worked Saturday for notes
-    private String worked_saturday;
+    private Boolean worked_saturday;
 
     //------------------------------------------------------------------------------------------------------------------
     // Checks if the user worked Sunday for notes
-    private String worked_sunday;
+    private Boolean worked_sunday;
 
     //------------------------------------------------------------------------------------------------------------------
     // Validates the overtime with reasonable numbers

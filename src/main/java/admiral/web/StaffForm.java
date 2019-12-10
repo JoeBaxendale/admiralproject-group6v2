@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContractorForm {
+public class StaffForm {
 
     //------------------------------------------------------------------------------------------------------------------
     // Validates the number of days is less than a week
@@ -37,8 +37,4 @@ public class ContractorForm {
     // Checks if the user worked Sunday for notes
     @NotNull(message = "Email Cannot be empty")
     private String email;
-
-    //------------------------------------------------------------------------------------------------------------------
-    // Checks if the user worked Sunday for notes
-    private Boolean active;
 }

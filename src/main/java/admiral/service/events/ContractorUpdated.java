@@ -1,25 +1,31 @@
-package admiral.service;
+package admiral.service.events;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Imports
-import admiral.domain.ContractorUser;
-import admiral.domain.TimeSheet;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.time.LocalDate;
 
 //----------------------------------------------------------------------------------------------------------------------
-// Interface for the retrieval of Contractor from the database
-public interface ContractorFinder {
+// Class to map the submission of the Time Sheet form
+@Data
+@AllArgsConstructor
+public class ContractorUpdated {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Retrieves Contractor based on Manager
-    public List<ContractorUser> findContractorByManager(String searchManager);
+    private int contractor_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Retrieves Contractor based on ID
-    public List<ContractorUser> findContractorById(String searchManager);
+    private int manager_id;
 
     //------------------------------------------------------------------------------------------------------------------
-    // Retrieves Contractors
-    public List<ContractorUser> findContractors();
+    private String first_name;
+
+    //------------------------------------------------------------------------------------------------------------------
+    private String last_name;
+
+    //------------------------------------------------------------------------------------------------------------------
+    private String email;
 }
