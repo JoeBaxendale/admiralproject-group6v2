@@ -63,7 +63,7 @@ public class authenticationController {
             userService.saveUser(user);
             modelAndView.addObject("Message", "user created successfully");
         }
-        modelAndView.addObject("user", new User());
+        modelAndView.addObject("user", user);
         modelAndView.setViewName("register");
         return  modelAndView;
     }

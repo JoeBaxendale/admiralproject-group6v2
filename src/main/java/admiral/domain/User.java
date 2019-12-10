@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -29,23 +30,26 @@ public class User {
     private int userId;
 
     //------------------------------------------------------------------------------------------------------------------
-    @NotNull(message = "First name is compulsory")
+//    @NotNull(message = "First name is compulsory")
+    @NotBlank(message = "First name is compulsory")
     @Column(name="first_name")
     private String firstName;
 
     //------------------------------------------------------------------------------------------------------------------
-    @NotNull(message = "Last name is compulsory")
+//    @NotNull(message = "Last name is compulsory")
+    @NotBlank(message = "Last name is compulsory")
     @Column(name="last_name")
     private String lastName;
 
     //------------------------------------------------------------------------------------------------------------------
-    @NotNull(message = "Email is compulsory")
+//    @NotNull(message = "Email is compulsory")
+    @NotBlank(message = "Email is compulsory")
     @Email(message = "Email is invalid")
     @Column(name="email")
     private String staffEmail;
 
     //------------------------------------------------------------------------------------------------------------------
-    @NotNull(message = "Password is compulsory")
+    @NotBlank(message = "Password is compulsory")
     @Length(min=5, message = "Password should be at least 5 characters")
     @Column(name="password")
     private String password;
@@ -56,19 +60,8 @@ public class User {
     private Integer roleId;
 
     //------------------------------------------------------------------------------------------------------------------
-    @NotNull(message = "Status is compulsory")
+    @NotNull(message = "Active is compulsory")
     @Column(name="active")
     private Boolean active;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private Set<Role> users;
-//
-//    public Set<Role> getRoles() {
-//        return users;
-//    }
-//
-//    public void setRoles(Set<Role> roles) {
-//        this.users = roles;
-//    }
 }

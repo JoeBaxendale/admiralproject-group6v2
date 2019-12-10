@@ -85,17 +85,6 @@
                                     </select>
                                     <div class="dropDownSelect2"></div>
                                 </div>
-
-<!--                                <div class="dropdown"  th:field="*{roleId}">-->
-<!--                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                                        Role ID-->
-<!--                                    </button>-->
-<!--                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">-->
-<!--                                        <button class="dropdown-item" type="button">Admin</button>-->
-<!--                                        <button class="dropdown-item" type="button">Manager</button>-->
-<!--                                        <button class="dropdown-item" type="button">Contractor</button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
                                 </br>
                                 </br>
 
@@ -108,7 +97,7 @@
                             <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
                             <span th:utext="${successMessage}"></span>
 
-                            <div class="alert alert-sucess alert-dismissible"
+                            <div class=""
                                  th:if="${{bindingResult != null && bindingResult.getAllErrors() != null}}">
                                 <button type="button" class="close" data-dismiss="alert"
                                         aria-hidden="true">x</button>
