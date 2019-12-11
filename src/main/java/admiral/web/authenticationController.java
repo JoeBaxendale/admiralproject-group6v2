@@ -53,18 +53,25 @@ public class authenticationController {
         if (bindingResult.hasErrors()){
             modelAndView.addObject("sucessMessage", "Please correct the errors in form!");
             modelMap.addAttribute("bindingResult", bindingResult);
+            modelAndView.addObject("user", user);
+            modelAndView.setViewName("register");
+            return  modelAndView;
         }
         //        we will save the user, if no binding errors
         else if (userService.isUserAlreadyPresent(user)) {
             modelAndView.addObject("Message", "user already exists");
+            modelAndView.addObject("user", user);
+            modelAndView.setViewName("register");
+            return  modelAndView;
         }
         else {
             //save the user registration form
             userService.saveUser(user);
             modelAndView.addObject("Message", "user created successfully");
         }
+
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("register");
+        modelAndView.setViewName("login");
         return  modelAndView;
     }
 }

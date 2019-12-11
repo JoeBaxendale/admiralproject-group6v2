@@ -47,11 +47,34 @@
                         </a>
                     </div>
 
+<!--                    <script>-->
+<!--                        window.onload = function registered(){-->
+<!--                            window.addEventListener("beforeunload", function decideOnProgression (e){-->
+<!--                                var confirmationMessage = 'Registration complete';-->
+
+<!--                                (e || window.event).returnValue = confirmationMessage;-->
+<!--                                return confirmationMessage;-->
+<!--                            })-->
+<!--                        }-->
+<!--                    </script>-->
+
+                    <script>
+                        function validateForm() {
+                            var bindingResults = /*[[${bindingResult}]]*/ 'default';
+
+                            if(bindingResults = null){
+                                alert("User Registered Successfully");
+                                return true;
+                            }
+                            console.log(bindingResults);
+                        }
+                    </script>
+
 
                     <div class="login-form">
                         <div>
 
-                            <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
+                            <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post"  onsubmit="return validateForm()">
 
 
                             <div class="form-group">
@@ -87,12 +110,6 @@
                                 </div>
                                 </br>
                                 </br>
-
-                            <div class="login-checkbox">
-                                <label>
-                                    <input type="checkbox" name="aggree">Agree the terms and policy
-                                </label>
-                            </div>
 
                             <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
                             <span th:utext="${successMessage}"></span>
