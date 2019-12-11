@@ -46,6 +46,8 @@ public class CustomLoginSucessHandler extends SimpleUrlAuthenticationSuccessHand
             roles.add(a.getAuthority());
         }
 
+        String userRole = authentication.getPrincipal().toString().split(",")[8];
+        session.setAttribute("accessLevel",userRole.substring(userRole.indexOf("=")+1));
         session.setAttribute("loginEmail",authentication.getName());    //add the email used to login to the session for later use
 
 //        Check user role and decide the redirect URL

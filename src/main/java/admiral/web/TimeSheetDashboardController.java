@@ -35,10 +35,8 @@ public class TimeSheetDashboardController {
         long accessLevel = finder.getUserLevelFromId(userId);
 
         if (accessLevel == 1){
-            model.addAttribute("accessLevel","Manager");
             return "redirect:/timesheetDashboard/"+ userId +"/Pending";
         }else if (accessLevel == 2){
-            model.addAttribute("accessLevel","Admin");
             return "redirect:/timesheetDashboard/"+ userId +"/Approved";
         }
 
@@ -51,10 +49,7 @@ public class TimeSheetDashboardController {
     @GetMapping("/timesheetDashboard/{id}/{filterTerm}")
     public String showTimeSheetDashboard(@PathVariable("filterTerm") String filterTerm, //get the filter term from the url
                                          @PathVariable("id") long userId,
-                                         @ModelAttribute("accessLevel") String accessLevel,
                                          Model model){
-
-        System.out.println("YEEEE " + accessLevel);
 
         model.addAttribute("userId",userId);
 
@@ -70,7 +65,6 @@ public class TimeSheetDashboardController {
         model.addAttribute("TimeSheets",TimeSheets);
         model.addAttribute("filterTerm",filterTerm);
         model.addAttribute("alteredTimeSheets", new String());
-        model.addAttribute("accessLevel", accessLevel);
         // Opens the dashboard html page
         return "timesheet_dashboard";
     }

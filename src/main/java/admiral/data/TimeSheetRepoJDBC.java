@@ -44,7 +44,7 @@ public class TimeSheetRepoJDBC implements TimeSheetRepo {
         // Define sql code
 //        String sql = "SELECT * FROM timesheet WHERE status = '"+ searchTerm+"'" ;
 
-        String sql = "SELECT timesheet.*, users.first_name, users.last_name FROM timesheet, users WHERE timesheet.contractor_id = users.user_id " +
+        String sql = "SELECT timesheet.*, users.first_name, users.last_name FROM timesheet, users, contractors WHERE timesheet.contractor_id = contractors.contractor_id AND contractors.user_id = users.user_id " +
                 "AND timesheet.status = '" + searchTerm + "'";
 
 
