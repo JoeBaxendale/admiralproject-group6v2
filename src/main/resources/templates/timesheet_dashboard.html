@@ -335,7 +335,7 @@
                                                 var confirmationMessage = 'It looks like you have been editing something. '
                                                     + 'If you leave before saving, your changes will be lost.';
 
-                                                (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+                                                e.returnValue = confirmationMessage; //Gecko + IE
                                                 return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
                                             });
                                         };
@@ -545,6 +545,7 @@
 
 
                                         function getData() {
+                                            isDirty = false;
                                             for(var i=1;(i<(table.rows.length)-1);i+=2){
                                                 var Data = document.getElementById("dropDownRow"+i).firstElementChild.innerHTML.split("<td>");
                                                 Select = null;                                      //wipe the entry of Select before reassigning it so that duplicates are avoided
