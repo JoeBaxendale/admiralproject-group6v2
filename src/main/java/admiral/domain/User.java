@@ -30,19 +30,16 @@ public class User {
     private int userId;
 
     //------------------------------------------------------------------------------------------------------------------
-//    @NotNull(message = "First name is compulsory")
     @NotBlank(message = "First name is compulsory")
     @Column(name="first_name")
     private String firstName;
 
     //------------------------------------------------------------------------------------------------------------------
-//    @NotNull(message = "Last name is compulsory")
     @NotBlank(message = "Last name is compulsory")
     @Column(name="last_name")
     private String lastName;
 
     //------------------------------------------------------------------------------------------------------------------
-//    @NotNull(message = "Email is compulsory")
     @NotBlank(message = "Email is compulsory")
     @Email(message = "Email is invalid")
     @Column(name="email")
