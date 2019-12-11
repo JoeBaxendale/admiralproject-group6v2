@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!-- ############################################################################################################### -->
 <!-- Page settings and formatting information -->
@@ -122,12 +122,9 @@
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
                                     <div class="content">
-                                        <!--                                        <a class="js-acc-btn">-->
                                         <div sec:authorize="isAuthenticated()">
                                             <div sec:authentication="name"></div>
                                         </div>
-
-                                        <!--                                        </a>-->
                                     </div>
 
                                     <!-- ########################################################################### -->
@@ -202,19 +199,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-                    <!-- ########################################################################################### -->
-                    <!-- Footer -->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <div class="copyright">-->
-<!--                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
                 </div>
             </div>
         </div>

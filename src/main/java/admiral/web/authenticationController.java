@@ -4,7 +4,6 @@ package admiral.web;
 // Imports
 import admiral.domain.User;
 import admiral.service.UserService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import admiral.domain.UserInfo;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,8 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 

@@ -6,8 +6,6 @@ import admiral.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Set;
-
 //----------------------------------------------------------------------------------------------------------------------
 // Form mapper for the user
 @Data

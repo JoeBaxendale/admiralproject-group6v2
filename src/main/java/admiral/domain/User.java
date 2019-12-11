@@ -11,7 +11,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 //----------------------------------------------------------------------------------------------------------------------
 //Defining mapping of the table users

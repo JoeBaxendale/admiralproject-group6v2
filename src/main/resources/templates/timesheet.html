@@ -91,10 +91,6 @@
                         <!-- ####################################################################################### -->
                         <!-- Possible search bar -->
                         <form class="form-header" action="" method="POST">
-                            <!-- <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." /> -->
-                            <!-- <button class="au-btn--submit" type="submit">
-                                <i class="zmdi zmdi-search"></i>
-                            </button> -->
                         </form>
 
                         <div class="header-button">
@@ -102,44 +98,17 @@
                                 <div class="account-item clearfix js-item-menu">
 
                                     <!-- ########################################################################### -->
-                                    <!-- Logo for the top bar -->
-<!--                                    <div class="image">-->
-<!--                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
-<!--                                    </div>-->
-
-                                    <!-- ########################################################################### -->
                                     <!-- User name -->
                                     <div class="content">
-<!--                                        <a class="js-acc-btn">-->
                                         <div sec:authorize="isAuthenticated()">
                                             <div sec:authentication="name"></div>
                                         </div>
-<!--                                        </a>-->
                                     </div>
 
                                     <!-- ########################################################################### -->
                                     <!-- Account dropdown -->
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
-
-                                            <!-- ################################################################### -->
-                                            <!-- Profile image -->
-<!--                                            <div class="image">-->
-<!--                                                <a href="#">-->
-<!--                                                    <img src="images/icon/avatar-01.jpg" alt=${{first_name}}/>-->
-<!--                                                </a>-->
-<!--                                            </div>-->
-
-                                            <!-- ################################################################### -->
-                                            <!-- Account information for dropdown -->
-<!--                                            <div class="content">-->
-<!--                                                <h5 class="name">-->
-<!--                                                    <a href="#">${{first_name}}</a>-->
-<!--                                                </h5>-->
-<!--                                                <span class="email">${{email}}</span>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-
 
                                         <!-- ####################################################################### -->
                                         <!-- Drop down logout button -->
@@ -322,17 +291,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- ########################################################################################### -->
-                    <!-- Footer -->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <div class="copyright">-->
-<!--                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
                 </div>
             </div>
         </div>

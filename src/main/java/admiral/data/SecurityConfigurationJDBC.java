@@ -69,11 +69,7 @@ public class SecurityConfigurationJDBC extends WebSecurityConfigurerAdapter {
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth      .userDetailsService(userInfoService).passwordEncoder((passwordEncoder));
-//                .jdbcAuthentication()
-//                .usersByUsernameQuery(usersQuery)
-//                .authoritiesByUsernameQuery(rolesQuery)
-//                .dataSource(dataSource)
-//                .passwordEncoder(passwordEncoder);
+
     }
 
     //------------------------------------------------------------------------------------------------------------------
