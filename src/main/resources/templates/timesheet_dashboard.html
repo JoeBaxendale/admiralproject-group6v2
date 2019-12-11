@@ -239,9 +239,54 @@
                                     }
                             </script>
                             <!--                            this is to set the value of the select box to what was selected when the user changes pages&ndash;&gt;-->
-                            <label>Date:</label>
-                            <select>Date
-                                <option>Test</option>
+                            <label>Week ending:</label>
+                            <select id="Date Picker" onchange="changeDates()">Date
+                                <option>All Dates</option>
+                                <script>
+                                    var datePicker = document.getElementById("Date Picker");
+
+                                    var today = new Date();
+                                    var date = new Date();
+                                    var date2 = new Date();
+                                    var date3 = new Date();
+                                    var date4 = new Date();
+                                    var chosenDayOfWeek = 7; // sunday
+                                    var difference = today.getDay() - chosenDayOfWeek;
+                                    if(difference > 0){
+                                        date.setDate(date.getDate() + 6)
+                                    }else if(difference < 0){
+                                        date.setDate(date.getDate() + ((-1) * difference))
+                                    }
+
+                                    var option;
+                                    option = document.createElement("option");
+                                    option.setAttribute("value", date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear());
+                                    option.innerHTML = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
+                                    datePicker.appendChild(option);
+
+                                    date2 = new Date(date.getFullYear(),(date.getMonth()),date.getDate()-7);
+
+                                    option = document.createElement("option");
+                                    option.setAttribute("value", date2.getDate()+"/"+date2.getMonth()+"/"+date2.getFullYear());
+                                    option.innerHTML = date2.getDate()+"/"+(date2.getMonth()+1)+"/"+date2.getFullYear();
+                                    datePicker.appendChild(option);
+
+                                    date3 = new Date(date2.getFullYear(),date2.getMonth(),date2.getDate()-7);
+
+                                    option = document.createElement("option");
+                                    option.setAttribute("value", date3.getDate()+"/"+date3.getMonth()+"/"+date3.getFullYear());
+                                    option.innerHTML = date3.getDate()+"/"+(date3.getMonth()+1)+"/"+date3.getFullYear();
+                                    datePicker.appendChild(option);
+
+                                    date4 = new Date(date3.getFullYear(),date3.getMonth(),date3.getDate()-7);
+
+                                    option = document.createElement("option");
+                                    option.setAttribute("value", date4.getDate()+"/"+date4.getMonth()+"/"+date4.getFullYear());
+                                    option.innerHTML = date4.getDate()+"/"+(date4.getMonth()+1)+"/"+date4.getFullYear();
+                                    datePicker.appendChild(option);
+
+
+                                </script>
                             </select>
 
                             <form action = "/submitChanges">
@@ -500,6 +545,39 @@
 
                                             }
                                             document.getElementById("submitBox").value = dataArray.toString();  //add the string of the array to a hidden input on a form to pass it into the controller
+                                        }
+
+
+                                        function changeDates() {
+
+                                            count2 = 0;
+                                            var table = document.getElementById("timeSheetTable");
+                                            for(var j=1;j<table.rows.length;j+=2){
+                                                table.rows[j].style.display = '';
+                                                table.rows[j+1].style.display = '';
+                                            }
+                                            var selected = datePicker.options[datePicker.selectedIndex].innerHTML;
+                                            var data = timeSheetArray2.toString().split(",").toString().split(",");
+                                            var dateEnded;
+                                            var selectedDate;
+                                            var selectedDateArray = selected.split("/");
+                                            console.log(selected);
+                                            if (selected != "All Dates") {
+                                                for (var i = 1; i < table.rows.length; i+=2) {
+                                                    var temp = data[count2 + 5].substring(data[count2 + 5].indexOf("=") + 1).split("-");
+                                                    selectedDate = new Date(selectedDateArray[2], selectedDateArray[1] - 1, selectedDateArray[0]);
+                                                    dateEnded = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
+
+                                                    table.rows[i].style.display = 'none';
+                                                    table.rows[i+1].style.display = 'none';
+                                                    if (dateEnded < selectedDate && dateEnded > new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() - 7)) {
+                                                        table.rows[i].style.display = '';
+                                                        table.rows[i+1].style.display = '';
+                                                    }
+
+                                                    count2 += 13;
+                                                }
+                                            }
                                         }
                                     </script>
                                     </tbody>
