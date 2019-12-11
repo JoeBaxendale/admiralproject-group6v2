@@ -13,12 +13,16 @@ import java.util.List;
 public interface StaffFinder {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Retrieves Contractor based on Manager
-    public List<ContractorUser> findContractorByManager(String searchManager);
+    // Retrieves Contractors
+    public List<ContractorUser> findContractors();
 
     //------------------------------------------------------------------------------------------------------------------
     // Retrieves Contractor based on ID
     public List<ContractorUser> findContractorById(String searchManager);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Retrieves Contractor based on Manager
+    public List<ContractorUser> findContractorByManager(String searchManager);
 
     //------------------------------------------------------------------------------------------------------------------
     // Retrieves Contractor based on ID
@@ -26,9 +30,9 @@ public interface StaffFinder {
 
     //------------------------------------------------------------------------------------------------------------------
     // Retrieves Contractors
-    public List<ContractorUser> findContractors();
+    public List<ManagerUser> findManagers();
 
     //------------------------------------------------------------------------------------------------------------------
-    // Retrieves Contractors
-    public List<ManagerUser> findManagers();
+    // Retrieves Contractor based on ID
+    public List<ManagerUser> findManagerById(int searchId);
 }

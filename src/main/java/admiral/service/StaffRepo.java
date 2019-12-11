@@ -7,6 +7,7 @@ import admiral.domain.ContractorUser;
 import admiral.domain.ManagerUser;
 import admiral.domain.TimeSheet;
 import admiral.service.events.ContractorUpdated;
+import admiral.service.events.ManagerUpdated;
 import admiral.service.events.TimeSheetMade;
 
 import java.util.List;
@@ -16,24 +17,20 @@ import java.util.List;
 public interface StaffRepo {
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to retrieve Contractor based on manager
-    public List<ContractorUser> findContractorByManager(String searchTerm);
+    // Method to retrieve Contractors
+    public List<ContractorUser> findContractors();
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to retrieve Contractor based on id
     public List<ContractorUser> findContractorById(String searchTerm);
 
     //------------------------------------------------------------------------------------------------------------------
+    // Method to retrieve Contractor based on manager
+    public List<ContractorUser> findContractorByManager(String searchTerm);
+
+    //------------------------------------------------------------------------------------------------------------------
     // Method to retrieve Contractor based on id
     public int getContractorByUser(long userId);
-
-    //------------------------------------------------------------------------------------------------------------------
-    // Method to retrieve Contractors
-    public List<ContractorUser> findContractors();
-
-    //------------------------------------------------------------------------------------------------------------------
-    // Method to retrieve Managers
-    public List<ManagerUser> findManagers();
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to update Contractors
@@ -47,4 +44,23 @@ public interface StaffRepo {
     // Method to update Contractors
     public void deactivateContractor(int contractorId);
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to retrieve Managers
+    public List<ManagerUser> findManagers();
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to retrieve Managers based on id
+    public List<ManagerUser> findManagerById(int searchId);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to update Manager
+    public void updateManager(ManagerUpdated managerUpdated);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to update Manager
+    public void updateManagerPassword(int managerId, String newPassword);
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to update manager
+    public void deactivateManager(int managerId);
 }

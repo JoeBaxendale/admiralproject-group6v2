@@ -75,6 +75,12 @@ public class TimeSheetController {
             if(timeSheet.getStart_date().compareTo(timeSheet.getEnd_date()) > 0) {
                 bindingResult.rejectValue("end_date", "error.end_date", "End date must be after the start date");
             }
+
+            if((timeSheet.getNumber_of_days() < 1 && timeSheet.getWorked_saturday()) ||
+                    (timeSheet.getNumber_of_days() < 1 && timeSheet.getWorked_sunday()) ||
+                    (timeSheet.getNumber_of_days() < 2 && timeSheet.getWorked_saturday() && timeSheet.getWorked_sunday())) {
+                bindingResult.rejectValue("number_of_days", "error.number_of_days", "Need to increase the number of days worked to reflect working the weekend");
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
