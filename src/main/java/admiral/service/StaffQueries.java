@@ -24,9 +24,9 @@ public class StaffQueries implements StaffFinder {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to query the database, retrieving Contractor based on a Manager
-    public List<ContractorUser> findContractorByManager(String searchManager){
-        return staffRepo.findContractorByManager(searchManager);
+    // Method to query the database, retrieving Contractors
+    public List<ContractorUser> findContractors(){
+        return staffRepo.findContractors();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -36,14 +36,27 @@ public class StaffQueries implements StaffFinder {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Method to query the database, retrieving Contractors
-    public List<ContractorUser> findContractors(){
-        return staffRepo.findContractors();
+    // Method to query the database, retrieving Contractor based on a Manager
+    public List<ContractorUser> findContractorByManager(String searchManager){
+        return staffRepo.findContractorByManager(searchManager);
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to query the database, retrieving Contractor based on a id
+    public int getContractorByUser(long userId){
+        return staffRepo.getContractorByUser(userId);
+    }
+
 
     //------------------------------------------------------------------------------------------------------------------
     // Method to query the database, retrieving manager
     public List<ManagerUser> findManagers(){
         return staffRepo.findManagers();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Method to query the database, retrieving Contractor based on a id
+    public List<ManagerUser> findManagerById(int searchId){
+        return staffRepo.findManagerById(searchId);
     }
 }

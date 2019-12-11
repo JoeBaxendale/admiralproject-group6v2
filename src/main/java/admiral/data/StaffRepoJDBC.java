@@ -8,6 +8,7 @@ import admiral.domain.ContractorUser;
 import admiral.domain.ManagerUser;
 import admiral.service.StaffRepo;
 import admiral.service.events.ContractorUpdated;
+import admiral.service.events.ManagerUpdated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -35,11 +36,11 @@ public class StaffRepoJDBC implements StaffRepo {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Finds and returns a list of all contractors with the same manager
-    public List<ContractorUser> findContractorByManager(String searchTerm){
+    // Finds and returns a list of all contractors from DB
+    public List<ContractorUser> findContractors(){
 
         // Define sql code
-        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id where manager_id = '"+ searchTerm+"' AND active = 1" ;
+        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id WHERE active = 1" ;
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
@@ -113,11 +114,11 @@ public class StaffRepoJDBC implements StaffRepo {
     };
 
     //------------------------------------------------------------------------------------------------------------------
-    // Finds and returns a list of all contractors from DB
-    public List<ContractorUser> findContractors(){
+    // Finds and returns a list of all contractors with the same manager
+    public List<ContractorUser> findContractorByManager(String searchTerm){
 
         // Define sql code
-        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id WHERE active = 1" ;
+        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id where manager_id = '"+ searchTerm+"' AND active = 1" ;
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
@@ -149,6 +150,37 @@ public class StaffRepoJDBC implements StaffRepo {
         }
 
         return contractorUserList;
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Finds and returns a contractor based on id (List to handle DB errors)
+    public int getContractorByUser(long userId){
+
+        // Define sql code
+        String sql = "Select contractor_id from contractors where user_id = '"+ userId+"'";
+        int tempId = 0;
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        List<ContractorUser> contractorUserList = new ArrayList<ContractorUser>();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet temp = st.executeQuery(sql);
+
+            while(temp.next()){
+                tempId = temp.getInt(1);
+            }
+            return tempId;
+
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tempId;
     };
 
     //------------------------------------------------------------------------------------------------------------------
@@ -253,4 +285,107 @@ public class StaffRepoJDBC implements StaffRepo {
 
         return managerUserList;
     };
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Finds and returns a contractor based on id (List to handle DB errors)
+    public List<ManagerUser> findManagerById(int searchId){
+
+        // Define sql code
+        String sql = "Select manager_id, managers.user_id, first_name, last_name, email, active from managers inner join users on managers.user_id = users.user_id WHERE active = 1 AND managers.manager_id = '"+ searchId +"'" ;
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        List<ManagerUser> managerUserList = new ArrayList<ManagerUser>();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet temp = st.executeQuery(sql);
+
+            //----------------------------------------------------------------------------------------------------------
+            // Maps the data to a Contractor list
+            while (temp.next()) {
+                managerUserList.add(new ManagerUser(temp.getInt(1),
+                        temp.getInt(2),
+                        temp.getString(3),
+                        temp.getString(4),
+                        temp.getString(5),
+                        temp.getBoolean(6)));
+
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return managerUserList;
+    };
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Update managers details
+    public void updateManager(ManagerUpdated managerUpdated) {
+
+        // Define sql code, pulling data from passed TimeSheetMade object
+        String sql = "update managers inner join users on managers.user_id = users.user_id Set first_name = '"+
+                managerUpdated.getFirst_name() +"', last_name ='"+ managerUpdated.getLast_name() +"', email ='"+
+                managerUpdated.getEmail() +"' WHERE manager_id = '"+ managerUpdated.getManager_id() +"'";
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Upadtes users password
+    public void updateManagerPassword(int managerId, String newPassword) {
+
+        // Define sql code, pulling data from passed TimeSheetMade object
+        String sql = "update managers inner join users on managers.user_id = users.user_id Set password ='"+
+                newPassword +"' WHERE manager_id = '"+ managerId +"'";
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Finds and returns a list of all contractors from DB
+    public void deactivateManager(int managerId) {
+
+        // Define sql code, pulling data from passed TimeSheetMade object
+        String sql = "update managers inner join users on managers.user_id = users.user_id Set active = 0 WHERE " +
+                "manager_id = '"+ managerId +"'";
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Executes the sql code
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Outputs DBG error message on DB connection failure
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

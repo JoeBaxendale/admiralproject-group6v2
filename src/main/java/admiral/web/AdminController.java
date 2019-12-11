@@ -8,14 +8,13 @@ import admiral.service.StaffCreator;
 import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
 import admiral.service.events.ContractorUpdated;
-import admiral.service.events.TimeSheetMade;
+import admiral.service.events.ManagerUpdated;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -29,16 +28,19 @@ public class AdminController {
     // Finder for the Time Sheet queries
     private StaffFinder finder;
 
+    private PasswordEncoder passwordEncoder;
+
     //------------------------------------------------------------------------------------------------------------------
     // Constructor setting creator
-    public AdminController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder) {
+    public AdminController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder, PasswordEncoder iPasswordEncoder) {
         staffCreator = iStaffCreator;
         finder = iFinder;
+        passwordEncoder = iPasswordEncoder;
     }
 
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
-    @GetMapping(path = "/Manager/{id}")
+    @GetMapping(path = "/ContractorDash/{id}")
     public String contractorManager(@PathVariable("id") String managerId, Model model) {
 
         List<ContractorUser> contractorsUnderManager;
@@ -59,7 +61,7 @@ public class AdminController {
         // Open managers page
         model.addAttribute("managersKey",managers);
         model.addAttribute("searchKey",managerId);
-        return "contractor_manager";
+        return "contractor_dashboard";
     }
 
     public List<ContractorUser> getManagerNames(List<ContractorUser> iContractors, List<ManagerUser> iManagers){
@@ -124,7 +126,7 @@ public class AdminController {
         staffCreator.updateContractor(contractorUpdated);
 
         // Open managers page
-        return "redirect:/Manager/All";
+        return "redirect:/ContractorDash/All";
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -143,8 +145,17 @@ public class AdminController {
     // Mangers page to manager users
     @RequestMapping(path = "/PasswordContractorDetails/{id}", method = RequestMethod.POST)
     public String ContractorPasswordProcess(@PathVariable("id") String contractorId,
-                                            @ModelAttribute("contractorKey") @Valid PasswordForm passwordForm,
+                                            @ModelAttribute("passKey") @Valid PasswordForm passwordForm,
                                             BindingResult bindingResult, Model model) {
+
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Check that the supplied end date is later or the same as the start date
+        if ((passwordForm.getPassword1() != null) & (passwordForm.getPassword2() != null)){
+            if(!passwordForm.getPassword1().equals(passwordForm.getPassword2())) {
+                bindingResult.rejectValue("password2", "error.password2", "Passwords must match");
+            }
+        }
 
         //--------------------------------------------------------------------------------------------------------------
         // Validate the form, else force resubmission
@@ -154,31 +165,142 @@ public class AdminController {
             return "contractor_password";
         }
 
-        //--------------------------------------------------------------------------------------------------------------
-        // Check that the supplied end date is later or the same as the start date
-        if ((passwordForm.getPassword1() != null) & (passwordForm.getPassword2() != null)){
-            if(!passwordForm.getPassword1().equals(passwordForm.getPassword2())) {
-                bindingResult.rejectValue("getPassword2", "error.password1", "Passwords must match");
-            }
-        }
 
         // Breaks without encrypting
-        //staffCreator.updateContractorPassword(Integer.parseInt(contractorId), passwordForm.getPassword1());
+        String tempPassword = passwordEncoder.encode(passwordForm.getPassword1());
+        staffCreator.updateContractorPassword(Integer.parseInt(contractorId), tempPassword);
 
         // Open managers page
-        return "redirect:/Manager/All";
+        return "redirect:/ContractorDash/All";
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    // Mangers page to manager users
-    @RequestMapping(path = "/Deactivate/{id}", method = RequestMethod.GET)
+    // Disables a contractor account
+    @RequestMapping(path = "/DeactivateContractor/{id}", method = RequestMethod.GET)
     public String deactivateContractor(@PathVariable("id") String contractorId, Model model) {
 
 
         staffCreator.deactivateContractor(Integer.parseInt(contractorId));
 
         // Open managers page
-        return "redirect:/Manager/All";
+        return "redirect:/ContractorDash/All";
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @GetMapping(path = "/ManagerDash")
+    public String managerManager(Model model) {
+
+        // Creates and populates a list of TimeSheets, passes it to the dashboard page
+        List<ManagerUser> managers = finder.findManagers();
+        model.addAttribute("managers",managers);
+
+        // Open managers page
+        return "manager_dashboard";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @GetMapping(path = "/Manager/{id}")
+    public String managerEditor(@PathVariable("id") String managerId, Model model) {
+
+        List<ManagerUser> manager = finder.findManagerById(Integer.parseInt(managerId));
+
+        StaffForm staffForm = new StaffForm(
+                manager.get(0).getManager_id(),
+                manager.get(0).getFirstName(),
+                manager.get(0).getLastName(),
+                manager.get(0).getStaffEmail());
+
+        model.addAttribute("managerKey", staffForm);
+        model.addAttribute("managerId", managerId);
+
+        // Open managers page
+        return "manager";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @RequestMapping(path = "/ManagerUpdate/{id}", method = RequestMethod.POST)
+    public String managerDetails(@PathVariable("id") String managerId,
+                                    @ModelAttribute("managerKey") @Valid StaffForm managerForm,
+                                    BindingResult bindingResult, Model model) {
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Validate the form, else force resubmission
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("managerKey", managerForm);
+            model.addAttribute("managerId", managerId);
+            return "manager";
+        }
+
+        ManagerUpdated managerUpdated = new ManagerUpdated(
+                managerForm.getManager_id(),
+                managerForm.getFirst_name(),
+                managerForm.getLast_name(),
+                managerForm.getEmail());
+
+        staffCreator.updateManager(managerUpdated);
+
+        // Open managers page
+        return "redirect:/ManagerDash";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Set the managers password
+    @RequestMapping(path = "/SetPasswordManager/{id}", method = RequestMethod.GET)
+    public String setManagersPassword(@PathVariable("id") String managerId, Model model) {
+
+        model.addAttribute("passKey", new PasswordForm());
+        model.addAttribute("managerId", managerId);
+
+        // Open managers page
+        return "manager_password";
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @RequestMapping(path = "/PasswordManagerDetails/{id}", method = RequestMethod.POST)
+    public String ManagerPasswordProcess(@PathVariable("id") String managerId,
+                                            @ModelAttribute("passKey") @Valid PasswordForm passwordForm,
+                                            BindingResult bindingResult, Model model) {
+
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Check that the supplied end date is later or the same as the start date
+        if ((passwordForm.getPassword1() != null) & (passwordForm.getPassword2() != null)){
+            if(!passwordForm.getPassword1().equals(passwordForm.getPassword2())) {
+                bindingResult.rejectValue("password2", "error.password2", "Passwords must match");
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Validate the form, else force resubmission
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("passKey", passwordForm);
+            model.addAttribute("managerId", managerId);
+            return "manager_password";
+        }
+
+
+        // Breaks without encrypting
+        String tempPassword = passwordEncoder.encode(passwordForm.getPassword1());
+        staffCreator.updateManagerPassword(Integer.parseInt(managerId), tempPassword);
+
+        // Open managers page
+        return "redirect:/ManagerDash";
+    }
+
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Mangers page to manager users
+    @RequestMapping(path = "/DeactivateManager/{id}", method = RequestMethod.GET)
+    public String deactivateManager(@PathVariable("id") String managerId, Model model) {
+
+
+        staffCreator.deactivateManager(Integer.parseInt(managerId));
+
+        // Open managers page
+        return "redirect:/ManagerDash";
+    }
 }

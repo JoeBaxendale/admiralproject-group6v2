@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <!-- ############################################################################################################### -->
 <!-- Page settings and formatting information -->
@@ -156,7 +156,6 @@
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
 
-
                                             <!-- ####################################################################### -->
                                             <!-- Account management link -->
                                             <div class="account-dropdown__body">
@@ -190,140 +189,51 @@
                     <div class="m-t-30">
                         <div class="col-lg-6">
                             <div class="card">
-                                <div class="card-header">Admiral Contractor Editor</div>
+                                <div class="card-header">Managers Dashboard</div>
                                 <div class="card-body">
 
                                     <!-- ########################################################################### -->
                                     <!-- Greeting for user -->
                                     <div class="card-title">
-                                        <h3 class="text-center title-2">
+                                        <h3 class="text-center title-2">Manage Managers</h3>
+                                    </div>
 
-                                            Hello
-
-                                            <div sec:authorize="isAuthenticated()">
-                                                <div sec:authentication="name"></div>
-                                            </div>
-
-                                            Edit contractor</h3>
+                                    <div id=none_found th:if="${#lists.isEmpty(managers)}">
+                                        <br><br><p>No managers available</p><br><br>
                                     </div>
 
                                     <!-- ########################################################################### -->
-                                    <!-- Form for Time Sheets submission -->
-                                    <div>
-                                    <form action="#" method="post" th:action="@{/ContractorUpdate/{id} (id=${contractorId})}" th:object="${contractorKey}">
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the manager -->
-                                        <div class="form-group">
-
-                                            <br><label class="control-label mb-1">Manager</label>
-                                            <select id="managers_select" class="form-control" th:field="*{manager_id}">
-
-                                                <tr th:each="manager : ${managersKey}">
-                                                    <div id="manager_select" th:if="${manager.manager_id} == ${managerId}">
-                                                        <option th:attr="value= ${manager.manager_id}" selected="selected" th:text="${manager.firstName} + ' ' + ${manager.lastName}"></option>
-                                                    </div>
-                                                    <div id="not_manager" th:if="${manager.manager_id} != ${managerId}">
-                                                        <option th:attr="value= ${manager.manager_id}" th:text="${manager.firstName} + ' ' + ${manager.lastName}"></option>
-                                                    </div>
-                                                </tr>
-
-                                            </select>
-                                            <span class="help-block" data-valmsg-for="cc-number" dta-valmsg-replace="true"></span>
-                                        </div>
-
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the overtime -->
-                                        <div class="form-group">
-                                            <label class="control-label mb-1">First Name</label>
-                                            <input class="form-control"
-                                                   th:field="*{first_name}"
-                                                   type="text"/>
-
+                                    <!-- Table of contractors -->
+                                    <div id=ContractorListContainer th:if="${not #lists.isEmpty(managers)}">
+                                        <br>
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">E-mail</th>
+                                                <th scope="col">Edit</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
                                             <!-- ################################################################### -->
-                                            <!-- Error message for the number of days -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{first_name}"
-                                                 th:if="${#fields.hasErrors('first_name')}">
-                                                First name Error
-                                            </div>
-                                            <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                        </div>
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the overtime -->
-                                        <div class="form-group">
-                                            <label class="control-label mb-1">Last Name</label>
-                                            <input class="form-control"
-                                                   th:field="*{last_name}"
-                                                   type="text"/>
-
-                                            <!-- ################################################################### -->
-                                            <!-- Error message for the number of days -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{last_name}"
-                                                 th:if="${#fields.hasErrors('last_name')}">
-                                                Last name Error
-                                            </div>
-                                            <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                        </div>
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the overtime -->
-                                        <div class="form-group">
-                                            <label class="control-label mb-1">Email</label>
-                                            <input class="form-control"
-                                                   th:field="*{email}"
-                                                   type="text"/>
-
-                                            <!-- ################################################################### -->
-                                            <!-- Error message for the number of days -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{email}"
-                                                 th:if="${#fields.hasErrors('email')}">
-                                                Email Error
-                                            </div>
-                                            <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                        </div>
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the Start date -->
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <center><a th:href="@{/SetPasswordContractor/{id} (id=${contractorId}) }"
-                                                           th:id="'contractorPassLink'+ ${contractorId}">
-                                                    <button id="set_password" class="btn btn-lg btn-info btn-block">
-                                                    <span>Change password</span>
-                                                </button></a></center>
-                                            </div>
-
-                                            <!-- ################################################################### -->
-                                            <!-- Form field for the end date -->
-                                            <div class="col-6">
-                                                <center><a th:href="@{/DeactivateContractor/{id} (id=${contractorId}) }"
-                                                           th:id="'contractorDeactiveLink'+ ${contractorId}">
-                                                    <button id="set_deactive" class="btn btn-lg btn-info btn-block">
-                                                        <span>Deactivate account</span>
-                                                    </button></a></center>
-                                            </div>
-                                            <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                        </div><br>
-
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form submission button -->
-                                        <div>
-                                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                <span id="payment-button-amount">Submit</span>
-                                            </button>
-                                        </div>
-                                    </form>
+                                            <!-- Get each contractor information -->
+                                            <tr th:each="currManager : ${managers}">
+                                                <td th:text="${currManager.firstName} + ' ' + ${currManager.lastName}"></td>
+                                                <td th:text="${currManager.staffEmail}"></td>
+                                                <td><a th:href="@{/Manager/{id} (id=${currManager.manager_id}) }"
+                                                   th:id="'managerLink'+ ${currManager.manager_id}">Edit
+                                                </a></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
 
                     <!-- ########################################################################################### -->
                     <!-- Footer -->

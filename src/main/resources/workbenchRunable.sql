@@ -49,9 +49,14 @@ CREATE TABLE IF NOT EXISTS users
 
     
 insert into users (user_id, first_name, last_name, email, password, role_id, active) values (1,'Karla', 'Mendivelso', 'karla@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 1, 1);
-insert into users (user_id, first_name, last_name, email, password, role_id, active) values (2,'Joe', 'Baxendale', 'joe@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 2, 1);
-insert into users (user_id, first_name, last_name, email, password, role_id, active) values (3,'Daniel', 'Addis', 'daniel@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 3, 1);
-insert into users (user_id, first_name, last_name, email, password, role_id, active) values (4,'Dexter', 'Gordon', 'dexter@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 3, 1);
+insert into users (user_id, first_name, last_name, email, password, role_id, active) values (2,'Peter', 'Bridge', 'peter@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 1, 1);
+
+insert into users (user_id, first_name, last_name, email, password, role_id, active) values (3,'Joe', 'Baxendale', 'joe@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 2, 1);
+
+insert into users (user_id, first_name, last_name, email, password, role_id, active) values (4,'Daniel', 'Addis', 'daniel@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 3, 1);
+insert into users (user_id, first_name, last_name, email, password, role_id, active) values (5,'Dexter', 'Gordon', 'dexter@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 3, 1);
+insert into users (user_id, first_name, last_name, email, password, role_id, active) values (6,'Dave', 'Lance', 'dave@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 3, 1);
+insert into users (user_id, first_name, last_name, email, password, role_id, active) values (7,'Sara', 'Beckket', 'sara@hotmail.com', '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G', 3, 1);
 
 -- -----------------------------------------------------
 -- Table `managers`
@@ -69,8 +74,6 @@ CREATE TABLE IF NOT EXISTS managers
 
 insert into managers(manager_id, user_id) values(1,1);
 insert into managers(manager_id, user_id) values(2,2);
-insert into managers(manager_id, user_id) values(3,3);
-insert into managers(manager_id, user_id) values(4,4);
 
 -- -----------------------------------------------------
 -- Table `contractors`
@@ -88,10 +91,10 @@ CREATE TABLE IF NOT EXISTS contractors
 )
     ENGINE = InnoDB;
 
-INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (1,1,1);
-INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (2,2,2);
-INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (3,3,3);
-INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (4,4,4);
+INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (1,4,1);
+INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (2,5,2);
+INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (3,6,2);
+INSERT INTO contractors(contractor_id,user_id,manager_id) VALUES (4,7,2);
 
 -- -----------------------------------------------------
 -- Table `time_sheets`

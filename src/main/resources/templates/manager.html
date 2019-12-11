@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!-- ############################################################################################################### -->
 <!-- Page settings and formatting information -->
@@ -73,9 +73,16 @@
                     </li>
 
                     <!-- ########################################################################################### -->
+                    <!-- Link to the managers dashboard -->
+                    <li class="active">
+                        <a href="/ManagerDash">
+                            <i class="fas fa-table"></i>Managers</a>
+                    </li>
+
+                    <!-- ########################################################################################### -->
                     <!-- Link to the contractor dashboard -->
                     <li class="active">
-                        <a href="/Manager/All">
+                        <a href="/ContractorDash/All">
                             <i class="fas fa-table"></i>Contractors</a>
                     </li>
 
@@ -126,29 +133,12 @@
                         <!-- ####################################################################################### -->
                         <!-- Possible search bar -->
                         <form class="form-header" action="" method="POST">
-                            <!-- <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." /> -->
-                            <!-- <button class="au-btn--submit" type="submit">
-                                <i class="zmdi zmdi-search"></i>
-                            </button> -->
                         </form>
 
 
                         <div class="header-button">
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
-
-
-                                    <!--                                    <div class="image">-->
-                                    <!--                                        <img src="/images/icon/avatar-01.jpg" alt="John Doe" />-->
-                                    <!--                                    </div>-->
-                                    <!--                                    <div class="content">-->
-                                    <!--                                        <a class="js-acc-btn" href="#">john doe</a>-->
-
-                                    <!-- ########################################################################### -->
-                                    <!-- Logo for the top bar -->
-                                    <!--                                    <div class="image">-->
-                                    <!--                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
-                                    <!--                                    </div>-->
 
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
@@ -165,23 +155,7 @@
                                     <!-- Account dropdown -->
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
-                                            <!-- ################################################################### -->
-                                            <!-- Profile image -->
-                                            <!--                                            <div class="image">-->
-                                            <!--                                                <a href="#">-->
-                                            <!--                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
-                                            <!--                                                </a>-->
-                                            <!--                                            </div>-->
 
-                                            <!--                                            &lt;!&ndash; ################################################################### &ndash;&gt;-->
-                                            <!--                                            &lt;!&ndash; Account information for dropdown &ndash;&gt;-->
-                                            <!--                                            <div class="content">-->
-                                            <!--                                                <h5 class="name">-->
-                                            <!--                                                    <a href="#">john doe</a>-->
-                                            <!--                                                </h5>-->
-                                            <!--                                                <span class="email">johndoe@example.com</span>-->
-                                            <!--                                            </div>-->
-                                            <!--                                        </div>-->
 
                                             <!-- ####################################################################### -->
                                             <!-- Account management link -->
@@ -216,78 +190,123 @@
                     <div class="m-t-30">
                         <div class="col-lg-6">
                             <div class="card">
-                                <div class="card-header">User Manager</div>
+                                <div class="card-header">Admiral Contractor Editor</div>
                                 <div class="card-body">
 
                                     <!-- ########################################################################### -->
                                     <!-- Greeting for user -->
                                     <div class="card-title">
-                                        <h3 class="text-center title-2">Manage Contractors</h3>
+                                        <h3 class="text-center title-2">
+
+                                            Hello
+
+                                            <div sec:authorize="isAuthenticated()">
+                                                <div sec:authentication="name"></div>
+                                            </div>
+
+                                            Edit manager</h3>
                                     </div>
 
                                     <!-- ########################################################################### -->
-                                    <!-- Table of contractors -->
-                                    <br><h3>Filter By Manager: </h3>
-                                    <div id=filter th:if="${not #lists.isEmpty(managersKey)}">
-                                        <select onchange="if (this.value) window.location.href=this.value">
+                                    <!-- Form for Time Sheets submission -->
+                                    <div>
+                                    <form action="#" method="post" th:action="@{/ManagerUpdate/{id} (id=${managerId})}" th:object="${managerKey}">
 
-                                            <div id="all" th:if="${searchKey} == All">
-                                                <option value="All" selected="selected">All Contractors</option>
-                                            </div>
-                                            <div id="not_all" th:if="${searchKey} != All">
-                                                <option value="All">All Contractors</option>
-                                            </div>
+                                        <!-- ####################################################################### -->
+                                        <!-- Form field for the manager -->
+                                        <div class="form-group">
+
+                                            <input class="form-control" th:field="*{manager_id}", type="hidden">
+                                        </div>
 
 
-                                            <tr th:each="currManager : ${managersKey}">
-                                                <div id="manager" th:if="${searchKey} == ${currManager.manager_id}">
-                                                    <option th:attr="value= ${currManager.manager_id}" selected="selected" th:text="${currManager.firstName} + ' ' + ${currManager.lastName}"></option>
-                                                </div>
-                                                <div id="not_manager" th:if="${searchKey} != ${currManager.manager_id}">
-                                                    <option th:attr="value= ${currManager.manager_id}" th:text="${currManager.firstName} + ' ' + ${currManager.lastName}"></option>
-                                                </div>
-                                            </tr>
-                                        </select>
-                                    </div>
+                                        <!-- ####################################################################### -->
+                                        <!-- Form field for the overtime -->
+                                        <div class="form-group">
+                                            <label class="control-label mb-1">First Name</label>
+                                            <input class="form-control"
+                                                   th:field="*{first_name}"
+                                                   type="text"/>
 
-                                    <div id=none_found th:if="${#lists.isEmpty(contractorsUnderManager)}">
-                                        <br><br><p>No contractors available</p><br><br>
-                                    </div>
-
-                                    <!-- ########################################################################### -->
-                                    <!-- Table of contractors -->
-                                    <div id=ContractorListContainer th:if="${not #lists.isEmpty(contractorsUnderManager)}">
-                                        <br>
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">Manager</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">E-mail</th>
-                                                <th scope="col">Edit</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
                                             <!-- ################################################################### -->
-                                            <!-- Get each contractor information -->
-                                            <tr th:each="currContractor : ${contractorsUnderManager}">
-                                                <td th:text="${currContractor.manager_name}"></td>
-                                                <td th:text="${currContractor.firstName} + ' ' + ${currContractor.lastName}"></td>
-                                                <td th:text="${currContractor.staffEmail}"></td>
-                                                <td><a th:href="@{/Contractor/{id} (id=${currContractor.contractor_id}) }"
-                                                   th:id="'contractorLink'+ ${currContractor.contractor_id}">Edit
-                                                </a></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            <!-- Error message for the number of days -->
+                                            <div class="alert alert-danger"
+                                                 th:errors="*{first_name}"
+                                                 th:if="${#fields.hasErrors('first_name')}">
+                                                First name Error
+                                            </div>
+                                        </div>
 
+                                        <!-- ####################################################################### -->
+                                        <!-- Form field for the overtime -->
+                                        <div class="form-group">
+                                            <label class="control-label mb-1">Last Name</label>
+                                            <input class="form-control"
+                                                   th:field="*{last_name}"
+                                                   type="text"/>
+
+                                            <!-- ################################################################### -->
+                                            <!-- Error message for the number of days -->
+                                            <div class="alert alert-danger"
+                                                 th:errors="*{last_name}"
+                                                 th:if="${#fields.hasErrors('last_name')}">
+                                                Last name Error
+                                            </div>
+                                        </div>
+
+                                        <!-- ####################################################################### -->
+                                        <!-- Form field for the overtime -->
+                                        <div class="form-group">
+                                            <label class="control-label mb-1">Email</label>
+                                            <input class="form-control"
+                                                   th:field="*{email}"
+                                                   type="text"/>
+
+                                            <!-- ################################################################### -->
+                                            <!-- Error message for the number of days -->
+                                            <div class="alert alert-danger"
+                                                 th:errors="*{email}"
+                                                 th:if="${#fields.hasErrors('email')}">
+                                                Email Error
+                                            </div>
+                                        </div>
+
+                                        <!-- ####################################################################### -->
+                                        <!-- Form field for the Start date -->
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <center><a th:href="@{/SetPasswordManager/{id} (id=${managerId}) }"
+                                                           th:id="'managerPassLink'+ ${managerId}">
+                                                    <button id="set_password" class="btn btn-lg btn-info btn-block">
+                                                    <span>Change password</span>
+                                                </button></a></center>
+                                            </div>
+
+                                            <!-- ################################################################### -->
+                                            <!-- Form field for the end date -->
+                                            <div class="col-6">
+                                                <center><a th:href="@{/DeactivateManager/{id} (id=${managerId}) }"
+                                                           th:id="'ManagerDeactiveLink'+ ${managerId}">
+                                                    <button id="set_deactive" class="btn btn-lg btn-info btn-block">
+                                                        <span>Deactivate account</span>
+                                                    </button></a></center>
+                                            </div>
+                                        </div><br>
+
+
+                                        <!-- ####################################################################### -->
+                                        <!-- Form submission button -->
+                                        <div>
+                                            <button id="submit-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                <span id="button-button-text">Submit</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
 
                     <!-- ########################################################################################### -->
                     <!-- Footer -->

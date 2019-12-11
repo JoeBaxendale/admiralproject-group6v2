@@ -7,6 +7,7 @@ import admiral.domain.ManagerUser;
 import admiral.service.StaffCreator;
 import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
+import admiral.service.TimeSheetFinder;
 import admiral.service.events.ContractorUpdated;
 import admiral.service.events.TimeSheetMade;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Controller for Time Sheet and Time Sheet processing
+// Paired Programming between Dan and Dexter
 @Controller
 public class TimeSheetController {
 
@@ -31,13 +33,15 @@ public class TimeSheetController {
 
     // Finder for the Time Sheet queries
     private StaffFinder finder;
+    private TimeSheetFinder tFinder;
 
     //------------------------------------------------------------------------------------------------------------------
     // Constructor setting creator
-    public TimeSheetController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder) {
+    public TimeSheetController(TimeSheetCreator iCreator, StaffCreator iStaffCreator, StaffFinder iFinder, TimeSheetFinder iTFinder) {
         timeSheetCreator = iCreator;
         staffCreator = iStaffCreator;
         finder = iFinder;
+        tFinder = iTFinder;
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -45,7 +49,6 @@ public class TimeSheetController {
     @RequestMapping(path = "/Timesheet", method = RequestMethod.GET)
     public String timeSheetDetails(Model model) {
 
-        System.out.println("---------------------------------------------------------------------------------------->");
         // Gets date for form
         LocalDate currentDate = LocalDate.now();
         LocalDate weekPast = currentDate.minusDays(7);
@@ -59,15 +62,24 @@ public class TimeSheetController {
     //------------------------------------------------------------------------------------------------------------------
     // Time sheet details page; form validation, processing and receipt page
     @RequestMapping(path = "/TimesheetDetails", method = RequestMethod.POST)
-    public String timeSheetProcess(@ModelAttribute("timesheetKey") @Valid TimeSheetForm timeSheet,
+    public String timeSheetProcess(@SessionAttribute("loginEmail") String loginEmail, @ModelAttribute("timesheetKey") @Valid TimeSheetForm timeSheet,
                                    BindingResult bindingResult,
                                    Model model) {
+
+        long userId = tFinder.getUserIdByEmail(loginEmail);
+        int contractorId = finder.getContractorByUser(userId);
 
         //--------------------------------------------------------------------------------------------------------------
         // Check that the supplied end date is later or the same as the start date
         if ((timeSheet.getStart_date() != null) & (timeSheet.getEnd_date() != null)){
             if(timeSheet.getStart_date().compareTo(timeSheet.getEnd_date()) > 0) {
                 bindingResult.rejectValue("end_date", "error.end_date", "End date must be after the start date");
+            }
+
+            if((timeSheet.getNumber_of_days() < 1 && timeSheet.getWorked_saturday()) ||
+                    (timeSheet.getNumber_of_days() < 1 && timeSheet.getWorked_sunday()) ||
+                    (timeSheet.getNumber_of_days() < 2 && timeSheet.getWorked_saturday() && timeSheet.getWorked_sunday())) {
+                bindingResult.rejectValue("number_of_days", "error.number_of_days", "Need to increase the number of days worked to reflect working the weekend");
             }
         }
 
@@ -79,7 +91,6 @@ public class TimeSheetController {
         }
 
         String tempNotes = timeSheet.getNotes();
-        System.out.println("------------------------------------------------------------>"+ timeSheet.getWorked_saturday() + timeSheet.getWorked_sunday());
 
         if(timeSheet.getWorked_sunday() == true){
             tempNotes = "Worked Sunday;" + tempNotes;
@@ -91,10 +102,11 @@ public class TimeSheetController {
         }
 
 
+
         //--------------------------------------------------------------------------------------------------------------
         // Inserts the form details to the database
         TimeSheetMade timeSheetEvent = new TimeSheetMade(
-                2,
+                contractorId,
                 timeSheet.getNumber_of_days(),
                 timeSheet.getOvertime(),
                 timeSheet.getStart_date(),
