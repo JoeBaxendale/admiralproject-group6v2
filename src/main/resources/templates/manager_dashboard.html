@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <!-- ############################################################################################################### -->
 <!-- Page settings and formatting information -->
@@ -68,7 +68,7 @@
                     <!-- ########################################################################################### -->
                     <!-- Link to the Time Sheet dashboard -->
                     <li class="active">
-                        <a href="/timesheetDashboard/Pending">
+                        <a href="/timesheetDashboard">
                             <i class="fas fa-table"></i>Dashboard</a>
                     </li>
 
@@ -140,7 +140,6 @@
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
 
-
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
                                     <div class="content">
@@ -190,77 +189,51 @@
                     <div class="m-t-30">
                         <div class="col-lg-6">
                             <div class="card">
-                                <div class="card-header">Admiral Contractor Editor</div>
+                                <div class="card-header">Managers Dashboard</div>
                                 <div class="card-body">
 
                                     <!-- ########################################################################### -->
                                     <!-- Greeting for user -->
                                     <div class="card-title">
-                                        <h3 class="text-center title-2">
+                                        <h3 class="text-center title-2">Manage Managers</h3>
+                                    </div>
 
-                                            Hello
-
-                                            <div sec:authorize="isAuthenticated()">
-                                                <div sec:authentication="name"></div>
-                                            </div>
+                                    <div id=none_found th:if="${#lists.isEmpty(managers)}">
+                                        <br><br><p>No managers available</p><br><br>
                                     </div>
 
                                     <!-- ########################################################################### -->
-                                    <!-- Form for Time Sheets submission -->
-                                    <div>
-                                    <form action="#" method="post" th:action="@{/PasswordContractorDetails/{id} (id=${contractorId})}" th:object="${passKey}">
-
-
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the overtime -->
-                                        <div class="form-group">
-                                            <label class="control-label mb-1">Password</label>
-                                            <input class="form-control"
-                                                   th:field="*{password1}"
-                                                   type="text"/>
-
+                                    <!-- Table of contractors -->
+                                    <div id=ContractorListContainer th:if="${not #lists.isEmpty(managers)}">
+                                        <br>
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">E-mail</th>
+                                                <th scope="col">Edit</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
                                             <!-- ################################################################### -->
-                                            <!-- Error message for the number of days -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{password1}"
-                                                 th:if="${#fields.hasErrors('password1')}">
-                                                Password Error
-                                            </div>
-                                            <span class="help-block" data-valmsg-for="password1" data-valmsg-replace="true"></span>
-                                        </div>
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the overtime -->
-                                        <div class="form-group">
-                                            <label class="control-label mb-1">Re-Enter Password</label>
-                                            <input class="form-control"
-                                                   th:field="*{password2}"
-                                                   type="text"/>
-
-                                            <!-- ################################################################### -->
-                                            <!-- Error message for the number of days -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{password2}"
-                                                 th:if="${#fields.hasErrors('password2')}">
-                                                password Error
-                                            </div>
-                                            <span class="help-block" data-valmsg-for="password2" data-valmsg-replace="true"></span>
-                                        </div><br>
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form submission button -->
-                                        <div>
-                                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                <span id="payment-button-amount">Submit</span>
-                                            </button>
-                                        </div>
-                                    </form>
+                                            <!-- Get each contractor information -->
+                                            <tr th:each="currManager : ${managers}">
+                                                <td th:text="${currManager.firstName} + ' ' + ${currManager.lastName}"></td>
+                                                <td th:text="${currManager.staffEmail}"></td>
+                                                <td><a th:href="@{/Manager/{id} (id=${currManager.manager_id}) }"
+                                                   th:id="'managerLink'+ ${currManager.manager_id}">Edit
+                                                </a></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
 
                     <!-- ########################################################################################### -->
                     <!-- Footer -->

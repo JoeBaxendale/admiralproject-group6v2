@@ -68,7 +68,7 @@
                     <!-- ########################################################################################### -->
                     <!-- Link to the Time Sheet dashboard -->
                     <li class="active">
-                        <a href="/timesheetDashboard/Pending">
+                        <a href="/timesheetDashboard">
                             <i class="fas fa-table"></i>Dashboard</a>
                     </li>
 
@@ -140,7 +140,6 @@
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
 
-
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
                                     <div class="content">
@@ -156,6 +155,7 @@
                                     <!-- Account dropdown -->
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
+
 
                                             <!-- ####################################################################### -->
                                             <!-- Account management link -->
@@ -203,56 +203,102 @@
                                             <div sec:authorize="isAuthenticated()">
                                                 <div sec:authentication="name"></div>
                                             </div>
+
+                                            Edit manager</h3>
                                     </div>
 
                                     <!-- ########################################################################### -->
                                     <!-- Form for Time Sheets submission -->
                                     <div>
-                                    <form action="#" method="post" th:action="@{/PasswordContractorDetails/{id} (id=${contractorId})}" th:object="${passKey}">
+                                    <form action="#" method="post" th:action="@{/ManagerUpdate/{id} (id=${managerId})}" th:object="${managerKey}">
 
+                                        <!-- ####################################################################### -->
+                                        <!-- Form field for the manager -->
+                                        <div class="form-group">
+
+                                            <input class="form-control" th:field="*{manager_id}", type="hidden">
+                                        </div>
 
 
                                         <!-- ####################################################################### -->
                                         <!-- Form field for the overtime -->
                                         <div class="form-group">
-                                            <label class="control-label mb-1">Password</label>
+                                            <label class="control-label mb-1">First Name</label>
                                             <input class="form-control"
-                                                   th:field="*{password1}"
+                                                   th:field="*{first_name}"
                                                    type="text"/>
 
                                             <!-- ################################################################### -->
                                             <!-- Error message for the number of days -->
                                             <div class="alert alert-danger"
-                                                 th:errors="*{password1}"
-                                                 th:if="${#fields.hasErrors('password1')}">
-                                                Password Error
+                                                 th:errors="*{first_name}"
+                                                 th:if="${#fields.hasErrors('first_name')}">
+                                                First name Error
                                             </div>
-                                            <span class="help-block" data-valmsg-for="password1" data-valmsg-replace="true"></span>
                                         </div>
 
                                         <!-- ####################################################################### -->
                                         <!-- Form field for the overtime -->
                                         <div class="form-group">
-                                            <label class="control-label mb-1">Re-Enter Password</label>
+                                            <label class="control-label mb-1">Last Name</label>
                                             <input class="form-control"
-                                                   th:field="*{password2}"
+                                                   th:field="*{last_name}"
                                                    type="text"/>
 
                                             <!-- ################################################################### -->
                                             <!-- Error message for the number of days -->
                                             <div class="alert alert-danger"
-                                                 th:errors="*{password2}"
-                                                 th:if="${#fields.hasErrors('password2')}">
-                                                password Error
+                                                 th:errors="*{last_name}"
+                                                 th:if="${#fields.hasErrors('last_name')}">
+                                                Last name Error
                                             </div>
-                                            <span class="help-block" data-valmsg-for="password2" data-valmsg-replace="true"></span>
+                                        </div>
+
+                                        <!-- ####################################################################### -->
+                                        <!-- Form field for the overtime -->
+                                        <div class="form-group">
+                                            <label class="control-label mb-1">Email</label>
+                                            <input class="form-control"
+                                                   th:field="*{email}"
+                                                   type="text"/>
+
+                                            <!-- ################################################################### -->
+                                            <!-- Error message for the number of days -->
+                                            <div class="alert alert-danger"
+                                                 th:errors="*{email}"
+                                                 th:if="${#fields.hasErrors('email')}">
+                                                Email Error
+                                            </div>
+                                        </div>
+
+                                        <!-- ####################################################################### -->
+                                        <!-- Form field for the Start date -->
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <center><a th:href="@{/SetPasswordManager/{id} (id=${managerId}) }"
+                                                           th:id="'managerPassLink'+ ${managerId}">
+                                                    <button id="set_password" class="btn btn-lg btn-info btn-block">
+                                                    <span>Change password</span>
+                                                </button></a></center>
+                                            </div>
+
+                                            <!-- ################################################################### -->
+                                            <!-- Form field for the end date -->
+                                            <div class="col-6">
+                                                <center><a th:href="@{/DeactivateManager/{id} (id=${managerId}) }"
+                                                           th:id="'ManagerDeactiveLink'+ ${managerId}">
+                                                    <button id="set_deactive" class="btn btn-lg btn-info btn-block">
+                                                        <span>Deactivate account</span>
+                                                    </button></a></center>
+                                            </div>
                                         </div><br>
+
 
                                         <!-- ####################################################################### -->
                                         <!-- Form submission button -->
                                         <div>
-                                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                <span id="payment-button-amount">Submit</span>
+                                            <button id="submit-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                <span id="button-button-text">Submit</span>
                                             </button>
                                         </div>
                                     </form>

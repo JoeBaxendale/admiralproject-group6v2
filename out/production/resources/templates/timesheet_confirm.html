@@ -82,12 +82,12 @@
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to login page -->
                             <li>
-                                <a href="/login">Login</a>
+                                <a href="login">Login</a>
                             </li>
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to forget password page -->
                             <li>
-                                <a href="/forget-pass">Forget Password</a>
+                                <a href="forget-pass">Forget Password</a>
                             </li>
                         </ul>
                     </li>
@@ -117,6 +117,7 @@
                             </button> -->
                         </form>
 
+
                         <div class="header-button">
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
@@ -131,9 +132,9 @@
                                     <!-- User name -->
                                     <div class="content">
 <!--                                        <a class="js-acc-btn">-->
-                                        <div sec:authorize="isAuthenticated()">
-                                            <div sec:authentication="name"></div>
-                                        </div>
+                                            <div sec:authorize="isAuthenticated()">
+                                                <div sec:authentication="name"></div>
+                                            </div>
 <!--                                        </a>-->
                                     </div>
 
@@ -146,7 +147,7 @@
                                             <!-- Profile image -->
 <!--                                            <div class="image">-->
 <!--                                                <a href="#">-->
-<!--                                                    <img src="images/icon/avatar-01.jpg" alt=${{first_name}}/>-->
+<!--                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
 <!--                                                </a>-->
 <!--                                            </div>-->
 
@@ -154,9 +155,9 @@
                                             <!-- Account information for dropdown -->
 <!--                                            <div class="content">-->
 <!--                                                <h5 class="name">-->
-<!--                                                    <a href="#">${{first_name}}</a>-->
+<!--                                                    <a href="#">john doe</a>-->
 <!--                                                </h5>-->
-<!--                                                <span class="email">${{email}}</span>-->
+<!--                                                <span class="email">johndoe@example.com</span>-->
 <!--                                            </div>-->
 <!--                                        </div>-->
 
@@ -193,159 +194,38 @@
                     <div class="m-t-30">
                         <div class="col-lg-6">
                             <div class="card">
-                                <div class="card-header">Admiral TimeSheet</div>
+                                <div class="card-header">Admiral TimeSheet Details</div>
                                 <div class="card-body">
 
                                     <!-- ########################################################################### -->
                                     <!-- Greeting for user -->
-                                    <div class="card-title">
-                                        <h3 class="text-center title-2">
-
-                                            Hello
-
-                                            <div sec:authorize="isAuthenticated()">
-                                                <div sec:authentication="name"></div>
-                                            </div>
-
-                                            please fill in your time sheet</h3>
-                                    </div>
+<!--                                    <div class="card-title">-->
+<!--                                        <h3 class="text-center title-2">Hello {Name} please fill in your time sheet</h3>-->
+<!--                                    </div>-->
 
                                     <!-- ########################################################################### -->
-                                    <!-- Form for Time Sheets submission -->
-                                    <div>
-                                    <form action="#" method="post" th:action="@{/TimesheetDetails}" th:object="${timesheetKey}">
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the number of days -->
-                                        <div class="form-group">
-                                            <label class="control-label mb-1">Number of days</label>
-                                            <input value="0"
-                                                   class="form-control"
-                                                   th:field="*{number_of_days}"
-                                                   type="number"
-                                                   min="0"
-                                                   max="7"/>
-                                            <!-- ################################################################### -->
-                                            <!-- Error message for the number of days -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{number_of_days}"
-                                                 th:if="${#fields.hasErrors('number_of_days')}">
-                                                Number of days Error
-                                            </div>
-                                            <span class="help-block" data-valmsg-for="cc-number" dta-valmsg-replace="true"></span>
-                                        </div>
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the number of days -->
-                                        <div class="form-group">
-                                            <label class="control-label mb-1">Of those days I worked:  &emsp;</label>
-                                            <input th:field="*{worked_saturday}"
-                                                   type="checkbox"
-                                                   value="Worked Saturday"/>Worked Saturday &emsp;
-
-                                            <input th:field="*{worked_sunday}"
-                                                   type="checkbox"
-                                                   value="Worked Sunday"/>Worked Sunday &emsp;
-
-                                            <span class="help-block" data-valmsg-for="cc-number" dta-valmsg-replace="true"></span>
-                                        </div>
-
-
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the overtime -->
-                                        <div class="form-group">
-                                            <label class="control-label mb-1">Overtime</label>
-                                            <input placeholder="0"
-                                                   value="0"
-                                                   class="form-control"
-                                                   th:field="*{overtime}"
-                                                   type="number"
-                                                   min="0"
-                                                   max="25"/>
-
-                                            <!-- ################################################################### -->
-                                            <!-- Error message for the number of days -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{overtime}"
-                                                 th:if="${#fields.hasErrors('overtime')}">
-                                                Overtime of days Error
-                                            </div>
-                                            <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                        </div>
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the notes -->
-                                        <div class="form-group has-success">
-                                            <label class="control-label mb-1">Notes</label>
-                                            <input
-                                                    class="form-control"
-                                                    th:field="*{notes}"
-                                                    type="text"/>
-
-                                            <!-- ################################################################### -->
-                                            <!-- Error message for the notes -->
-                                            <div class="alert alert-danger"
-                                                 th:errors="*{notes}"
-                                                 th:if="${#fields.hasErrors('notes')}">
-                                                Notes error
-                                            </div>
-                                            <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                        </div>
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form field for the Start date -->
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label class="control-label mb-1">Start Date</label>
-                                                    <input
-                                                            class="form-control"
-                                                            th:field="*{start_date}"
-                                                            type="date"/>
-
-                                                    <!-- ########################################################### -->
-                                                    <!-- Error message for the start date -->
-                                                    <div class="alert alert-danger"
-                                                         th:errors="*{start_date}"
-                                                         th:if="${#fields.hasErrors('start_date')}">
-                                                        Start date of days Error
-                                                    </div>
-                                                    <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
-                                                </div>
-                                            </div>
-
-                                            <!-- ################################################################### -->
-                                            <!-- Form field for the end date -->
-                                            <div class="col-6">
-                                                <label class="control-label mb-1">End Date</label>
-                                                <div class="input-group">
-                                                    <input id="theDate"
-                                                            class="form-control"
-                                                            th:field="*{end_date}"
-                                                            type="date"/>
-                                                            <!--value="2019-12-12"-->
-
-                                                    <!-- ########################################################### -->
-                                                    <!-- Error message for the end date -->
-                                                    <div class="alert alert-danger"
-                                                         th:errors="*{end_date}"
-                                                         th:if="${#fields.hasErrors('end_date')}">
-                                                        End date of days Error
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- ####################################################################### -->
-                                        <!-- Form submission button -->
+                                    <!-- Form for Time Sheets date -->
+                                    <form>
                                         <div>
-                                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                <span id="payment-button-amount">Submit</span>
-                                            </button>
+
+                                            <!-- ################################################################### -->
+                                            <!-- Form results for the number of days -->
+                                            <p>Number of days:</p>
+                                            <span th:text="${timesheetKey.number_of_days}"></span><br>
+
+                                            <!-- ################################################################### -->
+                                            <!-- Form results for the overtime -->
+                                            <p>Overtime:</p>
+                                            <span th:text="${timesheetKey.overtime}"></span><br>
+
+                                            <!-- ################################################################### -->
+                                            <!-- Form results for the dates -->
+                                            <p>Between:</p>
+                                            <span th:text="${timesheetKey.start_date}"></span>
+                                            <span th:text="${timesheetKey.end_date}"></span><br>
                                         </div>
+
                                     </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -353,13 +233,13 @@
 
                     <!-- ########################################################################################### -->
                     <!-- Footer -->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <div class="copyright">-->
-<!--                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-md-12">-->
+                    <!--                            <div class="copyright">-->
+                    <!--                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
 
                 </div>
             </div>
@@ -391,6 +271,7 @@
 
 <!-- ############################################################################################################### -->
 <!-- Main JS-->
+<script src="js/main.js"></script>
 <script src="js/main.js"></script>
 </body>
 

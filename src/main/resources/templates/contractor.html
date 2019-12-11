@@ -73,9 +73,16 @@
                     </li>
 
                     <!-- ########################################################################################### -->
+                    <!-- Link to the managers dashboard -->
+                    <li class="active">
+                        <a href="/ManagerDash">
+                            <i class="fas fa-table"></i>Managers</a>
+                    </li>
+
+                    <!-- ########################################################################################### -->
                     <!-- Link to the contractor dashboard -->
                     <li class="active">
-                        <a href="/Manager/All">
+                        <a href="/ContractorDash/All">
                             <i class="fas fa-table"></i>Contractors</a>
                     </li>
 
@@ -89,19 +96,19 @@
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to login page -->
                             <li>
-                                <a href="login">Login</a>
+                                <a href="/login">Login</a>
                             </li>
 
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to register page -->
                             <li>
-                                <a href="register">Register</a>
+                                <a href="/register">Register</a>
                             </li>
 
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to forget password page -->
                             <li>
-                                <a href="forget-pass">Forget Password</a>
+                                <a href="/forget-pass">Forget Password</a>
                             </li>
                         </ul>
                     </li>
@@ -126,29 +133,12 @@
                         <!-- ####################################################################################### -->
                         <!-- Possible search bar -->
                         <form class="form-header" action="" method="POST">
-                            <!-- <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." /> -->
-                            <!-- <button class="au-btn--submit" type="submit">
-                                <i class="zmdi zmdi-search"></i>
-                            </button> -->
                         </form>
 
 
                         <div class="header-button">
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
-
-
-                                    <!--                                    <div class="image">-->
-                                    <!--                                        <img src="/images/icon/avatar-01.jpg" alt="John Doe" />-->
-                                    <!--                                    </div>-->
-                                    <!--                                    <div class="content">-->
-                                    <!--                                        <a class="js-acc-btn" href="#">john doe</a>-->
-
-                                    <!-- ########################################################################### -->
-                                    <!-- Logo for the top bar -->
-                                    <!--                                    <div class="image">-->
-                                    <!--                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
-                                    <!--                                    </div>-->
 
                                     <!-- ########################################################################### -->
                                     <!-- User name -->
@@ -165,23 +155,7 @@
                                     <!-- Account dropdown -->
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
-                                            <!-- ################################################################### -->
-                                            <!-- Profile image -->
-                                            <!--                                            <div class="image">-->
-                                            <!--                                                <a href="#">-->
-                                            <!--                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />-->
-                                            <!--                                                </a>-->
-                                            <!--                                            </div>-->
 
-                                            <!--                                            &lt;!&ndash; ################################################################### &ndash;&gt;-->
-                                            <!--                                            &lt;!&ndash; Account information for dropdown &ndash;&gt;-->
-                                            <!--                                            <div class="content">-->
-                                            <!--                                                <h5 class="name">-->
-                                            <!--                                                    <a href="#">john doe</a>-->
-                                            <!--                                                </h5>-->
-                                            <!--                                                <span class="email">johndoe@example.com</span>-->
-                                            <!--                                            </div>-->
-                                            <!--                                        </div>-->
 
                                             <!-- ####################################################################### -->
                                             <!-- Account management link -->
@@ -230,7 +204,7 @@
                                                 <div sec:authentication="name"></div>
                                             </div>
 
-                                            please fill in your time sheet</h3>
+                                            Edit contractor</h3>
                                     </div>
 
                                     <!-- ########################################################################### -->
@@ -327,8 +301,8 @@
                                             <!-- ################################################################### -->
                                             <!-- Form field for the end date -->
                                             <div class="col-6">
-                                                <center><a th:href="@{/Deactivate/{id} (id=${contractorId}) }"
-                                                           th:id="'contractorPassLink'+ ${contractorId}">
+                                                <center><a th:href="@{/DeactivateContractor/{id} (id=${contractorId}) }"
+                                                           th:id="'contractorDeactiveLink'+ ${contractorId}">
                                                     <button id="set_deactive" class="btn btn-lg btn-info btn-block">
                                                         <span>Deactivate account</span>
                                                     </button></a></center>

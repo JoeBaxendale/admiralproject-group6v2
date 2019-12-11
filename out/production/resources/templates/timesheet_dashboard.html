@@ -74,16 +74,9 @@
                     </li>
 
                     <!-- ########################################################################################### -->
-                    <!-- Link to the managers dashboard -->
-                    <li class="active">
-                        <a href="/ManagerDash">
-                            <i class="fas fa-table"></i>Managers</a>
-                    </li>
-
-                    <!-- ########################################################################################### -->
                     <!-- Link to the contractor dashboard -->
                     <li class="active">
-                        <a href="/ContractorDash/All">
+                        <a href="/Manager/All">
                             <i class="fas fa-table"></i>Contractors</a>
                     </li>
 
@@ -97,19 +90,19 @@
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to login page -->
                             <li>
-                                <a href="/login">Login</a>
+                                <a href="login">Login</a>
                             </li>
 
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to register page -->
                             <li>
-                                <a href="/register">Register</a>
+                                <a href="register">Register</a>
                             </li>
 
                             <!-- ################################################################################### -->
                             <!-- Sub nav link to forget password page -->
                             <li>
-                                <a href="/forget-pass">Forget Password</a>
+                                <a href="forget-pass">Forget Password</a>
                             </li>
                         </ul>
                     </li>
@@ -228,23 +221,13 @@
                         <div class="col-md-12">
                             <label>Status:</label>
                             <select  id = "statusFilter" onchange="location = this.options[this.selectedIndex].value;">Status
-                                <option id = "Pending">Pending</option>
-                                <option id = "Approved">Approved</option>
-                                <option id = "Rejected">Rejected</option>
+                                <option id = "Pending" value = "/timesheetDashboard/[[${userId}]]/Pending">Pending</option>
+                                <option id = "Approved" value = "/timesheetDashboard/[[${userId}]]/Approved">Approved</option>
+                                <option id = "Rejected" value = "/timesheetDashboard/[[${userId}]]/Rejected">Rejected</option>
                                 <script>var userId = "[[${userId}]]";
                                 document.getElementById("Pending").setAttribute("value","/timesheetDashboard/"+userId+"/Pending");
                                 document.getElementById("Approved").setAttribute("value","/timesheetDashboard/"+userId+"/Approved");
                                 document.getElementById("Rejected").setAttribute("value","/timesheetDashboard/"+userId+"/Rejected");
-                                var statusSelecter = document.getElementById("statusFilter");
-                                var accessLevel = "[[${accessLevel}]]";
-                                console.log(accessLevel);
-                                if(accessLevel == "Admin") {
-                                    var option;
-                                    option = document.createElement("option");
-                                    option.setAttribute("value","/timesheetDashboard/"+userId+"/Archived");
-                                    option.innerHTML = "Archived";
-                                    statusSelecter.appendChild(option);
-                                }
                                 </script>
                             </select>
                             <script>
@@ -256,54 +239,9 @@
                                     }
                             </script>
                             <!--                            this is to set the value of the select box to what was selected when the user changes pages&ndash;&gt;-->
-                            <label>Week ending:</label>
-                            <select id="Date Picker" onchange="changeDates()">Date
-                                <option>All Dates</option>
-                                <script>
-                                    var datePicker = document.getElementById("Date Picker");
-
-                                    var today = new Date();
-                                    var date = new Date();
-                                    var date2 = new Date();
-                                    var date3 = new Date();
-                                    var date4 = new Date();
-                                    var chosenDayOfWeek = 7; // sunday
-                                    var difference = today.getDay() - chosenDayOfWeek;
-                                    if(difference > 0){
-                                        date.setDate(date.getDate() + 6)
-                                    }else if(difference < 0){
-                                        date.setDate(date.getDate() + ((-1) * difference))
-                                    }
-
-                                    var option;
-                                    option = document.createElement("option");
-                                    option.setAttribute("value", date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear());
-                                    option.innerHTML = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
-                                    datePicker.appendChild(option);
-
-                                    date2 = new Date(date.getFullYear(),(date.getMonth()),date.getDate()-7);
-
-                                    option = document.createElement("option");
-                                    option.setAttribute("value", date2.getDate()+"/"+date2.getMonth()+"/"+date2.getFullYear());
-                                    option.innerHTML = date2.getDate()+"/"+(date2.getMonth()+1)+"/"+date2.getFullYear();
-                                    datePicker.appendChild(option);
-
-                                    date3 = new Date(date2.getFullYear(),date2.getMonth(),date2.getDate()-7);
-
-                                    option = document.createElement("option");
-                                    option.setAttribute("value", date3.getDate()+"/"+date3.getMonth()+"/"+date3.getFullYear());
-                                    option.innerHTML = date3.getDate()+"/"+(date3.getMonth()+1)+"/"+date3.getFullYear();
-                                    datePicker.appendChild(option);
-
-                                    date4 = new Date(date3.getFullYear(),date3.getMonth(),date3.getDate()-7);
-
-                                    option = document.createElement("option");
-                                    option.setAttribute("value", date4.getDate()+"/"+date4.getMonth()+"/"+date4.getFullYear());
-                                    option.innerHTML = date4.getDate()+"/"+(date4.getMonth()+1)+"/"+date4.getFullYear();
-                                    datePicker.appendChild(option);
-
-
-                                </script>
+                            <label>Date:</label>
+                            <select>Date
+                                <option>Test</option>
                             </select>
 
                             <form action = "/submitChanges">
@@ -342,7 +280,7 @@
                                                 var confirmationMessage = 'It looks like you have been editing something. '
                                                     + 'If you leave before saving, your changes will be lost.';
 
-                                                e.returnValue = confirmationMessage; //Gecko + IE
+                                                (e || window.event).returnValue = confirmationMessage; //Gecko + IE
                                                 return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
                                             });
                                         };
@@ -552,7 +490,6 @@
 
 
                                         function getData() {
-                                            isDirty = false;
                                             for(var i=1;(i<(table.rows.length)-1);i+=2){
                                                 var Data = document.getElementById("dropDownRow"+i).firstElementChild.innerHTML.split("<td>");
                                                 Select = null;                                      //wipe the entry of Select before reassigning it so that duplicates are avoided
@@ -563,39 +500,6 @@
 
                                             }
                                             document.getElementById("submitBox").value = dataArray.toString();  //add the string of the array to a hidden input on a form to pass it into the controller
-                                        }
-
-
-                                        function changeDates() {
-
-                                            count2 = 0;
-                                            var table = document.getElementById("timeSheetTable");
-                                            for(var j=1;j<table.rows.length;j+=2){
-                                                table.rows[j].style.display = '';
-                                                table.rows[j+1].style.display = '';
-                                            }
-                                            var selected = datePicker.options[datePicker.selectedIndex].innerHTML;
-                                            var data = timeSheetArray2.toString().split(",").toString().split(",");
-                                            var dateEnded;
-                                            var selectedDate;
-                                            var selectedDateArray = selected.split("/");
-                                            console.log(selected);
-                                            if (selected != "All Dates") {
-                                                for (var i = 1; i < table.rows.length; i+=2) {
-                                                    var temp = data[count2 + 5].substring(data[count2 + 5].indexOf("=") + 1).split("-");
-                                                    selectedDate = new Date(selectedDateArray[2], selectedDateArray[1] - 1, selectedDateArray[0]);
-                                                    dateEnded = new Date(parseInt(temp[0]), parseInt(temp[1]) - 1, parseInt(temp[2]));
-
-                                                    table.rows[i].style.display = 'none';
-                                                    table.rows[i+1].style.display = 'none';
-                                                    if (dateEnded < selectedDate && dateEnded > new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() - 7)) {
-                                                        table.rows[i].style.display = '';
-                                                        table.rows[i+1].style.display = '';
-                                                    }
-
-                                                    count2 += 13;
-                                                }
-                                            }
                                         }
                                     </script>
                                     </tbody>
