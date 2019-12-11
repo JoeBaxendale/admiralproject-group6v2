@@ -88,7 +88,7 @@ public class TimeSheetController {
             }
 
             if(timeSheet.getStart_date().isBefore(currentDate.minusMonths(2))){
-                bindingResult.rejectValue("end_date", "error.end_date", "Work week cannot be longer than 7 days");
+                bindingResult.rejectValue("end_date", "error.end_date", "Cannot create a time sheet older than 2 months");
             }
         }
 
