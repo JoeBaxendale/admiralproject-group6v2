@@ -206,7 +206,6 @@
                                 document.getElementById("Rejected").setAttribute("value","/timesheetDashboard/"+userId+"/Rejected");
                                 var statusSelecter = document.getElementById("statusFilter");
                                 var accessLevel = "[[${accessLevel}]]";
-                                console.log(accessLevel);
                                 if(accessLevel == "Admin") {
                                     var option;
                                     option = document.createElement("option");
@@ -440,7 +439,7 @@
                                                 ddRow2.insertCell(4);
                                                 notes_section = ddRow2.insertCell(5);
                                                 notes_section.style.width = 150%
-                                                ddRow2.insertCell(6);
+                                                    ddRow2.insertCell(6);
 
                                                 var clickPosition = this.id;
                                                 var id = clickPosition.substring(3); //create the id for data addition and appending the table
@@ -548,7 +547,6 @@
                                             var dateEnded;
                                             var selectedDate;
                                             var selectedDateArray = selected.split("/");
-                                            console.log(selected);
                                             if (selected != "All Dates") {
                                                 for (var i = 1; i < table.rows.length; i+=2) {
                                                     var temp = data[count2 + 5].substring(data[count2 + 5].indexOf("=") + 1).split("-");
@@ -557,12 +555,12 @@
 
                                                     table.rows[i].style.display = 'none';
                                                     table.rows[i+1].style.display = 'none';
-                                                    if (dateEnded < selectedDate && dateEnded > new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() - 7)) {
+                                                    if (dateEnded <= selectedDate && dateEnded > new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() - 7)) {
                                                         table.rows[i].style.display = '';
                                                         table.rows[i+1].style.display = '';
                                                     }
 
-                                                    count2 += 13;
+                                                    count2 += 14;
                                                 }
                                             }
                                         }
