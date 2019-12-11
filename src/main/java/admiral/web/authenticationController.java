@@ -79,6 +79,8 @@ public class authenticationController {
         //        we will save the user, if no binding errors
         else if (userService.isUserAlreadyPresent(user)) {
             modelAndView.addObject("Message", "user already exists");
+            bindingResult.rejectValue("email", "error.email", "User already exists");
+            modelMap.addAttribute("bindingResult", bindingResult);
             modelAndView.addObject("user", user);
             modelAndView.setViewName("register");
             return  modelAndView;
