@@ -81,6 +81,10 @@ public class TimeSheetController {
                     (timeSheet.getNumber_of_days() < 2 && timeSheet.getWorked_saturday() && timeSheet.getWorked_sunday())) {
                 bindingResult.rejectValue("number_of_days", "error.number_of_days", "Need to increase the number of days worked to reflect working the weekend");
             }
+
+            if(timeSheet.getStart_date().isBefore(timeSheet.getEnd_date().minusDays(7))){
+                  bindingResult.rejectValue("end_date", "error.end_date", "Work week cannot be longer than 7 days");
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
