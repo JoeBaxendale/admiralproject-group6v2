@@ -46,7 +46,7 @@ public class User {
     @NotBlank(message = "Email is compulsory")
     @Email(message = "Email is invalid")
     @Column(name="email")
-    private String staffEmail;
+    private String email;
 
     //------------------------------------------------------------------------------------------------------------------
     @NotBlank(message = "Password is compulsory")
