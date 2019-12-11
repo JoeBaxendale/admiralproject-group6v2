@@ -19,6 +19,7 @@ import java.util.List;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Controller for Time Sheet and Time Sheet processing
+@SessionAttributes({"accessLevel"})
 @Controller
 public class AdminController {
 
