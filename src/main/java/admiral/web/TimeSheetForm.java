@@ -20,8 +20,8 @@ public class TimeSheetForm {
     //------------------------------------------------------------------------------------------------------------------
     // Validates the number of days is less than a week
     @NotNull(message = "Number of Days worked required")
-    @Min(value = 0, message = "Value must be between 0 and 7")
-    @Max(value = 7, message = "Value must be between 0 and 7")
+    @Min(value = 0, message = "Cannot work longer than a week")
+    @Max(value = 7, message = "Cannot work longer than a week")
     private int number_of_days;
 
     //------------------------------------------------------------------------------------------------------------------

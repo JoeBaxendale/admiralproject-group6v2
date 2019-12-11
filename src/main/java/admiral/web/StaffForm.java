@@ -25,16 +25,17 @@ public class StaffForm {
 
     //------------------------------------------------------------------------------------------------------------------
     // Checks if the user worked Saturday for notes
-    @NotNull(message = "First name Cannot be empty")
+    @NotBlank(message = "First name Cannot be empty")
     private String first_name;
 
     //------------------------------------------------------------------------------------------------------------------
     // Checks if the user worked Sunday for notes
-    @NotNull(message = "Last name Cannot be empty")
+    @NotBlank(message = "Last name Cannot be empty")
     private String last_name;
 
     //------------------------------------------------------------------------------------------------------------------
     // Checks if the user worked Sunday for notes
     @NotNull(message = "Email Cannot be empty")
+    @Email
     private String email;
 }
