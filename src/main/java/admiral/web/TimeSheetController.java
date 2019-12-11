@@ -68,6 +68,7 @@ public class TimeSheetController {
 
         long userId = tFinder.getUserIdByEmail(loginEmail);
         int contractorId = finder.getContractorByUser(userId);
+        LocalDate currentDate = LocalDate.now();
 
         //--------------------------------------------------------------------------------------------------------------
         // Check that the supplied end date is later or the same as the start date
@@ -84,6 +85,10 @@ public class TimeSheetController {
 
             if(timeSheet.getStart_date().isBefore(timeSheet.getEnd_date().minusDays(7))){
                   bindingResult.rejectValue("end_date", "error.end_date", "Work week cannot be longer than 7 days");
+            }
+
+            if(timeSheet.getStart_date().isBefore(currentDate.minusMonths(2))){
+                bindingResult.rejectValue("end_date", "error.end_date", "Work week cannot be longer than 7 days");
             }
         }
 
