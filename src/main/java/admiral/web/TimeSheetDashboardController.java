@@ -54,8 +54,6 @@ public class TimeSheetDashboardController {
                                          @ModelAttribute("accessLevel") String accessLevel,
                                          Model model){
 
-        System.out.println("YEEEE " + accessLevel);
-
         model.addAttribute("userId",userId);
 
         // Creates and populates a list of TimeSheets, passes it to the dashboard page
