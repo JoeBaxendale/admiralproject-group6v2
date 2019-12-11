@@ -39,7 +39,7 @@ public class authenticationController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
+        User user = new User(0,"","","","",3,true);
         modelAndView.addObject("user", user);
         modelAndView.setViewName("register"); //will open register html
         return modelAndView;
