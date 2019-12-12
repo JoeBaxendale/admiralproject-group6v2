@@ -22,14 +22,12 @@ public class PasswordForm {
     // Checks if the user worked Saturday for notes
     @NotNull(message = "Password Cannot be empty")
     @NotBlank(message = "Password Cannot be empty")
-    @Min(value = 7, message = "Password must contain at least 5 characters")
     private String password1;
 
     //------------------------------------------------------------------------------------------------------------------
     // Checks if the user worked Sunday for notes
     @NotNull(message = "Password Cannot be empty")
     @NotBlank(message = "Password Cannot be empty")
-    @Min(value = 7, message = "Password must contain at least 5 characters")
     private String password2;
 
 }
