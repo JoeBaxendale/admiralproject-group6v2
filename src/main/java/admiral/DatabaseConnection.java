@@ -17,7 +17,7 @@ public class DatabaseConnection {
     // Connects to the pre-created admiral database
     {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admiral","root","comsc");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admiral","root","comsc123");
         } catch (SQLException e) {
             e.printStackTrace();
         }
