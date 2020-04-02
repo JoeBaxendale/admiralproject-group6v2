@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.1.9.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+    id 'checkstyle'
 }
 
 group 'com.nsa.admiral'
@@ -32,4 +33,14 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+checkstyleMain{
+    configFile = file("${configDir}/checkstyleMain.xml")
+    maxErrors=10000
+}
+
+checkstyleTest{
+    configFile = file("${configDir}/checkstyleTest.xml")
+    ignoreFailures=true
+    maxErrors=50
 }
