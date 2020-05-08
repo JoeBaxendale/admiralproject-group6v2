@@ -9,6 +9,7 @@ import admiral.service.StaffFinder;
 import admiral.service.TimeSheetCreator;
 import admiral.service.events.ContractorUpdated;
 import admiral.service.events.ManagerUpdated;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +43,11 @@ public class AdminController {
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
     @GetMapping(path = "/ContractorDash/{id}")
-    public String contractorManager(@PathVariable("id") String managerId, Model model) {
+    public String contractorManager(@PathVariable("id") String managerId,@SessionAttribute("accessLevel")String accessLevel, Model model) {
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         List<ContractorUser> contractorsUnderManager;
         List<ManagerUser> managers = finder.findManagers();
@@ -82,7 +87,11 @@ public class AdminController {
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
     @GetMapping(path = "/Contractor/{id}")
-    public String contractorEditor(@PathVariable("id") String contractorId, Model model) {
+    public String contractorEditor(@PathVariable("id") String contractorId,@SessionAttribute("accessLevel")String accessLevel, Model model) {
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         List<ContractorUser> contractor = finder.findContractorById(contractorId);
         List<ManagerUser> managers = finder.findManagers();
@@ -106,8 +115,14 @@ public class AdminController {
     // Mangers page to manager users
     @RequestMapping(path = "/ContractorUpdate/{id}", method = RequestMethod.POST)
     public String contractorDetails(@PathVariable("id") String contractorId,
-                                          @ModelAttribute("contractorKey") @Valid StaffForm contractorForm,
-                                          BindingResult bindingResult, Model model) {
+                                    @SessionAttribute("accessLevel")String accessLevel,
+                                    @ModelAttribute("contractorKey") @Valid StaffForm contractorForm,
+                                    BindingResult bindingResult, Model model) {
+
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         //--------------------------------------------------------------------------------------------------------------
         // Validate the form, else force resubmission
@@ -133,7 +148,11 @@ public class AdminController {
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
     @RequestMapping(path = "/SetPasswordContractor/{id}", method = RequestMethod.GET)
-    public String setContractorPassword(@PathVariable("id") String contractorId, Model model) {
+    public String setContractorPassword(@PathVariable("id") String contractorId,@SessionAttribute("accessLevel")String accessLevel, Model model) {
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         model.addAttribute("passKey", new PasswordForm());
         model.addAttribute("contractorId", contractorId);
@@ -146,9 +165,14 @@ public class AdminController {
     // Mangers page to manager users
     @RequestMapping(path = "/PasswordContractorDetails/{id}", method = RequestMethod.POST)
     public String ContractorPasswordProcess(@PathVariable("id") String contractorId,
+                                            @SessionAttribute("accessLevel")String accessLevel,
                                             @ModelAttribute("passKey") @Valid PasswordForm passwordForm,
                                             BindingResult bindingResult, Model model) {
 
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         //--------------------------------------------------------------------------------------------------------------
         // Check that the supplied end date is later or the same as the start date
@@ -178,8 +202,12 @@ public class AdminController {
     //------------------------------------------------------------------------------------------------------------------
     // Disables a contractor account
     @RequestMapping(path = "/DeactivateContractor/{id}", method = RequestMethod.GET)
-    public String deactivateContractor(@PathVariable("id") String contractorId, Model model) {
+    public String deactivateContractor(@PathVariable("id") String contractorId,@SessionAttribute("accessLevel")String accessLevel, Model model) {
 
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         staffCreator.deactivateContractor(Integer.parseInt(contractorId));
 
@@ -190,7 +218,11 @@ public class AdminController {
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
     @GetMapping(path = "/ManagerDash")
-    public String managerManager(Model model) {
+    public String managerManager(Model model,@SessionAttribute("accessLevel")String accessLevel) {
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         // Creates and populates a list of TimeSheets, passes it to the dashboard page
         List<ManagerUser> managers = finder.findManagers();
@@ -203,7 +235,11 @@ public class AdminController {
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
     @GetMapping(path = "/Manager/{id}")
-    public String managerEditor(@PathVariable("id") String managerId, Model model) {
+    public String managerEditor(@PathVariable("id") String managerId,@SessionAttribute("accessLevel")String accessLevel, Model model) {
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         List<ManagerUser> manager = finder.findManagerById(Integer.parseInt(managerId));
 
@@ -224,8 +260,13 @@ public class AdminController {
     // Mangers page to manager users
     @RequestMapping(path = "/ManagerUpdate/{id}", method = RequestMethod.POST)
     public String managerDetails(@PathVariable("id") String managerId,
-                                    @ModelAttribute("managerKey") @Valid StaffForm managerForm,
-                                    BindingResult bindingResult, Model model) {
+                                 @SessionAttribute("accessLevel")String accessLevel,
+                                 @ModelAttribute("managerKey") @Valid StaffForm managerForm,
+                                 BindingResult bindingResult, Model model) {
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         //--------------------------------------------------------------------------------------------------------------
         // Validate the form, else force resubmission
@@ -250,7 +291,11 @@ public class AdminController {
     //------------------------------------------------------------------------------------------------------------------
     // Set the managers password
     @RequestMapping(path = "/SetPasswordManager/{id}", method = RequestMethod.GET)
-    public String setManagersPassword(@PathVariable("id") String managerId, Model model) {
+    public String setManagersPassword(@PathVariable("id") String managerId,@SessionAttribute("accessLevel")String accessLevel, Model model) {
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         model.addAttribute("passKey", new PasswordForm());
         model.addAttribute("managerId", managerId);
@@ -263,9 +308,14 @@ public class AdminController {
     // Mangers page to manager users
     @RequestMapping(path = "/PasswordManagerDetails/{id}", method = RequestMethod.POST)
     public String ManagerPasswordProcess(@PathVariable("id") String managerId,
-                                            @ModelAttribute("passKey") @Valid PasswordForm passwordForm,
-                                            BindingResult bindingResult, Model model) {
+                                         @SessionAttribute("accessLevel")String accessLevel,
+                                         @ModelAttribute("passKey") @Valid PasswordForm passwordForm,
+                                         BindingResult bindingResult, Model model) {
 
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         //--------------------------------------------------------------------------------------------------------------
         // Check that the supplied end date is later or the same as the start date
@@ -296,8 +346,12 @@ public class AdminController {
     //------------------------------------------------------------------------------------------------------------------
     // Mangers page to manager users
     @RequestMapping(path = "/DeactivateManager/{id}", method = RequestMethod.GET)
-    public String deactivateManager(@PathVariable("id") String managerId, Model model) {
+    public String deactivateManager(@PathVariable("id") String managerId, @SessionAttribute("accessLevel")String accessLevel,Model model) {
 
+
+        if(!accessLevel.equals("Admin")){
+            return "AccessError";
+        }
 
         staffCreator.deactivateManager(Integer.parseInt(managerId));
 
@@ -305,3 +359,4 @@ public class AdminController {
         return "redirect:/ManagerDash";
     }
 }
+

@@ -53,59 +53,63 @@
                             <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
 
 
-                            <div class="form-group">
-                                <label>First Name</label>
-                                <input class="au-input au-input--full" th:field="*{firstName}" type="text" name="first_name" placeholder="Username">
-                            </div>
-                            <div class="form-group">
-                                <label>Last Name</label>
-                                <input class="au-input au-input--full"  th:field="*{lastName}" type="text" name="last_name" placeholder="Username">
-                            </div>
-                            <div class="form-group">
-                                <label>Email Address</label>
-                                <input class="au-input au-input--full" th:field="*{email}" type="email" name="email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input class="au-input au-input--full"  th:field="*{password}" type="password" name="password" placeholder="Password">
-                            </div>
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input class="au-input au-input--full" th:field="*{firstName}" type="text" name="first_name" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input class="au-input au-input--full"  th:field="*{lastName}" type="text" name="last_name" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input class="au-input au-input--full" th:field="*{email}" type="email" name="email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="au-input au-input--full"  th:field="*{password}" type="password" name="password" placeholder="Password">
+                                </div>
                                 <div class="form-group">
                                     <input class="au-input au-input--full"  th:field="*{active}" type="hidden" name="active">
                                 </div>
 
                                 <label>Role ID</label></br>
                                 <div class="rs-select2--dark rs-select2--sm rs-select2--border" th:field="*{roleId}">
-                                    <select class="js-select2 au-select-dark" name="roleId">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3" selected="selected">3</option>
+                                    <select class="js-select2 au-select-dark" name="roleId" >
+                                        <option value="1">Manager</option>
+                                        <option value="2">Admin</option>
+                                        <option value="3" selected="selected">Contractor</option>
                                     </select>
                                     <div class="dropDownSelect2"></div>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id = "check">
+                                    <label for="check">Confirm Choice</label>
                                 </div>
                                 </br>
                                 </br>
 
-                            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
-                            <span th:utext="${successMessage}"></span>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
+                                <span th:utext="${successMessage}"></span>
 
-                            <div class=""
-                                 th:if="${{bindingResult != null && bindingResult.getAllErrors() != null}}">
-                                <button type="button" class="close" data-dismiss="alert"
-                                        aria-hidden="true">x</button>
-                                <ul th:each="data: ${bindingResult.getAllErrors()}">
-                                    <li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
-                                </ul>
-                            </div>
+                                <div class=""
+                                     th:if="${{bindingResult != null && bindingResult.getAllErrors() != null}}">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                            aria-hidden="true">x</button>
+                                    <ul th:each="data: ${bindingResult.getAllErrors()}">
+                                        <li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+                                    </ul>
+                                </div>
 
 
-                             </form>
+                            </form>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
 
 <!-- Jquery JS-->
@@ -136,3 +140,14 @@
 
 </html>
 <!-- end document-->
+
+
+
+
+
+
+
+
+
+
+
