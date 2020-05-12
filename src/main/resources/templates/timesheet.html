@@ -163,6 +163,7 @@
                                             <input value="0"
                                                    class="form-control"
                                                    th:field="*{number_of_days}"
+                                                   id = "NumberOfDaysWorked"
                                                    type="number"
                                                    min="0"
                                                    max="7"/>
@@ -181,10 +182,12 @@
                                         <div class="form-group">
                                             <label class="control-label mb-1">Of those days I worked:  &emsp;</label>
                                             <input th:field="*{worked_saturday}"
+                                                   id = "Worked_Saturday"
                                                    type="checkbox"
                                                    value="Worked Saturday"/>Worked Saturday &emsp;
 
                                             <input th:field="*{worked_sunday}"
+                                                   id = "Worked_Sunday"
                                                    type="checkbox"
                                                    value="Worked Sunday"/>Worked Sunday &emsp;
 
@@ -201,6 +204,7 @@
                                                    value="0"
                                                    class="form-control"
                                                    th:field="*{overtime}"
+                                                   id = "OvertimeWorked"
                                                    type="number"
                                                    min="0"
                                                    max="25"/>
