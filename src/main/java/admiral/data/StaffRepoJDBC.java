@@ -40,7 +40,7 @@ public class StaffRepoJDBC implements StaffRepo {
     public List<ContractorUser> findContractors(){
 
         // Define sql code
-        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id WHERE active = 1" ;
+        String sql = "Select contractors.contractor_id, contractors.manager_id, contractors.contractors.user_id, contractors.first_name, contractors.last_name, contractors.email, contractors.role_id, contractors.active from contractors, users WHERE contractors.user_id = users.user_id and active = 1" ;
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
@@ -79,7 +79,7 @@ public class StaffRepoJDBC implements StaffRepo {
     public List<ContractorUser> findContractorById(String searchTerm){
 
         // Define sql code
-        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id where contractor_id = '"+ searchTerm+"' AND active = 1";
+        String sql = "Select contractors.contractor_id, contractors.manager_id, contractors.contractors.user_id, contractors.first_name, contractors.last_name, contractors.email, contractors.role_id, contractors.active from contractors, users WHERE contractors.user_id = users.user_id and active = 1 AND contractor_id = '"+ searchTerm+"'";
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
@@ -118,7 +118,7 @@ public class StaffRepoJDBC implements StaffRepo {
     public List<ContractorUser> findContractorByManager(String searchTerm){
 
         // Define sql code
-        String sql = "Select contractor_id, manager_id, contractors.user_id, first_name, last_name, email, role_id, active from contractors inner join users on contractors.user_id = users.user_id where manager_id = '"+ searchTerm+"' AND active = 1" ;
+        String sql = "Select contractors.contractor_id, contractors.manager_id, contractors.contractors.user_id, contractors.first_name, contractors.last_name, contractors.email, contractors.role_id, contractors.active from contractors, users WHERE contractors.user_id = users.user_id AND manager_id = '"+ searchTerm+"' AND active = 1" ;
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
@@ -255,7 +255,7 @@ public class StaffRepoJDBC implements StaffRepo {
     public List<ManagerUser> findManagers(){
 
         // Define sql code
-        String sql = "Select manager_id, managers.user_id, first_name, last_name, email, active from managers inner join users on managers.user_id = users.user_id WHERE active = 1" ;
+        String sql = "Select managers.manager_id, managers.user_id, managers.first_name, managers.last_name, managers.email, managers.active from managers, users WHERE managers.user_id = users.user_id AND active = 1" ;
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
@@ -291,7 +291,7 @@ public class StaffRepoJDBC implements StaffRepo {
     public List<ManagerUser> findManagerById(int searchId){
 
         // Define sql code
-        String sql = "Select manager_id, managers.user_id, first_name, last_name, email, active from managers inner join users on managers.user_id = users.user_id WHERE active = 1 AND managers.manager_id = '"+ searchId +"'" ;
+        String sql = "Select managers.manager_id, managers.user_id, managers.first_name, managers.last_name, managers.email, managers.active from managers, users WHERE managers.user_id = users.user_id AND active = 1 AND managers.manager_id = '"+ searchId +"'" ;
 
         //--------------------------------------------------------------------------------------------------------------
         // Executes the sql code
